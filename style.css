@@ -1,40 +1,58 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
 }
- body {
-       font-family: Arial, sans-serif;
-       background-color: #f4f4f4;
-       text-align: center;
- }
-  
- nav {
-    background-color: #d374a8;
-    padding: 10px 0;
- }
- 
- nav ul {
-    list-style: none;
-    padding: 0;
- }
- 
- nav ul li{
-    display: inline-block;
-    position: relative;
-    margin: 0 15px;
- }
 
- nav ul li a
- {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    padding: 10px 15px;
-    background: #d374a8;
-    border-radius: 5px;
- }
+body {
+   font-family: "Montserrat", sans-serif;
+   background-color: #f4f4f4;
+   text-align: center;
+}
 
- nav ul li a:hover {
-    background-color: #dd4699;
- }
+/* Estilização da nav */
+
+nav {
+   font-weight: 400;
+   background-color: #FFA5AB;
+   padding: 20px 0;
+}
+
+nav ul {
+   list-style: none;
+   padding: 0;
+}
+
+nav ul li {
+   display: inline-block;
+   position: relative;
+   margin: 0 15px;
+}
+
+nav ul li a {
+   text-decoration: none;
+   color: white;
+   font-size: 18px;
+   padding: 10px 15px;
+   background: #FFA5AB;
+   border-radius: 5px;
+}
+
+nav ul li a:hover {
+   background-color: #DA627D;
+}
+
+/* Estilizando primeira sessão: Apresentação médica */
+
+.apresentacao_medica_container{
+   display: flex;
+   width: 100vw;
+   height: 70vh;
+   padding: 0 20px 0 20px;
+}
+
+#apresentacao_medica{
+   background-color: #A53860;
+}
