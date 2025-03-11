@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Fonte para o nome da Dra. */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 * {
    margin: 0;
    padding: 0;
@@ -8,7 +12,7 @@
 
 body {
    font-family: "Montserrat", sans-serif;
-   background-color: #f4f4f4;
+   background-color: aliceblue;
    text-align: center;
 }
 
@@ -48,11 +52,49 @@ nav ul li a:hover {
 
 .apresentacao_medica_container{
    display: flex;
+   background-color: #f9f0f1;
    width: 100vw;
    height: 70vh;
-   padding: 0 20px 0 20px;
+   padding: 20px;
+   margin-top: 10px;
+   justify-content: space-around;
+   align-items: center;
 }
 
-#apresentacao_medica{
-   background-color: #A53860;
+.apresentacao_medica_container .informacao_medica{
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: center;
+}
+
+.apresentacao_medica_container .informacao_medica h1{
+   font-family: "Dancing Script", cursive;
+   font-size:xx-large;
+}
+
+.apresentacao_medica_container .informacao_medica h3, h4{
+   font-weight: 500;
+   margin: 5px;
+}
+
+.apresentacao_medica_container .informacao_medica .btnAgendar_consulta{
+   width: 65%;
+   height: 35px;
+   border-radius: 10px;
+   font-size: medium;
+   font-weight: 600;
+   margin-top: 15px;
+   background-color: #FFA5AB;
+   cursor: pointer;
+}
+
+.btnAgendar_consulta:active{
+   transform: scale(0.9);
+   color: whitesmoke;
+   border-color: whitesmoke;
+}
+
+.btnAgendar_consulta:hover{
+   color: whitesmoke;
+   border-color: whitesmoke;
 }
