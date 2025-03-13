@@ -56,7 +56,6 @@ nav ul li a:hover {
    width: 100vw;
    height: 70vh;
    padding: 20px;
-   margin-top: 10px;
    justify-content: space-around;
    align-items: center;
 }
@@ -97,4 +96,36 @@ nav ul li a:hover {
 .btnAgendar_consulta:hover{
    color: whitesmoke;
    border-color: whitesmoke;
+}
+
+/* Estilizando container de especialidades */
+
+#especialidades{
+   background-color: #FFA5AB;
+}
+.especialidades_container{
+   display: flex;
+   flex-direction: row;
+   text-align: center;
+   justify-content: space-around;
+}
+
+.tipos_especialidades{
+   border: solid black 1px;
+   max-width: 500px;
+   max-height: 600px;
+   padding: 5px;
+}
+
+.especialidades_container .tipos_especialidades figcaption h3{
+   padding: 10px;
+   font-weight: 500;
+}
+
+.especialidades_container .tipos_especialidades figcaption p{
+   text-align: justify;
+   white-space: normal;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   max-height: 100px;
 }
