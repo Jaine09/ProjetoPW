@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área de administração</title>
+    <link rel="stylesheet" href="adm.css">
 </head>
+
 <body>
-    <marquee>Em produção</marquee>
+
+    <nav>
+        <img src="./img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+        <ul>
+            <li><a href="./homepage.html">Home</a></li>
+            <li><a href="#">Consultório</a></li>
+            <li><a href="#">Especialidade</a></li>
+        </ul>
+    </nav>
+
+    <section class="session_TelaPrincipal">
+        <div class="telaPrincipal_container">
+            <img src="./img/imagenDoutora.png" alt="Imagem da doutora" id="imgTelaPrincipal">
+            <h2 id>Bem-vinda, Dra. Ana Clara Silva</h2>
+
+            <div class="formPesquisa">
+                <form>
+                    <label for="filtro">Filtrar por:</label>
+                    <input type="radio" name="radioNome" id="radioNome" value="Nome">
+                    <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
+                    <input type="radio" name="radioData" id="radioData" value="Data">
+                    <input type="date" name="txtData" id="txtData">
+
+                </form>
+            </div>
+
+            <p>Olá, Dra. Ana Clara Silva!
+                Seja bem-vinda ao portal de gerenciamento de consultas. Aqui você pode acessar
+                todas as informações relacionadas às consultas marcadas e aos históricos dos
+                pacientes. </p>
+        </div>
+    </section>
 </body>
+
 </html>
