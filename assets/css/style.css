@@ -4,10 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-   --corTexto-sessao-especialidade: #6F233F;
+   --corTexto: #6F233F;
    --fundoSessoes: #FFE1E3;
-   --fundo-sessaoMedica: #f9f0f1;
-   --fundo-sessao-especialidade: #FFE1E3;
 }
 
 * {
@@ -122,7 +120,7 @@ nav ul li a:hover {
 #especialidades h2{
    padding: 10px;
    font-size: 30px;
-   color: var(--corTexto-sessao-especialidade);
+   color: var(--corTexto);
 }
 
 .especialidades_container{
@@ -154,7 +152,7 @@ nav ul li a:hover {
 
 .especialidades_container .tipos_especialidades figcaption h3{
    font-weight: 600;
-   color: var(--corTexto-sessao-especialidade);
+   color: var(--corTexto);
    margin-bottom: 5px;
 }
 
@@ -206,4 +204,111 @@ nav ul li a:hover {
    text-align: justify;
    padding: 30px;
    font-weight: 500;
+}
+
+/* Estilizando sessão do Blog */
+#conheca_blog{
+   background-color: var(--fundoSessoes);
+}
+
+#conheca_blog h2{
+   color: var(--corTexto);
+   padding-top: 20px;
+   font-size: 30px;
+}
+
+.container_blog{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 500px;
+}
+
+.card-blog{
+   display: flex;
+   background-color: #EAA59F;
+   height: 430px;
+   width: 700px;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   border-radius: 20px;
+}
+
+.card-blog img{
+   padding: 10px;
+   margin-top: 20px;
+   height: 350px;
+   width: 600px;
+}
+
+.card-blog button{
+   height: 40px;
+   width: 100px;
+   margin: 10px;
+   cursor: pointer;
+   border: 1px solid #bc736e;
+   background-color: #E4908A;
+   font-size: 15px;
+   border-radius: 5px;
+}
+
+.card-blog button:active{
+   transform: scale(0.9);
+}
+
+.card-blog button:hover{
+   font-weight: bold;
+   background-color: #ea7d75;
+}
+
+/* Estilizando sessão de depoimento */
+
+#depoimento{
+   background-color: var(--fundo-sessaoMedica);
+}
+
+#depoimento h2{
+   color: var(--corTexto);
+   padding: 20px;
+   margin: 10px;
+   font-size: 30px;
+}
+
+.depoimento-container{
+   display: flex;
+   flex-direction: row;
+   text-align: center;
+   justify-content: space-around;
+   margin-bottom: 50px;
+}
+
+.card-depoimentos{
+   max-width: 400px;
+   max-height: 500px;
+   padding: 5px;
+   background-color: #EAA59F;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: space-between;
+}
+
+.card-depoimentos h4{
+   font-size: 16px;
+   color: #6F233F;
+   font-weight: 600;
+}
+
+.card-depoimentos .comentario{
+   text-align: justify;
+   font-size: 16px;
+   font-weight: 400;
+   margin: 5px;
+}
+
+/* Estilizando sessão de contato */
+.contato-container{
+   background-color: var(--fundoSessoes);
 }

@@ -17,3 +17,8 @@ function acionarEntrarAdm(event) {
 function acionarBtnSaibaMais(){
     window.location.href = "../pages/especialidade.html";
 }
+
+function acessarBlog(){
+    alert("entrou");
+    window.location.href = "https://camis25.github.io/Projeto-Web/";
+}

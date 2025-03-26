@@ -68,7 +68,8 @@
                 <figcaption>
                     <h3>Planejamento <br> Familiar</h3>
                     <p>
-                        Orienta homens e mulheres sobre a chegada dos filhos e a prevenir a gravidez indesejada. O ginecologista especialista nesta área é responsável por questões de concepção e contracepção.
+                        Orienta homens e mulheres sobre a chegada dos filhos e a prevenir a gravidez indesejada. O
+                        ginecologista especialista nesta área é responsável por questões de concepção e contracepção.
                     </p>
                 </figcaption>
                 <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
@@ -79,7 +80,8 @@
                 <figcaption>
                     <h3>Ginecologia da <br>Infância e Adolescência</h3>
                     <p>
-                        Aborda a saúde da mulher não gestante, nas interfaces da sua vida, desde o período neonatal até a infância e adolescência
+                        Aborda a saúde da mulher não gestante, nas interfaces da sua vida, desde o período neonatal até
+                        a infância e adolescência
                     </p>
                 </figcaption>
                 <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
@@ -105,11 +107,67 @@
     <section id="conheca_blog">
         <h2>Conheça nosso blog</h2>
         <div class="container_blog">
-            <img src="" alt="">
-            <button><a href="">Acessar</a></button>
+            <div class="card-blog">
+                <img src="../assets/img/blog.png" alt="">
+                <button type="button" onclick="acessarBlog()">Acessar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimento">
+        <h2>Depoimentos</h2>
+        <div class="depoimento-container">
+            
+            <div class="card-depoimentos">
+                <h4>Mariana Santana</h4>
+                <p class="comentario">
+                    Durante muito tempo adiei a ida ao ginecologista por medo e insegurança. Ouvia muitas histórias e ficava nervosa só de pensar. Finalmente, tomei coragem e marquei uma consulta. Fui surpreendida pela gentileza e profissionalismo da médica. Ela me deixou super à vontade, explicou tudo com clareza e me senti realmente cuidada. Foi um alívio enorme perceber que não era nada do que eu imaginava. Recomendo muito que todas as mulheres façam suas consultas regulares, é essencial para a nossa saúde e bem-estar.
+                </p>
+            </div>
+            <div class="card-depoimentos">
+                <h4>Fabiana Silva</h4>
+                <p class="comentario">
+                    Minha experiência com o ginecologista sempre foi positiva, e isso me ajudou a entender a importância da prevenção. Faço meus exames de rotina anualmente e me sinto segura e informada sobre a minha saúde íntima. Recentemente, durante um exame de rotina, foi detectada uma pequena alteração que, se não fosse descoberta precocemente, poderia ter se tornado um problema maior. Isso me mostrou o quanto é fundamental não negligenciar essas consultas. É um ato de cuidado conosco mesmas.
+                </p>
+            </div>
+            <div class="card-depoimentos">
+                <h4>Aline Lima</h4>
+                <p class="comentario">
+                    A consulta com a ginecologista foi muito mais do que um exame, foi um momento de aprendizado e empoderamento. Pude tirar todas as minhas dúvidas sobre o meu corpo, métodos contraceptivos e saúde sexual. A médica foi super aberta e me deu informações valiosas que eu não tinha antes. Saí do consultório me sentindo mais confiante e consciente sobre as minhas escolhas. É importante encontrar um profissional que te deixe confortável para conversar sobre tudo, sem julgamentos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="contato-container">
+            <div class="form-container">
+                <form>
+                    <h1>Tire suas dúvidas</h1>
+
+                    <label for="nome" id="lblNome">Nome</label>
+                    <input type="text" id="txtNome" required>
+                    
+                    <label for="telefone" id="lblTelefone">Telefone</label>
+                    <input type="tel" id="txtTelefone" required>
+
+                    <label for="email" id="lblEmail">E-mail</label>
+                    <input type="email" id="txtEmail" required>
+
+                    <label for="mensagem" id="lblMensagem">Digite sua mensagem...</label>
+                    <textarea name="mensagem" id="txtMensagem" rows="10" cols="50"></textarea>
+
+                    <button type="submit" onclick="" id="btnEnviar">Enviar</button>
+                </form>
+            </div>
+
+            <div class="slogan-container">
+                <h1>
+                    Tire suas dúvidas e descubra o melhor para sua saúde
+                </h1>
+            </div>
         </div>
     </section>
 
 </body>
-
 </html>
