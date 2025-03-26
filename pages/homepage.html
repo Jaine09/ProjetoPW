@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página inicial</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/script/script.js"></script>
     <!-- Icon da página -->
-    <link rel="shortcut icon" type="imagex/png" href="./img/logoClinica.png">
+    <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
 </head>
 
 <body>
     <nav>
-        <img src="./img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+        <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
         <ul>
             <li><a href="#apresentacao_medica">Home</a></li>
-            <li><a href="#">Consultório</a></li>
-            <li><a href="#">Especialidade</a></li>
+            <li><a href="../pages/consultorio.html">Consultório</a></li>
+            <li><a href="#especialidades">Especialidade</a></li>
         </ul>
     </nav>
 
@@ -33,7 +33,7 @@
 
             </div>
 
-            <img src="./img/imagenDoutora.png" alt="imagem da médica" id="imagem_doutora">
+            <img src="../assets/img/imagenDoutora.png" alt="imagem da médica" id="imagem_doutora">
         </div>
     </section>
 
@@ -42,45 +42,54 @@
         <div class="especialidades_container">
 
             <div class="tipos_especialidades">
-                <img src="./img/logoObstretricia.png" alt="">
+                <img src="../assets/img/obstetricia_icon.png" alt="Imagem de uma mulher grávida">
                 <figcaption>
                     <h3>Obstreticia</h3>
                     <p>
-                        A Obstetrícia serve para acompanhar o desenvolvimento da gestação, diagnosticar e tratar
-                        possíveis complicações, orientar sobre os cuidados necessários durante a gravidez, preparar a
-                        mulher para o parto e oferecer suporte emocional e físico durante todo o processo.
+                        Acompanhamento das questões relacionadas à reprodução humana, desde a concepção até o pós parto.
                     </p>
                 </figcaption>
+                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
             </div>
 
             <div class="tipos_especialidades">
-                <img src="./img/logoPlanejamentoFamiliar.png" alt="">
+                <img src="../assets/img/mastologia_icon.png" alt="Imagem de prevenção ao cancêr de mama">
                 <figcaption>
-                    <h3>Planejamento Familiar</h3>
+                    <h3>Mastologia</h3>
                     <p>
-                        Planejamento familiar é um conjunto de ações que auxiliam homens e mulheres a planejar a chegada
-                        dos filhos e também a prevenir uma gravidez indesejada.
+                        Verificação de doenças da mama, sejam elas benignas ou malignas.
                     </p>
                 </figcaption>
+                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
             </div>
 
             <div class="tipos_especialidades">
-                <img src="./img/logoGinecologiaInfanciaAdolescencia.png" alt="">
+                <img src="../assets/img/planejamentoFamiliar_icon.png" alt="Imagem de uma família">
                 <figcaption>
-                    <h3>Ginecologia da Infância e Adolescência</h3>
+                    <h3>Planejamento <br> Familiar</h3>
                     <p>
-                        A Ginecologia da Infância e Adolescência aborda a saúde da mulher não gestante, nas interfaces
-                        da sua vida, desde o período neonatal até a infância e adolescência, em uma visão integral, com
-                        especial atenção aos aspectos da boa prática da medicina humanizada e ética.
+                        Orienta homens e mulheres sobre a chegada dos filhos e a prevenir a gravidez indesejada. O ginecologista especialista nesta área é responsável por questões de concepção e contracepção.
                     </p>
                 </figcaption>
+                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
+            </div>
+
+            <div class="tipos_especialidades">
+                <img src="../assets/img/adolescente_icon.png" alt="Imagem de uma adolescente">
+                <figcaption>
+                    <h3>Ginecologia da <br>Infância e Adolescência</h3>
+                    <p>
+                        Aborda a saúde da mulher não gestante, nas interfaces da sua vida, desde o período neonatal até a infância e adolescência
+                    </p>
+                </figcaption>
+                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
             </div>
         </div>
     </section>
 
     <section id="sobre_medica">
         <div class="container_medica">
-            <img src="./img/medica.png" alt="Imagem da doutora">
+            <img src="../assets/img/medica.png" alt="Imagem da doutora">
 
             <div class="informacoes_medica">
                 <p>A Dra. Ana Clara Silva é uma ginecologista dedicada, graduada em Medicina pela Faculdade de Medicina

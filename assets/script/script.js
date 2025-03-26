@@ -13,3 +13,7 @@ function acionarEntrarAdm(event) {
         alert("Usuário incorreto");
     }
 }
+
+function acionarBtnSaibaMais(){
+    window.location.href = "../pages/especialidade.html";
+}
