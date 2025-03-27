@@ -44,9 +44,9 @@
             <div class="tipos_especialidades">
                 <img src="../assets/img/obstetricia_icon.png" alt="Imagem de uma mulher grávida">
                 <figcaption>
-                    <h3>Obstreticia</h3>
+                    <h3>Obsteticia</h3>
                     <p>
-                        Acompanhamento das questões relacionadas à reprodução humana, desde a concepção até o pós parto.
+                        Analisa os exames pré-natais para garantir a segurança, bem-estar e saúde da mãe e do feto. Realiza consultas, orienta e aconselha a mulher e familiares ao longo do período gestacional, realiza o parto e cuida da mulher e da criança durante o puerpério.
                     </p>
                 </figcaption>
                 <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
@@ -57,7 +57,7 @@
                 <figcaption>
                     <h3>Mastologia</h3>
                     <p>
-                        Verificação de doenças da mama, sejam elas benignas ou malignas.
+                        Verificação de doenças da mama, sejam elas benignas ou malignas. Avalia presença de tumores e cistos, realiza exames diagnósticos e faz o acompanhamento do câncer de mama.
                     </p>
                 </figcaption>
                 <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
@@ -117,23 +117,36 @@
     <section id="depoimento">
         <h2>Depoimentos</h2>
         <div class="depoimento-container">
-            
+
             <div class="card-depoimentos">
                 <h4>Mariana Santana</h4>
                 <p class="comentario">
-                    Durante muito tempo adiei a ida ao ginecologista por medo e insegurança. Ouvia muitas histórias e ficava nervosa só de pensar. Finalmente, tomei coragem e marquei uma consulta. Fui surpreendida pela gentileza e profissionalismo da médica. Ela me deixou super à vontade, explicou tudo com clareza e me senti realmente cuidada. Foi um alívio enorme perceber que não era nada do que eu imaginava. Recomendo muito que todas as mulheres façam suas consultas regulares, é essencial para a nossa saúde e bem-estar.
+                    Durante muito tempo adiei a ida ao ginecologista por medo e insegurança. Ouvia muitas histórias e
+                    ficava nervosa só de pensar. Finalmente, tomei coragem e marquei uma consulta. Fui surpreendida pela
+                    gentileza e profissionalismo da médica. Ela me deixou super à vontade, explicou tudo com clareza e
+                    me senti realmente cuidada. Foi um alívio enorme perceber que não era nada do que eu imaginava.
+                    Recomendo muito que todas as mulheres façam suas consultas regulares, é essencial para a nossa saúde
+                    e bem-estar.
                 </p>
             </div>
             <div class="card-depoimentos">
                 <h4>Fabiana Silva</h4>
                 <p class="comentario">
-                    Minha experiência com o ginecologista sempre foi positiva, e isso me ajudou a entender a importância da prevenção. Faço meus exames de rotina anualmente e me sinto segura e informada sobre a minha saúde íntima. Recentemente, durante um exame de rotina, foi detectada uma pequena alteração que, se não fosse descoberta precocemente, poderia ter se tornado um problema maior. Isso me mostrou o quanto é fundamental não negligenciar essas consultas. É um ato de cuidado conosco mesmas.
+                    Minha experiência com o ginecologista sempre foi positiva, e isso me ajudou a entender a importância
+                    da prevenção. Faço meus exames de rotina anualmente e me sinto segura e informada sobre a minha
+                    saúde íntima. Recentemente, durante um exame de rotina, foi detectada uma pequena alteração que, se
+                    não fosse descoberta precocemente, poderia ter se tornado um problema maior. Isso me mostrou o
+                    quanto é fundamental não negligenciar essas consultas. É um ato de cuidado conosco mesmas.
                 </p>
             </div>
             <div class="card-depoimentos">
                 <h4>Aline Lima</h4>
                 <p class="comentario">
-                    A consulta com a ginecologista foi muito mais do que um exame, foi um momento de aprendizado e empoderamento. Pude tirar todas as minhas dúvidas sobre o meu corpo, métodos contraceptivos e saúde sexual. A médica foi super aberta e me deu informações valiosas que eu não tinha antes. Saí do consultório me sentindo mais confiante e consciente sobre as minhas escolhas. É importante encontrar um profissional que te deixe confortável para conversar sobre tudo, sem julgamentos.
+                    A consulta com a ginecologista foi muito mais do que um exame, foi um momento de aprendizado e
+                    empoderamento. Pude tirar todas as minhas dúvidas sobre o meu corpo, métodos contraceptivos e saúde
+                    sexual. A médica foi super aberta e me deu informações valiosas que eu não tinha antes. Saí do
+                    consultório me sentindo mais confiante e consciente sobre as minhas escolhas. É importante encontrar
+                    um profissional que te deixe confortável para conversar sobre tudo, sem julgamentos.
                 </p>
             </div>
         </div>
@@ -141,25 +154,29 @@
 
     <section id="contato">
         <div class="contato-container">
-            <div class="form-container">
-                <form>
-                    <h1>Tire suas dúvidas</h1>
 
-                    <label for="nome" id="lblNome">Nome</label>
+            <form class="form-container">
+                <h1>Tire suas dúvidas</h1>
+
+                <div class="form-row">
+                    <label for="nome" id="lblNome">Nome:</label>
                     <input type="text" id="txtNome" required>
-                    
-                    <label for="telefone" id="lblTelefone">Telefone</label>
+
+                    <label for="telefone" id="lblTelefone">Telefone:</label>
                     <input type="tel" id="txtTelefone" required>
+                </div>
 
-                    <label for="email" id="lblEmail">E-mail</label>
+                <div class="form-group">
+                    <label for="email" id="lblEmail">E-mail:</label>
                     <input type="email" id="txtEmail" required>
+                </div>
 
+                <div class="form-group">
                     <label for="mensagem" id="lblMensagem">Digite sua mensagem...</label>
                     <textarea name="mensagem" id="txtMensagem" rows="10" cols="50"></textarea>
-
-                    <button type="submit" onclick="" id="btnEnviar">Enviar</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" onclick="" id="btnEnviar">Enviar</button>
+            </form>
 
             <div class="slogan-container">
                 <h1>
@@ -168,6 +185,24 @@
             </div>
         </div>
     </section>
+
+    <footer>
+        <div class="footer-container">
+            <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+
+            <div class="informacoes">
+                <p>Rua das Flores Imaginárias, nº 777, Bairro dos Sonhos Perdidos, Cidade da Utopia, UF - CEP: 00000-000</p> <br>
+                <p>(99) 99999-0000</p> <br>
+                <p>	&copy;Todos os Direitos Reservado</p>
+            </div>
+
+            <div class="rede-social">
+                <img src="../assets/img/instagram.png" alt="Símbolo do Instagram">
+                <img src="../assets/img/facebook.png" alt="Símbolo do Facebook">
+                <img src="../assets/img/whatsapp.png" alt="Símbolo do Whatsapp">
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

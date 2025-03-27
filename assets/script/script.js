@@ -19,6 +19,5 @@ function acionarBtnSaibaMais(){
 }
 
 function acessarBlog(){
-    alert("entrou");
     window.location.href = "https://camis25.github.io/Projeto-Web/";
 }
