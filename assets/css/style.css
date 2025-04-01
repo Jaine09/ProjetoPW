@@ -137,7 +137,13 @@
    background-color: #f9f0f1;
 }
 
-.container_medica{
+.container_medica h2{
+   color: var(--corTexto);
+   padding-top: 20px;
+   font-size: 30px;
+}
+
+.informacaoMedica-container{
    display: flex;
    flex-direction: row;
    align-items: center;
@@ -145,7 +151,7 @@
    justify-content: center;
 }
 
-.container_medica img{
+.informacaoMedica-container img{
    margin: 20px 20px 20px 50px;
    padding: 20px;
 }
