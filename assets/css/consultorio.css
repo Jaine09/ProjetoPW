@@ -1,0 +1,15 @@
+/* Fonte para o nome da Dra. */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --corTexto: #6F233F;
+    --fundoSessoes: #FFE1E3;
+    --fundoSessaoMedica: #F0F8FF;
+    --corBotao: #E4908A;
+    --bordaBotao: 1px solid #bc736e;
+    --bordaBotaoForm: 2px solid #bc736e;
+ }
+
+.consultorio-container{
+    background-color: var(--fundoSessoes) ;
+}

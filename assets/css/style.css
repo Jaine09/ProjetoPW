@@ -6,70 +6,17 @@
 :root{
    --corTexto: #6F233F;
    --fundoSessoes: #FFE1E3;
+   --fundoSessaoMedica: #F0F8FF;
    --corBotao: #E4908A;
    --bordaBotao: 1px solid #bc736e;
    --bordaBotaoForm: 2px solid #bc736e;
-}
-
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
-
-body {
-   font-family: "Montserrat", sans-serif;
-   background-color: aliceblue;
-   text-align: center;
-}
-
-/* Estilização da nav */
-
-nav {
-   font-weight: 400;
-   background-color: #FFA5AB;
-   display: flex;
-   align-items: center;
-}
-
-nav .logoInicial{
-   max-width: 60px;
-   max-height: 60px;
-   margin: 0 20px 0 20px;
-}
-
-nav ul {
-   list-style: none;
-   padding: 0;
-   margin: 0 auto;
-   display: flex;
-}
-
-nav ul li {
-   margin: 0 15px;
-}
-
-nav ul li a {
-   text-decoration: none;
-   color: #A0445D;
-   font-size: 18px;
-   padding: 10px 15px;
-   background: #FFA5AB;
-   font-weight: 500;
-}
-
-
-nav ul li a:hover {
-   background-color: #DA627D;
-   border-radius: 10px;
-   color: white;
 }
 
 /* Estilizando primeira sessão: Apresentação médica */
 
 .apresentacao_medica_container{
    display: flex;
-   background-color: var(--fundo-sessaoMedica);
+   background-color: var(--fundo-Sessao);
    height: 70vh;
    padding: 20px;
    justify-content: space-around;
@@ -268,13 +215,13 @@ nav ul li a:hover {
 /* Estilizando sessão de depoimento */
 
 #depoimento{
-   background-color: var(--fundo-sessaoMedica);
+   background-color: #f9f0f1;
+   height: 70%;
 }
 
 #depoimento h2{
    color: var(--corTexto);
    padding: 20px;
-   margin: 10px;
    font-size: 30px;
 }
 
@@ -282,9 +229,8 @@ nav ul li a:hover {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
-   margin-bottom: 50px;
+   padding: 40px;
    align-items: center;
-   margin: 0 30px 50px ;
 }
 
 .card-depoimentos{
