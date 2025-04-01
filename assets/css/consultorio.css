@@ -11,5 +11,70 @@
  }
 
 .consultorio-container{
-    background-color: var(--fundoSessoes) ;
+    background-color: var(--fundoSessoes);
+}
+
+.consultorio-container h2{
+    color: var(--corTexto);
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.information-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px 40px 30px;
+}
+
+.information-container img{
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    margin-right: 100px;
+}
+
+.information-consultorio{
+    text-align: justify;
+    width: 700px;
+    margin-left: 100px;
+    font-style: italic;
+}
+
+#location{
+    background-color: #ffe1e3c5;
+}
+
+.location-container h2{
+    color: var(--corTexto);
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.location-container{
+    
+}
+
+.location-consultorio{
+    display: flex;
+    padding: 20px 30px 40px 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.location-consultorio iframe{
+    height: 350px;
+    margin-left: 50px;
+}
+
+.informacao-consultorio{
+    text-align: justify;
+    width: 500px;
+    margin-left: 50px;
+}
+
+.informacao-consultorio h4{
+    font-style: italic;
+    font-weight: 600;
+    color: var(--corTexto);
 }

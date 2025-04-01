@@ -369,29 +369,3 @@ input[type="tel"]{
    padding: 30px;
    color: var(--corTexto);
 }
-
-/* Estilizando footer */
-
-.footer-container{
-   display: flex;
-   background-color: var(--fundo-sessaoMedica);
-   height: 30vh;
-   padding: 20px;
-   justify-content: space-around;
-   align-items: center;
-}
-
-.footer-container .logoInicial{
-   width: 70px;
-   height: 70px;
-   margin: 0 20px 0 20px;
-}
-
-.footer-container .informacoes{
-   width: 80vh;
-   font-size: 16px;
-}
-
-.footer-container .rede-social{
-   cursor: pointer;
-}
