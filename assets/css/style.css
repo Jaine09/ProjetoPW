@@ -159,7 +159,9 @@
 .informacoes_medica{
    text-align: justify;
    padding: 30px;
+   margin: 10px;
    font-weight: 500;
+   width: 700px;
 }
 
 /* Estilizando sessão do Blog */

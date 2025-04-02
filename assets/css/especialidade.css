@@ -1,0 +1,81 @@
+:root {
+    --corTexto: #6F233F;
+    --fundoSessoes: #FFE1E3;
+    --fundoSessaoMedica: #F0F8FF;
+    --corBotao: #E4908A;
+    --bordaBotao: 1px solid #bc736e;
+    --bordaBotaoForm: 2px solid #bc736e;
+}
+
+#especialidades {
+    background-color: var(--fundoSessoes);
+}
+
+.especialidade-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.especialidade-container h2 {
+    color: var(--corTexto);
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.especialidade-container .especialidade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 15px;
+}
+
+.especialidade img {
+    border-radius: 30px;
+    height: 500px;
+    width: 600px;
+    box-shadow: 1px 3px 3px var(--corBotao);
+}
+
+.especialidade .informacao-especialidade {
+    text-align: justify;
+    margin: 50px;
+    padding: 20px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.informacao-especialidade h3 {
+    color: var(--corTexto);
+    padding-top: 20px;
+    font-size: 20px;
+    font-style: normal;
+}
+
+.informacao-especialidade strong{
+    color: #6F233F;
+}
+
+.informacao-especialidade button {
+    margin-top: 20px;
+    padding: 5px;
+    height: 40px;
+    width: 130px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FFA5AB;
+    box-shadow:  1px 1px #E4908A;
+    cursor: pointer;
+}
+
+
+.informacao-especialidade button:active {
+    transform: scale(0.9);
+}
+
+.informacao-especialidade button:hover {
+    color: black;
+    font-weight: 600;
+    box-shadow: none;
+}

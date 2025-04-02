@@ -7,7 +7,7 @@ function acionarEntrarAdm(event) {
 
     if (txtEmailAdm == "admin@gmail.com" && txtSenhaAdm == "admin123") {
         
-        window.location.href = "./homepage.html";
+        window.location.href = "./pages/homepage.html";
     } else {
 
         alert("Usuário incorreto");

@@ -1,79 +1,76 @@
 /* Fonte para o nome da Dra. */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --corTexto: #6F233F;
     --fundoSessoes: #FFE1E3;
     --fundoSessaoMedica: #F0F8FF;
     --corBotao: #E4908A;
     --bordaBotao: 1px solid #bc736e;
     --bordaBotaoForm: 2px solid #bc736e;
- }
+}
 
-.consultorio-container{
+.consultorio-container {
     background-color: var(--fundoSessoes);
 }
 
-.consultorio-container h2{
+.consultorio-container h2 {
     color: var(--corTexto);
     padding-top: 20px;
     font-size: 30px;
 }
 
-.information-container{
+.information-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px 40px 30px;
 }
 
-.information-container img{
+.information-container img {
     width: 400px;
     height: 400px;
     border-radius: 10px;
     margin-right: 100px;
 }
 
-.information-consultorio{
+.information-consultorio {
     text-align: justify;
     width: 700px;
     margin-left: 100px;
     font-style: italic;
 }
 
-#location{
+#location {
     background-color: #ffe1e3c5;
 }
 
-.location-container h2{
+.location-container h2 {
     color: var(--corTexto);
     padding-top: 20px;
     font-size: 30px;
 }
 
-.location-container{
-    
-}
 
-.location-consultorio{
+.location-consultorio {
     display: flex;
     padding: 20px 30px 40px 30px;
     align-items: center;
     text-align: center;
 }
 
-.location-consultorio iframe{
+.location-consultorio iframe {
     height: 350px;
     margin-left: 50px;
 }
 
-.informacao-consultorio{
+.informacao-consultorio {
     text-align: justify;
     width: 500px;
     margin-left: 50px;
 }
 
-.informacao-consultorio h4{
+.informacao-consultorio h4 {
     font-style: italic;
     font-weight: 600;
     color: var(--corTexto);
