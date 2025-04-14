@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.12">
+  <diagram name="Página-1" id="GBsnLvnI4-rpbLtsN5aY">
+    <mxGraphModel dx="1044" dy="527" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-1" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.user;" vertex="1" parent="1">
+          <mxGeometry x="207" y="20" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-2" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="257" y="40" as="sourcePoint" />
+            <mxPoint x="347" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-3" value="Acessar site" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-4" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="40" as="sourcePoint" />
+            <mxPoint x="610" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-7" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="Z3DMo7HApsxmjVOeg6QT-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="687" y="70" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-5" value="Navegar pelo site" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="622" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-14" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Z3DMo7HApsxmjVOeg6QT-6" target="Z3DMo7HApsxmjVOeg6QT-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-17" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Z3DMo7HApsxmjVOeg6QT-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="487" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-6" value="Se" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="647" y="160" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-13" value="Só pode visualizar as postagens e artigos&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="622" y="360" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-15" value="Não estiver logado" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="697" y="270" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-18" value="Estiver logado" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="517" y="160" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-24" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Z3DMo7HApsxmjVOeg6QT-21" target="Z3DMo7HApsxmjVOeg6QT-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-21" value="Pode acessar a área de usuário&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="377" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-26" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Z3DMo7HApsxmjVOeg6QT-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="247" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-30" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Z3DMo7HApsxmjVOeg6QT-23" target="Z3DMo7HApsxmjVOeg6QT-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-23" value="Se" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="397" y="300" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-27" value="Login for &lt;br&gt;&quot;draAna@gmail.com&quot;&lt;br&gt;e senha for&lt;br&gt;&amp;nbsp;&quot;AnaAdm123&quot;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="257" y="260" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-28" value="Pode acessar a área de administração disponibilizada no perfil" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="67" y="310" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-29" value="Acesso somente ás áreas &quot;Editar perfil&quot;, &quot;Fazer post&quot;, &quot;Meus posts&quot;, &quot;Artigos&quot; e &quot;Comunidade&quot;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="355.5" y="475" width="163" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3DMo7HApsxmjVOeg6QT-31" value="Login e senha for&amp;nbsp;&lt;br&gt;diferente&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="440" y="400" width="120" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
