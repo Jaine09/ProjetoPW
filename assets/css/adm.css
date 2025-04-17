@@ -67,13 +67,19 @@
     background-color: rgb(247, 246, 246);
 }
 
-#btnEntrarUser {
+#btnEntrarAdm {
     width: 100px;
     height: 30px;
     border-radius: 10px;
     background-color: #DA627D;
     border: solid 2px #A53860;
     cursor: pointer;
+}
+
+#btnEntrarAdm:hover {
+    background-color: #A53860;
+    color: white;
+    transition: 0.3s;
 }
 
 /* Estilizando tela inicial do administrador */
