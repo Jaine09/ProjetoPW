@@ -1,0 +1,229 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: aliceblue;
+}
+
+.content {
+    border-radius: 20px;
+    background-color: #FFE1E3;
+    width: 52vw;
+    height: 80%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background-color: #E4908A;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+
+
+    left: 0;
+}
+
+/*Estilizando conteúdo inicial (Entrar)*/
+
+.primeiro-conteudo {
+    display: flex;
+}
+
+.primeiro-conteudo .segunda-coluna {
+    z-index: 11;
+}
+
+.titulo {
+    font-weight: bold;
+    text-transform: capitalize; /*transformando a primeira letra em maiúscula*/
+}
+
+.primeiro-titulo {
+    color: #6F233F;
+    font-size: 30px;
+}
+
+.segundo-titulo {
+    color: #A0445D;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.descricao {
+    font-size: 12px;
+    color: white;
+    line-height: 20px; /*espaçamento entre as linhas*/
+}
+
+.descricao-login {
+    color: #A0445D;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.primeira-coluna {
+    text-align: center;
+    width: 40%; /*definindo como o item será posicionado*/
+    z-index: 10; /*colocando o item acima do background*/
+}
+
+.segunda-coluna {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilizando formulário */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+
+.form input {
+    padding: 10px;
+    height: 45px;
+    width: 100%;
+    border: none;
+    background-color: #f401;
+    margin: 8px;
+}
+
+.form-cadastro input {
+    height: 30px;
+}
+
+.form-cadastro .btn {
+    margin: 5px;
+}
+
+.senha {
+    color: white;
+    font-size: 14px;
+    margin: 15px 0;
+}
+
+.btn {
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: black;
+    font-size: 10px;
+    padding: 10px;
+    width: 150px;
+    font-weight: bold;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.primeiro-btn {
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+
+.primeiro-btn:active {
+    transform: scale(0.9);
+}
+
+.primeiro-btn:hover {
+    color: whitesmoke;
+    background-color: #A0445D;
+    border: #A0445D 1px solid;
+}
+
+.segundo-btn {
+    background-color: #FFA5AB;
+    border: 1px solid #EAA59F;
+    transition: background-color .5s;
+}
+
+.segundo-btn a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.segundo-btn:active {
+    transform: scale(0.9);
+    
+}
+
+.segundo-btn:hover a{
+    color: white;
+}
+
+.segundo-btn:hover {
+    border: none;
+    background-color: #6F233Fff;
+    color: white;
+}
+
+/* Estilizando contéudo de Cadastro */
+.segundo-conteudo {
+    position: absolute;
+    display: flex;
+}
+
+.segundo-conteudo .primeira-coluna {
+    order: 2;
+    /*colocando a primeira coluna depois da segunda coluna*/
+    z-index: -1;
+}
+
+.segundo-conteudo .segunda-coluna {
+    order: 1;
+    /*colocando a segunda coluna antes da primeira coluna*/
+    z-index: -1;
+}
+
+.senha {
+    color: #6F233F;
+    font-size: 14px;
+    margin: 15px 0;
+    text-decoration: none;
+}
+
+/* Sumindo com o conteúdo login e aparecendo a página de cadastro */
+.cadastrar-js .primeiro-conteudo .primeira-coluna,
+.cadastrar-js .primeiro-conteudo .segunda-coluna {
+    z-index: -1;
+}
+
+.cadastrar-js .segundo-conteudo .primeira-coluna,
+.cadastrar-js .segundo-conteudo .segunda-coluna {
+    z-index: 11;
+}
+
+/* movimentando a parte colorida */
+.cadastrar-js .content::before {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 30%;
+    border-top-left-radius: 30%;
+    left: 60%;
+}
+
+/* Sumindo com o conteúdo de cadastro e aparecendo a página de login */
+
+.entrar-js .primeiro-conteudo .primeira-coluna,
+.entrar-js .primeiro-conteudo .segunda-coluna {
+    z-index: 11;
+}
+
+.entrar-js .segundo-conteudo .primeira-coluna,
+.entrar-js .segundo-conteudo .segunda-coluna {
+    z-index: -1;
+}

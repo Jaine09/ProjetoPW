@@ -7,11 +7,9 @@
     <title>Área de administração</title>
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/adm.css">
-    
-    <script src="../assets/js/script.js"></script>
 
     <!-- Icon da página -->
-    <link rel="shortcut icon" type="imagex/png" href="./img/logoClinica.png">
+    <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
 </head>
 
 <body>
@@ -21,32 +19,96 @@
         <ul>
             <li><a href="./homepage.html">Home</a></li>
             <li><a href="./consultorio.html">Consultório</a></li>
-            <li><a href="./especialidade.html">Especialidade</a></li>
+            <li><a href="./especialidade.html">Especialidades</a></li>
         </ul>
     </nav>
 
     <section class="session_TelaPrincipal">
-        <div class="telaPrincipal_container">
-            <img src="../assets/img/imagenDoutora.png" alt="Imagem da doutora" id="imgTelaPrincipal">
-            <h2 id>Bem-vinda, Dra. Ana Clara Silva</h2>
 
-            <div class="formPesquisa">
-                <form>
-                    <label for="filtro">Filtrar por:</label>
-                    <input type="radio" name="radioNome" id="radioNome" value="Nome">
-                    <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
-                    <input type="radio" name="radioData" id="radioData" value="Data">
-                    <input type="date" name="txtData" id="txtData">
+            <div class="filter-container">
+                <img src="../assets/img/imagenDoutora.png" alt="Imagem da doutora" id="imgTelaPrincipal">
+                <h2 id>Bem-vinda, Dra. Ana Clara Silva</h2>
 
-                </form>
+                <div class="formPesquisa">
+                    <form>
+                        <label for="filtro">Filtrar por:</label>
+
+                        <div class="filter-group">
+                            <input type="radio" name="radioNome" id="radioNome" value="nome">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome"
+                                style="display: none;">
+                        </div>
+
+                        <div class="filter-group">
+                            <input type="radio" name="radioData" id="radioData" value="Data">
+                            <label for="data">Data</label>
+                            <input type="date" name="txtData" id="txtData" style="display: none;">
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
 
-            <p>Olá, Dra. Ana Clara Silva!
-                Seja bem-vinda ao portal de gerenciamento de consultas. Aqui você pode acessar
-                todas as informações relacionadas às consultas marcadas e aos históricos dos
-                pacientes. </p>
+            <div class="telaPrincipal_container">
+                <p>
+                    Olá, Dra. Ana Clara Silva! <br>
+                    Seja bem-vinda ao portal de gerenciamento de consultas. Aqui você pode acessar
+                    todas as informações relacionadas às consultas marcadas e aos históricos dos
+                    pacientes. 
+                </p>
+
         </div>
     </section>
+
+    <section id="menu-adm">
+        <div class="menu-container">
+        <div class="menu-adm-container">
+            <h2>Menu de Administração</h2>
+            <ul>
+                <li><a href="#">Pacientes Cadastrados</a></li>
+                <li><a href="#">Consultas Marcadas</a></li>
+                <li><a href="#">Histórico de Consultas</a></li>
+                <li><a href="#">Mensagens</a></li>
+            </ul>
+        </div>
+
+        <div class="menu-information">
+            <table id="tabelaConsultas">
+                <caption>Consultas Marcadas</caption>
+                <tr>
+                    <th>Data</th>
+                    <th>Nome do Paciente</th>
+                    <th>Especialidade</th>
+                    <th>Horário</th>
+                    <th>Status</th>
+                    <th>Observações</th>
+                </tr>
+
+                <tr>
+                    <td>10/10/2023</td>
+                    <td>Maria da Silva</td>
+                    <td>Mastologia</td>
+                    <td>14:00</td>
+                    <td>Confirmada</td>
+                    <td>Nenhuma</td>
+                </tr>
+
+                <tr>
+                    <td>10/10/2023</td>
+                    <td>Maria da Silva</td>
+                    <td>Mastologia</td>
+                    <td>14:00</td>
+                    <td>Confirmada</td>
+                    <td>Nenhuma</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </section>
+    <script src="../assets/js/script.js"></script>
+
 </body>
 
 </html>

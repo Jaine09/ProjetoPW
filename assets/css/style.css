@@ -14,6 +14,11 @@
 
 /* Estilizando primeira sessão: Apresentação médica */
 
+h2{
+   text-align: center;
+}
+
+
 .apresentacao_medica_container{
    display: flex;
    background-color: var(--fundo-Sessao);
@@ -122,6 +127,11 @@
    cursor: pointer;
 }
 
+.tipos_especialidades .btnSaibaMais a{
+   text-decoration: none;
+   color: black;
+}
+
 .tipos_especialidades .btnSaibaMais:active{
    transform: scale(0.9);
 }
@@ -201,6 +211,7 @@
 }
 
 .card-blog button{
+   justify-content: center;
    height: 40px;
    width: 100px;
    margin: 10px;
@@ -209,6 +220,11 @@
    background-color: var(--corBotao);
    font-size: 15px;
    border-radius: 5px;
+}
+
+.card-blog button a{
+   text-decoration: none;
+   color: black;
 }
 
 .card-blog button:active{
@@ -279,6 +295,7 @@
 }
 
 .form-container{
+   text-align: center;
    align-items: center;
    max-height: 500px;
    max-width: 560px;
@@ -289,6 +306,7 @@
 }
 
 .form-container h1{
+   text-align: center;
    padding: 10px;
    color: var(--corTexto);
    font-size: 25px;

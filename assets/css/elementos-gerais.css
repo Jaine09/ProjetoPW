@@ -1,0 +1,18 @@
+.stick-distancia{
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+    z-index: 1000; 
+}
+
+.distacia{
+    font-size: 20px;
+    color: white;
+}

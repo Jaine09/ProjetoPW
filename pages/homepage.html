@@ -7,8 +7,8 @@
     <title>Página inicial</title>
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-
-    <script src="../assets/js/script.js"></script>
+    <link rel="stylesheet" href="../assets/css/elementos-gerais.css">
+    
     <!-- Icon da página -->
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
 </head>
@@ -19,9 +19,17 @@
         <ul>
             <li><a href="#apresentacao_medica">Home</a></li>
             <li><a href="./consultorio.html">Consultório</a></li>
-            <li><a href="./especialidade.html">Especialidade</a></li>
+            <li><a href="./especialidade.html">Especialidades</a></li>
         </ul>
+        <button class="btnEntrarCadastrar" id="btnEntrarCadastrar"><a href="./loginUser.html">Entrar</a></button>
+        <img src="../assets/img/user.png" alt="Seja um usuário" class="usuario">
     </nav>
+
+    <div class="stick-distancia" id="stick-distancia-id">
+        <span class="icon-distancia"></span>
+        <span  id="distancia"></span> <br>
+        <span id="tempo"></span>
+    </div>
 
     <section id="apresentacao_medica">
         <div class="apresentacao_medica_container">
@@ -53,7 +61,7 @@
                         realiza o parto e cuida da mulher e da criança durante o puerpério.
                     </p>
                 </figcaption>
-                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
+                <button type="button" class="btnSaibaMais"><a href="./especialidade.html">Saiba mais</a></button>
             </div>
 
             <div class="tipos_especialidades">
@@ -65,7 +73,7 @@
                         cistos, realiza exames diagnósticos e faz o acompanhamento do câncer de mama.
                     </p>
                 </figcaption>
-                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
+                <button type="button" class="btnSaibaMais"><a href="./especialidade.html">Saiba mais</a></button>
             </div>
 
             <div class="tipos_especialidades">
@@ -77,7 +85,7 @@
                         ginecologista especialista nesta área é responsável por questões de concepção e contracepção.
                     </p>
                 </figcaption>
-                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
+                <button type="button" class="btnSaibaMais"><a href="./especialidade.html">Saiba mais</a></button>
             </div>
 
             <div class="tipos_especialidades">
@@ -89,7 +97,7 @@
                         a infância e adolescência
                     </p>
                 </figcaption>
-                <button type="button" class="btnSaibaMais" onclick="acionarBtnSaibaMais()">Saiba mais</button>
+                <button type="button" class="btnSaibaMais"><a href="./especialidade.html">Saiba mais</a></button>
             </div>
         </div>
     </section>
@@ -119,7 +127,7 @@
         <div class="container_blog">
             <div class="card-blog">
                 <img src="../assets/img/blog.png" alt="">
-                <button type="button" onclick="acessarBlog()">Acessar</button>
+                <button type="button"><a href="https://camis25.github.io/Projeto-Web/">Acessar</a></button>
             </div>
         </div>
     </section>
@@ -214,7 +222,8 @@
             </div>
         </div>
     </footer>
-
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/ExibirDistanciaTempo.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
-function acionarEntrarAdm(event) {
-    event.preventDefault();
+const btnLogar = document.getElementById('btnEntrarCadastrar');
+
+function acionarEntrarAdm() {
     var txtEmailAdm = document.getElementById('txtEmail').value;
     var txtSenhaAdm = document.getElementById('txtSenha').value;
 
@@ -7,17 +8,13 @@ function acionarEntrarAdm(event) {
 
     if (txtEmailAdm == "admin@gmail.com" && txtSenhaAdm == "admin123") {
         
-        window.location.href = "./pages/homepage.html";
+        window.location.href = "./pages/adm.html";
     } else {
 
         alert("Usuário incorreto");
     }
 }
 
-function acionarBtnSaibaMais(){
-    window.location.href = "../pages/especialidade.html";
-}
-
-function acessarBlog(){
-    window.location.href = "https://camis25.github.io/Projeto-Web/";
-}
+btnLogar.addEventListener('click', function(){
+    window.location.href = "./loginUser.html";
+});

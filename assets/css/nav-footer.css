@@ -12,7 +12,6 @@
 body {
    font-family: "Montserrat", sans-serif;
    background-color: aliceblue;
-   text-align: center;
 }
 
 /* Estilização da nav */
@@ -28,6 +27,46 @@ nav .logoInicial {
    max-width: 60px;
    max-height: 60px;
    margin: 0 20px 0 20px;
+}
+
+nav .btnEntrarCadastrar {
+   margin-right: 100px;
+   padding: 5px;
+   height: 40px;
+   width: 100px;
+   border-radius: 5px;
+   border: none;
+   color: #A0445D;
+   background-color: #F4DADB;
+   box-shadow: 1px 1px #EAA59F;
+   cursor: pointer;
+}
+
+nav .btnEntrarCadastrar a{
+   text-decoration: none;
+   color: #A0445D;
+   font-weight: 600;
+}
+
+nav .btnEntrarCadastrar:active {
+   transform: scale(0.9);
+}
+
+nav .btnEntrarCadastrar:hover {
+   background-color: #DA627D;
+   color: white;
+   font-weight: 600;
+   box-shadow: none;
+}
+
+nav .btnEntrarCadastrar:hover a {
+   color: white;
+}
+
+nav .usuario {
+   display: none;
+   margin-right: 50px;
+   cursor: pointer;
 }
 
 nav ul {

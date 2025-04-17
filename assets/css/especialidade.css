@@ -7,6 +7,10 @@
     --bordaBotaoForm: 2px solid #bc736e;
 }
 
+h2{
+    text-align: center;
+}
+
 #especialidades {
     background-color: var(--fundoSessoes);
 }
@@ -68,7 +72,6 @@
     box-shadow:  1px 1px #E4908A;
     cursor: pointer;
 }
-
 
 .informacao-especialidade button:active {
     transform: scale(0.9);

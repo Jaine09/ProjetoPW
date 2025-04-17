@@ -10,6 +10,10 @@
     --bordaBotaoForm: 2px solid #bc736e;
 }
 
+h2{
+    text-align: center;
+}
+
 .consultorio-container {
     background-color: var(--fundoSessoes);
 }
