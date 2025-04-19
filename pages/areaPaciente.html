@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Paciente</title>
+
+    <link rel="stylesheet" href="../assets/css/nav-footer.css">
+    <link rel="stylesheet" href="../assets/css/areaPaciente.css">
+
+    <!-- Icon da página -->
+    <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
+</head>
+
+<body>
+    <nav>
+        <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./consultorio.html">Consultório</a></li>
+            <li><a href="./especialidade.html">Especialidades</a></li>
+        </ul>
+    </nav>
+
+    <div id="tituloPag">
+        <h1>Olá, <span id="nomePaciente"></span></h1>
+    </div>
+
+    <main>
+        <div class="menu">
+            <ul>
+                <li><a href="#historico">Meu histórico</a></li>
+                <li><a href="#dadosPessoais">Dados Pessoais</a></li>
+                <li><a href="#endereco">Endereço</a></li>
+                <li><a href="">Avaliações</a></li>
+                <li><button type="button">Sair</button></li>
+            </ul>
+        </div>
+
+        <section id="historico">
+            <div class="conteudoInicial">
+                <h2>Histórico de Consultas</h2>
+                <button type="button"><a href="#agendarConsulta">Agendar Consulta</a></button>
+            </div>
+            <table id="tabelaHistorico" class="tabelaHistorico">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Especialidade</th>
+                        <th>Exames</th>
+                        <th>Receitas médicas</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaHistorico" class="tabelaHistorico">
+                    <tr>
+                        <td>01/01/2023</td>
+                        <td>Cardiologia</td>
+                        <td><a href="#">Exame de sangue</a></td>
+                        <td><a href="#">Receita 1</a></td>
+                    </tr>
+                    <!-- As linhas da tabela serão preenchidas dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="dadosPessoais">
+            <div class="alterarDados">
+                <form action="" class="formAlterarDados" id="formAlterarDadosPessoais">
+                    <fieldset class="fieldsetAlterarDadosUsuários">
+                        <legend>Alterar Dados Pessoais</legend>
+                        <p>Preencha os campos que deseja alterar.</p>
+
+                        <div class="information-group">
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" name="nome">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="dataNascimento">Data de Nascimento:</label>
+                            <input type="date" id="dataNascimento" name="dataNascimento">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" name="cpf">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="tel" id="txtAlterarTelefone" name="telefone">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="txtAlterarEmail">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="txtAlterarSenha" name="senha">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="confirmarSenha">Confirmar Senha</label>
+                            <input type="password" id="txtAlterarConfirmarSenha" name="confirmarSenha">
+                        </div>
+                    </fieldset>
+                </form> <!-- Fim formulário alterar dados pessoais-->
+                <form action="" class="formAlterarDados" id="formAlterarDadosAcompanhante">
+                    <fieldset class="fieldsetAlterarDadosAcompanhante">
+                        <legend>Alterar dados do acompanhante</legend>
+                        <p>Preencha os campos que deseja alterar.</p>
+
+                        <div class="information-group">
+                            <label for="nomeAcompanhante">Nome do Acompanhante:</label>
+                            <input type="text" id="nomeAcompanhante" name="nomeAcompanhante">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpfAcompanhante" name="cpfAcompanhante">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="tel" id="telefoneAcompanhante" name="telefoneAcompanhante">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="email">Email:</label>
+                            <input type="email" name="emailAcompanhante" id="emailAcompanhante">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="parentescoAcompanhante">Parentesco:</label>
+                            <select id="parentescoAcompanhante" name="parentescoAcompanhante">
+                                <option value="" disabled selected>Selecione o parentesco</option>
+                                <option value="filho">Filho(a)</option>
+                                <option value="mae">Mãe</option>
+                                <option value="pai">Pai</option>
+                                <option value="irmao">Irmão</option>
+                                <option value="irma">Irmã</option>
+                                <option value="esposo">Esposo(a)</option>
+                                <option value="amigo">Amigo(a)</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                            <input type="text" id="outroParentescoAcompanhante" name="outroParentescoAcompanhante"
+                                placeholder="Especifique outro parentesco" ">
+                    </div>
+                </fieldset>
+            </form> <!-- Fim formulário alterar dados do acompanhante-->
+            
+                <div class=" btnAlterarInformacoes">
+                        <button type="button" id="editarInformações">Editar Informações</button>
+                        <button type="submit" id="salvarInformacoesUsuario">Salvar</button>
+                        <button type="reset" id="descartarInformacaoUsuario">Descartar Alterações</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="endereco">
+            <div class="alterarEndereco">
+            <form action="" class="formEndereco" id="formEndereco">
+                <fieldset class="fieldsetAlterarEndereco">
+                    <legend>Alterar Endereço</legend>
+                    <p>Preencha os campos que deseja alterar.</p>
+
+                    <div class="information-group">
+                        <label for="cep">CEP:</label>
+                        <input type="text" id="alterarCep" name="cep">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="rua">Rua:</label>
+                        <input type="text" id="alterarRua" name="rua">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="numero">Número:</label>
+                        <input type="text" id="alterarNumero" name="numero">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" id="alterarBairro" name="bairro">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="alterarCidade" name="cidade">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="estado">Estado:</label>
+                        <input type="text" id="alterarEstado" name="estado">
+                    </div>
+                </fieldset>
+            </form> <!-- Fim formulário alterar endereço-->
+
+                <div class=" btnAlterarInformacoes">
+                    <button type="button" id="editarEndereco">Editar Endereço</button>
+                    <button type="submit" id="salvarEdicaoEndereco">Salvar</button>
+                    <button type="reset" id="descaetarAlteracaoEndereco">Descartar Alterações</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="agendarConsulta">
+            <form action="" class="formAgendarConsulta" id="formAgendarConsulta">
+                <fieldset class="fieldsetAgendarConsulta">
+                    <legend>Agendar Consulta</legend>
+                    <p>Preencha os campos para agendar uma consulta.</p>
+
+                    <div class="information-group">
+                        <label for="especialidade">Especialidade:</label>
+                        <select id="especialidade" name="especialidade">
+                            <option value="" disabled selected>Selecione a especialidade</option>
+                            <option value="optObstetricia">Obstetricia</option>
+                            <option value="optMastologia">Mastologia</option>
+                            <option value="optPlanejamentoFamiliar">Planejamento Familiar</option>
+                            <option value="optGinecologiaInfAdo">Ginecologia da Infância e Adolescência</option>
+                        </select>
+                    </div>
+
+                    <div class="information-group">
+                        <label for="dataConsulta">Data da Consulta:</label>
+                        <input type="date" id="dataConsulta" name="dataConsulta">
+                    </div>
+
+                    <div class="information-group">
+                        <label for="horaConsulta">Hora da Consulta:</label>
+                        <input type="time" id="horaConsulta" name="horaConsulta">
+                    </div>
+
+                    <button type="submit" id="btnAgendarConsulta">Agendar Consulta</button>
+                </fieldset>
+        </section>
+    </main>
+</body>
+
+</html>

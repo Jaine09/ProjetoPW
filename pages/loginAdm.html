@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrador</title>
+    <link rel="stylesheet" href="../assets/css/nav-footer.css">
+    <link rel="stylesheet" href="../assets/css/adm.css">
+
+    <!-- Icon da página -->
+    <link rel="shortcut icon" type="imagex/png" href="./assets/img/logoClinica.png">
+</head>
+
+<body>
+    <nav>
+        <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./consultorio.html">Consultório</a></li>
+            <li><a href="./especialidade.html">Especialidades</a></li>
+        </ul>
+    </nav>
+
+    <div class="login">
+        <div class="login-container">
+            <h3>Bem-vinda!!</h3>
+            <h4>Faça o login para acessar sua área</h4>
+            <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoCli">
+            <form action="" class="login_form">
+                <label for="email" id="lblEmail">Email:</label>
+                <input type="text" name="txtEmail" id="txtEmail">
+                <br>
+                <br>
+                <label for="senha" id="lblSenha">Senha:</label>
+                <input type="password" name="txtSenha" id="txtSenha"> 
+                <br>
+                <br>
+                <button type="submit" id="btnEntrarAdm" onclick="acionarEntrarAdm()">Entrar</button>
+            </form>
+            <a href="#">Esqueceu sua senha? Clique aqui para recuperá-la.</a>
+        </div>
+    </div>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

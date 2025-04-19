@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
     background-color: aliceblue;
 }
 
@@ -10,7 +10,8 @@
     border-radius: 20px;
     background-color: #FFE1E3;
     width: 52vw;
-    height: 80%;
+    height: 90%;
+    margin:50px 0;
     justify-content: space-between;
     align-items: center;
     position: relative;
@@ -26,8 +27,6 @@
     border-bottom-right-radius: 30%;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-
-
     left: 0;
 }
 
@@ -61,6 +60,20 @@
     font-size: 12px;
     color: white;
     line-height: 20px; /*espaçamento entre as linhas*/
+}
+
+#adm{
+    margin-top: 5px;
+}
+
+#adm a{
+    color: #6F233F;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: italic;
+    text-decoration: none;
+    text-align: center;
+    margin: 80px;
 }
 
 .descricao-login {
@@ -106,6 +119,31 @@
 
 .form-cadastro .btn {
     margin: 5px;
+}
+
+#formAcompanhante{
+    display: none;
+}
+
+#formAcompanhante label{
+    color: rgb(51, 49, 49);
+    font-size: 15px;
+    margin: 0 10px;
+}
+
+#formAcompanhante select{
+    padding: 10px;
+    height: 45px;
+    width: 100%;
+    border: none;
+    background-color: #f401;
+    margin: 8px;
+}
+#mensagemMenorIdade{
+    margin: 15px 20px;
+    text-align: center;
+    color: rgb(87, 79, 79);
+    font-size: 15px;
 }
 
 .senha {

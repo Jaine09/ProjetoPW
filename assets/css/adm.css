@@ -53,6 +53,7 @@
 .login_form {
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .login_form label {
@@ -61,6 +62,7 @@
 }
 
 .login_form input {
+    padding: 5px;
     border-radius: 10px;
     border: none;
     height: 20px;

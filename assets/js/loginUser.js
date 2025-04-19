@@ -15,6 +15,7 @@ btnEntrar.addEventListener('click', function () {
 // Validando cadastro de dados do usuário
 function validarCadastroCompleto() {
     var nome = document.getElementById('nome').value;
+    var dataNascimento = document.getElementById('dataNascimento').value;
     var telefone = document.getElementById('telefone').value;
     var cpf = document.getElementById('cpf').value;
     var email = document.getElementById('email').value;
@@ -23,17 +24,88 @@ function validarCadastroCompleto() {
     var endereco = document.getElementById('endereco').value;
     var bairro = document.getElementById('bairro').value;
 
-    if (nome == "" || telefone == "" || cpf == "" || email == "" || senha == "" || cep == "" || endereco == "" || bairro == "") {
+    var informacoesUsuario = {
+        nome: nome,
+        dataNascimento: dataNascimento,
+        telefone: telefone,
+        cpf: cpf,
+        email: email,
+        senha: senha,
+        cep: cep,
+        endereco: endereco,
+        bairro: bairro
+    };
+
+    localStorage.setItem('email', JSON.stringify(informacoesUsuario));
+
+    var mensagem = document.getElementById('mensagemMenorIdade');
+    var cadastroUsuario = document.getElementById('formUsuario');
+    var cadastroAcompanhante = document.getElementById('formAcompanhante');
+
+    //Validando idade
+    var dataAtual = new Date();
+    var dataNasc = new Date(dataNascimento);
+    var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
+
+    var mensagemUsuario = 'Notamos que você é menor de idade, por favor, cadastre um acompanhante responsável.';
+
+    if (!nome || !dataNascimento || !telefone || !cpf  || !email|| !senha|| !cep || !endereco || !bairro) {
         alert('Preencha todos os campos!');
     } else {
-        if (telefone.length < 9 || telefone.length > 12) {
+        if(idade < 18) {
+            mensagem.textContent = mensagemUsuario;
+            cadastroUsuario.style.display = 'none';
+            cadastroAcompanhante.style.display = 'block';
+            validarCadastroCompletoComAcompanhante();
+        } else if (telefone.length < 9 || telefone.length > 12) {
             alert('Telefone inválido!');
         } else if (cpf.length < 12) {
             alert('CPF inválido!');
         } else {
             console.log('Cadastro realizado com sucesso! Calculando a distância...');
-            window.location.href = "./homepage.html";
+            window.location.href = "./areaPaciente.html";
         }
+    }
+}
+
+function validarCadastroCompletoComAcompanhante(){
+    var nomeAcompanhante = document.getElementById('inpNomeAcompanhante').value;
+    var cpfAcompanhante = document.getElementById('inpCpfAcompanhante').value;
+    var telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante').value;
+
+    var informacoesAcompanhante = {
+        nomeAcompanhante: nomeAcompanhante,
+        cpfAcompanhante: cpfAcompanhante,
+        telefoneAcompanhante: telefoneAcompanhante
+    };
+
+    localStorage.setItem('nomeAcompanhante', JSON.stringify(informacoesAcompanhante));
+
+    if(!nomeAcompanhante || !cpfAcompanhante || !telefoneAcompanhante) {
+        alert('Preencha todos os campos!');
+    }
+    else if (telefoneAcompanhante.length < 9 || telefoneAcompanhante.length > 12 ) {
+        alert('Telefone inválido!');
+    } else if (cpfAcompanhante.length < 12) {
+        alert('CPF inválido!');
+    } else {
+        console.log('Cadastro do acompanhante realizado com sucesso!');
+        window.location.href = "./areaPaciente.html";
+    }
+}
+
+function validarLogin(){
+    var email = document.getElementById('emailLogin').value;
+    var senha = document.getElementById('senhaLogin').value;
+
+    var informacoesUsuario = JSON.parse(localStorage.getItem('email'));
+
+    if (email === informacoesUsuario.email && senha === informacoesUsuario.senha) {
+        console.log('Login realizado com sucesso!');
+        alert('Login realizado com sucesso!');
+        window.location.href = "./areaPaciente.html";
+    } else {
+        alert('Email ou senha inválidos!');
     }
 }
 
@@ -119,7 +191,7 @@ function calculaDistancia(latitude, longitude) {
                 const distanciaEmQuilometros = (distancia / 1000).toFixed(2);
                 const duracaoFormatada = formatarDuracao(duracaoSegundos);
 
-                // feito para ser acessado na página homepage.html
+                // feito para ser acessado em todas as páginas
                 localStorage.setItem('distancia', distanciaEmQuilometros);
                 localStorage.setItem('tempo', duracaoFormatada);
 

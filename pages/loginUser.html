@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/loginUser.css">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <!-- Icon da página -->
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
@@ -20,7 +19,7 @@
         <nav>
             <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
             <ul>
-                <li><a href="./homepage.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="./consultorio.html">Consultório</a></li>
                 <li><a href="./especialidade.html">Especialidades</a></li>
             </ul>
@@ -43,10 +42,11 @@
                     <h2 class="titulo segundo-titulo">Seja Bem-Vinda</h2>
                     <p class="descricao descricao-login">Bem-vinda ao seu próximo nível de bem-estar.</p>
                     <form class="form">
-                        <input type="email" placeholder="Email" required>
-                        <input type="password" placeholder="Password" required>
+                        <input type="email" placeholder="Email" id="emailLogin" required>
+                        <input type="password" placeholder="Password" id="senhaLogin" required>
                         <a href="" class="senha">Esqueceu sua senha?</a>
-                        <button class="btn segundo-btn">Entrar</button>
+                        <button class="btn segundo-btn" onclick="validarLogin()">Entrar</button>
+                        <p id="adm"><a href="./loginAdm.html">Administração</a></p>
                     </form>
                 </div>
             </div><!--Final da primeiro conteúdo-->
@@ -58,20 +58,41 @@
                     <button id="entrar" class="btn primeiro-btn">Entrar</button>
                 </div>
                 <div class="segunda-coluna">
-                    <h2 class="titulo segundo-titulo">Seja Bem-Vinda</h2>
-                    <p class="descricao descricao-login">A porta de entrada para cuidar de você, por você.</p>
-                    <form action="" class="form form-cadastro">
-                        <input type="text" placeholder="Nome" id="nome" required>
+                    <h2 class="titulo segundo-titulo titulosOff">Seja Bem-Vinda</h2>
+                    <p class="descricao descricao-login titulosOff">A porta de entrada para cuidar de você, por você.</p>
+                    <form action="" class="form form-cadastro" id="formUsuario">
+                        <input type="text" placeholder="Nome Completo" id="nome" required>
+                        <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required>
                         <input type="telefone" placeholder="Telefone" id="telefone" required>
                         <input type="text" placeholder="CPF" id="cpf" required>
                         <input type="text" placeholder="CEP" id="cep" onblur="validarCep()" required>
                         <input type="text" placeholder="Endereco" id="endereco" readonly>
                         <input type="text" placeholder="Bairro" id="bairro" readonly>
-                        <input type="number" placeholder="Número" id="numero" >
+                        <input type="text" placeholder="Número" id="numero" >
                         <input type="email" placeholder="E-mail" id="email" required>
                         <input type="password" placeholder="Senha" id="senha" required>
                         
                         <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto()">Cadastrar</button>
+                    </form>
+
+                    <span id="mensagemMenorIdade"></span>
+                    
+                    <form class="form form-cadastro" id="formAcompanhante">
+                        <input type="text" placeholder="Nome Completo do Acompanhante" id="inpNomeAcompanhante" required>
+                        <input type="text" placeholder="CPF do Acompanhante" id="inpCpfAcompanhante" required>
+                        <input type="tel" placeholder="Telefone" id="inpTelefoneAcompanhante" required>
+                        <label for="parentescoAcompanhante">Parentesco:</label>
+                            <select id="parentescoAcompanhante" name="parentescoAcompanhante">
+                                <option value="" disabled selected>Selecione o parentesco</option>
+                                <option value="filho">Filho(a)</option>
+                                <option value="mae">Mãe</option>
+                                <option value="pai">Pai</option>
+                                <option value="irmao">Irmão</option>
+                                <option value="irma">Irmã</option>
+                                <option value="esposo">Esposo(a)</option>
+                                <option value="amigo">Amigo(a)</option>
+                            </select>
+                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante()">Cadastrar</button>
                     </form>
                 </div>
             </div> <!--Final segunda coluna-->

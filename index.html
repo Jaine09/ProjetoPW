@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Administrador</title>
+    <title>Página inicial</title>
     <link rel="stylesheet" href="./assets/css/nav-footer.css">
-    <link rel="stylesheet" href="./assets/css/adm.css">
-
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/elementos-gerais.css">
+    
     <!-- Icon da página -->
     <link rel="shortcut icon" type="imagex/png" href="./assets/img/logoClinica.png">
 </head>
@@ -16,31 +17,213 @@
     <nav>
         <img src="./assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
         <ul>
-            <li><a href="./pages/homepage.html">Home</a></li>
+            <li><a href="#apresentacao_medica">Home</a></li>
             <li><a href="./pages/consultorio.html">Consultório</a></li>
             <li><a href="./pages/especialidade.html">Especialidades</a></li>
         </ul>
+        <button class="btnEntrarCadastrar" id="btnEntrarCadastrar"><a href="./pages/loginUser.html">Entrar</a></button>
+        <img src="./assets/img/user.png" alt="Seja um usuário" class="usuario">
     </nav>
 
-    <div class="login">
-        <div class="login-container">
-            <h3>Bem-vinda!!</h3>
-            <h4>Faça o login para acessar sua área</h4>
-            <img src="./assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoCli">
-            <form action="" class="login_form">
-                <label for="email" id="lblEmail">Email:</label>
-                <input type="text" name="txtEmail" id="txtEmail">
-                <br>
-                <br>
-                <label for="senha" id="lblSenha">Senha:</label>
-                <input type="password" name="txtSenha" id="txtSenha"> 
-                <br>
-                <br>
-                <button type="submit" id="btnEntrarAdm" onclick="acionarEntrarAdm()">Entrar</button>
-            </form>
-            <a href="#">Esqueceu sua senha? Clique aqui para recuperá-la.</a>
-        </div>
+    <div class="stick-distancia" id="stick-distancia-id">
+        <span class="icon-distancia"></span>
+        <span  id="distancia"></span> <br>
+        <span id="tempo"></span>
     </div>
+
+    <section id="apresentacao_medica">
+        <div class="apresentacao_medica_container">
+            <div class="informacao_medica">
+
+                <h1>Dra. Ana Clara Silva</h1>
+                <h3>Ginecologista</h3>
+                <h4>CRM-SP 123456</h4>
+
+                <button class="btnAgendar_consulta">Agendar Consulta</button>
+
+            </div>
+
+            <img src="./assets/img/imagenDoutora.png" alt="imagem da médica" id="imagem_doutora">
+        </div>
+    </section>
+
+    <section id="especialidades">
+        <h2>Especialidades</h2>
+        <div class="especialidades_container">
+
+            <div class="tipos_especialidades">
+                <img src="./assets/img/obstetricia_icon.png" alt="Imagem de uma mulher grávida">
+                <figcaption>
+                    <h3>Obstetricia</h3>
+                    <p>
+                        Analisa os exames pré-natais para garantir a segurança, bem-estar e saúde da mãe e do feto.
+                        Realiza consultas, orienta e aconselha a mulher e familiares ao longo do período gestacional,
+                        realiza o parto e cuida da mulher e da criança durante o puerpério.
+                    </p>
+                </figcaption>
+                <button type="button" class="btnSaibaMais"><a href="./pages/especialidade.html">Saiba mais</a></button>
+            </div>
+
+            <div class="tipos_especialidades">
+                <img src="./assets/img/mastologia_icon.png" alt="Imagem de prevenção ao cancêr de mama">
+                <figcaption>
+                    <h3>Mastologia</h3>
+                    <p>
+                        Verificação de doenças da mama, sejam elas benignas ou malignas. Avalia presença de tumores e
+                        cistos, realiza exames diagnósticos e faz o acompanhamento do câncer de mama.
+                    </p>
+                </figcaption>
+                <button type="button" class="btnSaibaMais"><a href="./pages/especialidade.html">Saiba mais</a></button>
+            </div>
+
+            <div class="tipos_especialidades">
+                <img src="./assets/img/planejamentoFamiliar_icon.png" alt="Imagem de uma família">
+                <figcaption>
+                    <h3>Planejamento <br> Familiar</h3>
+                    <p>
+                        Orienta homens e mulheres sobre a chegada dos filhos e a prevenir a gravidez indesejada. O
+                        ginecologista especialista nesta área é responsável por questões de concepção e contracepção.
+                    </p>
+                </figcaption>
+                <button type="button" class="btnSaibaMais"><a href="./pages/especialidade.html">Saiba mais</a></button>
+            </div>
+
+            <div class="tipos_especialidades">
+                <img src="./assets/img/adolescente_icon.png" alt="Imagem de uma adolescente">
+                <figcaption>
+                    <h3>Ginecologia da <br>Infância e Adolescência</h3>
+                    <p>
+                        Aborda a saúde da mulher não gestante, nas interfaces da sua vida, desde o período neonatal até
+                        a infância e adolescência
+                    </p>
+                </figcaption>
+                <button type="button" class="btnSaibaMais"><a href="./pages/especialidade.html">Saiba mais</a></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre_medica">
+        <div class="container_medica">
+            <h2>Sobre a médica</h2>
+            <div class="informacaoMedica-container">
+                <img src="./assets/img/medica.png" alt="Imagem da doutora">
+
+                <div class="informacoes_medica">
+                    <p>A Dra. Ana Clara Silva é uma ginecologista dedicada, graduada em Medicina pela Faculdade de
+                        Medicina
+                        da Universidade de São Paulo (FMUSP) e com residência em Ginecologia e Obstetrícia pelo Hospital
+                        Hospital das Clínicas da FMUSP . Com
+                        especialização em Ginecologia, a Dra. Ana Clara Silva oferece acompanhamento
+                        ginecológico preventivo, obstetrícia, planejamento familiar e tratamento de doenças
+                        ginecológicas,
+                        como miomas, endometriose e menopausa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conheca_blog">
+        <h2>Conheça nosso blog</h2>
+        <div class="container_blog">
+            <div class="card-blog">
+                <img src="./assets/img/blog.png" alt="">
+                <button type="button"><a href="https://camis25.github.io/Projeto-Web/">Acessar</a></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimento">
+        <h2>Depoimentos</h2>
+        <div class="depoimento-container">
+
+            <div class="card-depoimentos">
+                <h4>Mariana Santana</h4>
+                <p class="comentario">
+                    Durante muito tempo adiei a ida ao ginecologista por medo e insegurança. Ouvia muitas histórias e
+                    ficava nervosa só de pensar. Finalmente, tomei coragem e marquei uma consulta. Fui surpreendida pela
+                    gentileza e profissionalismo da médica. Ela me deixou super à vontade, explicou tudo com clareza e
+                    me senti realmente cuidada. Foi um alívio enorme perceber que não era nada do que eu imaginava.
+                    Recomendo muito que todas as mulheres façam suas consultas regulares, é essencial para a nossa saúde
+                    e bem-estar.
+                </p>
+            </div>
+            <div class="card-depoimentos">
+                <h4>Fabiana Silva</h4>
+                <p class="comentario">
+                    Minha experiência com o ginecologista sempre foi positiva, e isso me ajudou a entender a importância
+                    da prevenção. Faço meus exames de rotina anualmente e me sinto segura e informada sobre a minha
+                    saúde íntima. Recentemente, durante um exame de rotina, foi detectada uma pequena alteração que, se
+                    não fosse descoberta precocemente, poderia ter se tornado um problema maior. Isso me mostrou o
+                    quanto é fundamental não negligenciar essas consultas. É um ato de cuidado conosco mesmas.
+                </p>
+            </div>
+            <div class="card-depoimentos">
+                <h4>Aline Lima</h4>
+                <p class="comentario">
+                    A consulta com a ginecologista foi muito mais do que um exame, foi um momento de aprendizado e
+                    empoderamento. Pude tirar todas as minhas dúvidas sobre o meu corpo, métodos contraceptivos e saúde
+                    sexual. A médica foi super aberta e me deu informações valiosas que eu não tinha antes. Saí do
+                    consultório me sentindo mais confiante e consciente sobre as minhas escolhas. É importante encontrar
+                    um profissional que te deixe confortável para conversar sobre tudo, sem julgamentos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="contato-container">
+
+            <form class="form-container">
+                <h1>Tire suas dúvidas</h1>
+
+                <div class="form-row">
+                    <label for="nome" id="lblNome">Nome:</label>
+                    <input type="text" id="txtNome" required>
+
+                    <label for="telefone" id="lblTelefone">Telefone:</label>
+                    <input type="tel" id="txtTelefone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" id="lblEmail">E-mail:</label>
+                    <input type="email" id="txtEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensagem" id="lblMensagem">Digite sua mensagem...</label>
+                    <textarea name="mensagem" id="txtMensagem" rows="10" cols="50"></textarea>
+                </div>
+                <button type="submit" onclick="" id="btnEnviar">Enviar</button>
+            </form>
+
+            <div class="slogan-container">
+                <h1>
+                    Tire suas dúvidas e descubra o melhor para sua saúde
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <img src="./assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
+
+            <div class="informacoes">
+                <p>Rua das Flores Imaginárias, nº 777, Bairro dos Sonhos Perdidos, Cidade da Utopia, UF - CEP: 00000-000
+                </p> <br>
+                <p>(99) 99999-0000</p> <br>
+                <p> &copy;Todos os Direitos Reservado</p>
+            </div>
+
+            <div class="rede-social">
+                <img src="./assets/img/instagram.png" alt="Símbolo do Instagram">
+                <img src="./assets/img/facebook.png" alt="Símbolo do Facebook">
+                <img src="./assets/img/whatsapp.png" alt="Símbolo do Whatsapp">
+            </div>
+        </div>
+    </footer>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/ExibirDistanciaTempo.js"></script>
 </body>
+
 </html>

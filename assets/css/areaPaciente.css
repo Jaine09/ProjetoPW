@@ -1,0 +1,285 @@
+:root {
+    --corTexto: #6F233F;
+    --fundoSessoes: #FFE1E3;
+    --fundoSessaoMedica: #F0F8FF;
+    --corBotao: #E4908A;
+    --bordaBotao: 1px solid #bc736e;
+    --bordaBotaoForm: 2px solid #bc736e;
+}
+
+main{
+    display: flex;
+    min-height: 100%;
+}
+
+#tituloPag{
+    margin: 5px;
+    padding: 5px;
+}
+
+#tituloPag h1{
+    font-size: 30px;
+    color: var(--corTexto);
+    /* text-align: center; */
+}
+
+#tituloPag span{
+    font-size: 30px;
+    color: var(--corTexto);
+    /* text-align: center; */
+    font-style: italic;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    width: 20%;
+    background-color: var(--fundoSessoes);
+    padding: 10px;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+
+.menu li a {
+    text-decoration: none;
+    color: var(--corTexto);
+    font-size: 16px;
+    padding: 15px;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu ul li button {
+    background-color: #f7c1c4;
+    border: 1px solid var(--corTexto);
+    border-radius: 5px;
+    width: 20px;
+    color: var(--corTexto);
+    font-weight: 200;
+    font-size: 16px;
+    padding: 10px;
+    width: 30%;
+    height: 30%;
+    margin: 20px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.menu ul li button:hover {
+    background-color: #d77b7f;
+    color: black;
+    font-weight: bold;
+}
+
+section{
+    margin-top: 20px;
+    margin-left: 20%;
+    padding: 20px;
+    width: 75%;
+}
+
+/* Sessão de visualizar histórico */
+#historico{
+    display: none;
+}
+
+.conteudoInicial{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.conteudoInicial h2{
+    font-size: 20px;
+    color: var(--corTexto);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.conteudoInicial button{
+    background-color: var(--fundoSessoes);
+    color: var(--corTexto);
+    border: 1px solid var(--corTexto);
+    width: 15%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.conteudoInicial button a{
+    text-decoration: none;
+    color: var(--corTexto);
+
+}
+
+.conteudoInicial button:active{
+    transform: scale(0.95);
+}
+
+.conteudoInicial button:hover{
+    background-color: #eab9bc;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid var(--fundoSessoes);
+}
+
+#tabelaHistorico{
+    width: 100%;
+    margin-top: 20px;
+    border: 2px solid var(--corTexto);
+}
+
+#tabelaHistorico th{
+    padding: 10px;
+    background-color: var(--fundoSessoes);
+    color: var(--corTexto);
+}
+
+#corpoTabelaHistorico tr td{
+    text-align: center;
+}
+
+/* Sessão de editar dados  e alterar endereço */
+#dadosPessoais{
+    display: none;
+}
+
+#endereco{
+    display: none;
+}
+
+#agendarConsulta{
+
+}
+
+.alterarDados, .alterarEndereco{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-height: 90%;
+}
+
+.formAlterarDados, .formEndereco, .formAgendarConsulta{ /* formulario de alterar dados, endereço e agendar consulta*/
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin: 20px;
+}
+
+.fieldsetAlterarDadosUsuários, .fieldsetAlterarDadosAcompanhante, .fieldsetAlterarEndereco, .fieldsetAgendarConsulta{
+    border: 2px solid var(--corTexto);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--fundoSessaoMedica);
+}
+
+.fieldsetAlterarDadosUsuários legend, .fieldsetAlterarDadosAcompanhante ,.fieldsetAlterarEndereco legend, .fieldsetAgendarConsulta legend{
+    font-size: 18px;
+    color: var(--corTexto);
+    font-weight: 500;
+}
+
+.fieldsetAlterarDadosUsuários p, .fieldsetAlterarDadosAcompanhante p, .fieldsetAlterarEndereco p, .fieldsetAgendarConsulta p{
+    font-size: 16px;
+    color: var(--corTexto);
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+
+.information-group {
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 15px; 
+}
+
+.formAlterarDados .information-group label, .formEndereco .information-group label, .formAgendarConsulta .information-group label {
+    margin-bottom: 5px; 
+    display: block; 
+}
+
+.formAlterarDados .information-group input, .formEndereco .information-group input, .formAgendarConsulta .information-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%; 
+    box-sizing: border-box; 
+}
+
+.fieldsetAgendarConsulta .information-group select{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%; 
+}
+
+.btnAlterarInformacoes{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.btnAlterarInformacoes button{
+    background-color: var(--corBotao);
+    color: white;
+    border: var(--bordaBotaoForm);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+.fieldsetAgendarConsulta button{
+    background-color:#eab9bc;
+    color: var(--corTexto);
+    border: var(--bordaBotaoForm);
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 10px 0;
+
+}
+
+.btnAlterarInformacoes button:active{
+    transform: scale(0.95);
+}
+
+.btnAlterarInformacoes button:hover{
+    background-color: #d77b7f;
+    color: black;
+}
+
+.fieldsetAgendarConsulta button:active{
+    transform: scale(0.9);
+}
+
+.fieldsetAgendarConsulta button:hover{
+    background-color: #d77b7f;
+    color: white;
+}
