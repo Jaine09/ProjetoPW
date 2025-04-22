@@ -14,7 +14,7 @@
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
 </head>
 
-<body class="cadastrar-js">
+<body class="entrar-js">
     <main>
         <nav>
             <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
@@ -45,7 +45,7 @@
                         <input type="email" placeholder="Email" id="emailLogin" required>
                         <input type="password" placeholder="Password" id="senhaLogin" required>
                         <a href="" class="senha">Esqueceu sua senha?</a>
-                        <button class="btn segundo-btn" onclick="validarLogin()">Entrar</button>
+                        <button class="btn segundo-btn" onclick="validarLogin(event)">Entrar</button>
                         <p id="adm"><a href="./loginAdm.html">Administração</a></p>
                     </form>
                 </div>
@@ -72,13 +72,14 @@
                         <input type="email" placeholder="E-mail" id="email" required>
                         <input type="password" placeholder="Senha" id="senha" required>
                         
-                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto()">Cadastrar</button>
+                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto(event)">Cadastrar</button>
                     </form>
 
                     <span id="mensagemMenorIdade"></span>
                     
                     <form class="form form-cadastro" id="formAcompanhante">
                         <input type="text" placeholder="Nome Completo do Acompanhante" id="inpNomeAcompanhante" required>
+                        <input type="date" placeholder="Data de Nascimento do Acompanhante" id="inpDataNascimentoAcompanhante" required>
                         <input type="text" placeholder="CPF do Acompanhante" id="inpCpfAcompanhante" required>
                         <input type="tel" placeholder="Telefone" id="inpTelefoneAcompanhante" required>
                         <label for="parentescoAcompanhante">Parentesco:</label>
@@ -92,7 +93,7 @@
                                 <option value="esposo">Esposo(a)</option>
                                 <option value="amigo">Amigo(a)</option>
                             </select>
-                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante()">Cadastrar</button>
+                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante(event)">Cadastrar</button>
                     </form>
                 </div>
             </div> <!--Final segunda coluna-->

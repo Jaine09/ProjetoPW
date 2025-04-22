@@ -9,7 +9,7 @@
 
 main{
     display: flex;
-    min-height: 100%;
+    height: 100%;
 }
 
 #tituloPag{
@@ -34,7 +34,8 @@ main{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
+    min-height: 83%;
+    max-height: 100%;
     width: 20%;
     background-color: var(--fundoSessoes);
     padding: 10px;
@@ -89,16 +90,46 @@ main{
 section{
     margin-top: 20px;
     margin-left: 20%;
-    padding: 20px;
+    padding: 0 20px;
     width: 75%;
+    height: 100%;
 }
 
-/* Sessão de visualizar histórico */
+/* tirando a visibolidade  */
 #historico{
-    display: none;
+    display: flex;
+    flex-direction: column;
+    /* display: none; */
 }
 
-.conteudoInicial{
+#dadosPessoais{
+    display: none;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+#endereco{
+    display: none;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+#agendarConsulta{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#avaliacoes{
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+}
+
+.conteudoInicial, .adicionarAvaliacao{
     display: flex;
     text-align: center;
     align-items: center;
@@ -106,14 +137,14 @@ section{
     margin-top: 20px;
 }
 
-.conteudoInicial h2{
+.conteudoInicial h2, .adicionarAvaliacao h2{
     font-size: 20px;
     color: var(--corTexto);
     margin: 0;
     flex-grow: 1;
 }
 
-.conteudoInicial button{
+.conteudoInicial button, #adicionarNovaAvaliacao{
     background-color: var(--fundoSessoes);
     color: var(--corTexto);
     border: 1px solid var(--corTexto);
@@ -130,11 +161,11 @@ section{
 
 }
 
-.conteudoInicial button:active{
+.conteudoInicial button:active, #adicionarNovaAvaliacao:active{
     transform: scale(0.95);
 }
 
-.conteudoInicial button:hover{
+.conteudoInicial button:hover, #adicionarNovaAvaliacao:hover{
     background-color: #eab9bc;
     color: black;
     font-size: 15px;
@@ -145,34 +176,23 @@ td {
     border: 1px solid var(--fundoSessoes);
 }
 
-#tabelaHistorico{
+#tabelaHistorico, #tabelaAvaliacoes{
     width: 100%;
     margin-top: 20px;
     border: 2px solid var(--corTexto);
 }
 
-#tabelaHistorico th{
+#tabelaHistorico th, #tabelaAvaliacoes th{
     padding: 10px;
     background-color: var(--fundoSessoes);
     color: var(--corTexto);
 }
 
-#corpoTabelaHistorico tr td{
+#corpoTabelaHistorico tr td, #corpoTabelaAvaliacoes tr td{
     text-align: center;
 }
 
 /* Sessão de editar dados  e alterar endereço */
-#dadosPessoais{
-    display: none;
-}
-
-#endereco{
-    display: none;
-}
-
-#agendarConsulta{
-
-}
 
 .alterarDados, .alterarEndereco{
     display: flex;
@@ -182,27 +202,44 @@ td {
     max-height: 90%;
 }
 
+.novaSenha{
+    display: none;
+}
+
+.formAvaliacoes{
+    display: none;
+    /* display: flex; */
+    flex-direction: column; 
+    align-items: center;
+    margin: 0 20px;
+}
+
 .formAlterarDados, .formEndereco, .formAgendarConsulta{ /* formulario de alterar dados, endereço e agendar consulta*/
     display: flex;
     flex-direction: column; 
     align-items: center;
-    margin: 20px;
+    margin: 0 20px;
+}
+
+.fieldsetAlterarDadosAcompanhante{
+    display: none;
+    /* display: flex; */
 }
 
 .fieldsetAlterarDadosUsuários, .fieldsetAlterarDadosAcompanhante, .fieldsetAlterarEndereco, .fieldsetAgendarConsulta{
     border: 2px solid var(--corTexto);
-    padding: 20px;
+    padding: 0 20px;
     border-radius: 5px;
     background-color: var(--fundoSessaoMedica);
 }
 
-.fieldsetAlterarDadosUsuários legend, .fieldsetAlterarDadosAcompanhante ,.fieldsetAlterarEndereco legend, .fieldsetAgendarConsulta legend{
+.fieldsetAlterarDadosUsuários legend, .fieldsetAlterarDadosAcompanhante legend,.fieldsetAlterarEndereco legend{
     font-size: 18px;
     color: var(--corTexto);
     font-weight: 500;
 }
 
-.fieldsetAlterarDadosUsuários p, .fieldsetAlterarDadosAcompanhante p, .fieldsetAlterarEndereco p, .fieldsetAgendarConsulta p{
+.fieldsetAlterarDadosUsuários p, .fieldsetAlterarDadosAcompanhante p, .fieldsetAlterarEndereco p, .fieldsetAgendarConsulta p, .fieldsetAvaliacoes p{
     font-size: 16px;
     color: var(--corTexto);
     font-style: italic;
@@ -229,7 +266,7 @@ td {
     box-sizing: border-box; 
 }
 
-.fieldsetAgendarConsulta .information-group select{
+.fieldsetAgendarConsulta .information-group select, .fieldsetAvaliacoes .information-group select{
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -242,7 +279,7 @@ td {
     margin: 10px;
 }
 
-.btnAlterarInformacoes button{
+.btnAlterarInformacoes button, #btnEnviarAvaliacao{
     background-color: var(--corBotao);
     color: white;
     border: var(--bordaBotaoForm);
@@ -266,11 +303,11 @@ td {
 
 }
 
-.btnAlterarInformacoes button:active{
+.btnAlterarInformacoes button:active, #btnEnviarAvaliacao:active{
     transform: scale(0.95);
 }
 
-.btnAlterarInformacoes button:hover{
+.btnAlterarInformacoes button:hover, #btnEnviarAvaliacao:hover{
     background-color: #d77b7f;
     color: black;
 }
@@ -282,4 +319,17 @@ td {
 .fieldsetAgendarConsulta button:hover{
     background-color: #d77b7f;
     color: white;
+}
+
+.fieldsetAvaliacoes {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.fieldsetAvaliacoes legend{
+    text-align: flex-start;
+    justify-content: start;
+    font-size: 18px;
 }

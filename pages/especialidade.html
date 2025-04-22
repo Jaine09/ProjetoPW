@@ -7,6 +7,7 @@
     <title>Especialidade</title>
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/especialidade.css">
+    <link rel="stylesheet" href="../assets/css/elementos-gerais.css">
     
     <!-- Icon da página -->
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
@@ -20,14 +21,23 @@
             <li><a href="./consultorio.html">Consultório</a></li>
             <li><a href="#especialidades">Especialidades</a></li>
         </ul>
-        <button class="btnEntrarCadastrar" id="btnEntrarCadastrar"><a href="./loginUser.html">Entrar</a></button>
-        <img src="../assets/img/user.png" alt="Seja um usuário" class="usuario">
+        <a href="./loginUser.html">
+            <button class="btnEntrarCadastrar" id="btnEntrarCadastrar">Entrar</button>
+        </a>
+        <button class="btnLogado"><a href="./areaPaciente.html"><img src="../assets/img/loginAtivo.png" alt="Usuário logado"></a></button>
     </nav>
+
+    <div class="stick-distancia">
+        <span class="information-stick icon-distancia"><img src="../assets/img/carro.png" alt="Tempo com carro"></span>
+        <span class="information-stick" id="distancia"></span>
+        <span class="information-stick" id="tempo"></span>
+    </div>
+
 
     <section id="especialidades">
         <div class="especialidade-container">
             <h2>Especialidades</h2>
-            <div class="especialidade">
+            <div class="especialidade" id="obstetricia">
                 <div class="informacao-especialidade">
                     <h3>Obstetricia</h3>
                     <br>
@@ -56,12 +66,12 @@
                             <strong>Cirurgias obstétricas:</strong> Realiza cirurgias como cesarianas e outras
                             intervenções necessárias em casos de complicações.
                         </p>
-                    <button>Agendar Consulta</button>
+                    <button type="button" class="btnAgendarConsulta">Agendar Consulta</button>
                 </div>
                 <img src="../assets/img/obstetricia_especialidade.jpg" alt="imagem de um bebê no ventre">
             </div>
 
-            <div class="especialidade">
+            <div class="especialidade" id="mastologia">
                 <img src="../assets/img/matologia_especialidade.jpg" alt="">
                 <div class="informacao-especialidade">
                     <h3>Mastologia</h3>
@@ -81,11 +91,11 @@
                         <p>
                             <strong>Reabilitação:</strong> Oferece suporte e acompanhamento às pacientes que passaram por tratamento de câncer de mama, auxiliando na recuperação física e emocional.
                         </p>
-                    <button>Agendar Consulta</button>
+                    <button type="button" class="btnAgendarConsulta">Agendar Consulta</button>
                 </div>
             </div>
 
-            <div class="especialidade">
+            <div class="especialidade" id="planejamentoFamiliar">
                 <div class="informacao-especialidade">
                     <h3>Planejamento Familiar</h3>
                     <br>
@@ -108,7 +118,7 @@
                             <p>
                                 <strong>Empodera indivíduos e casais:</strong> Permite que as pessoas tenham controle sobre suas decisões reprodutivas, o que está diretamente ligado à autonomia e à capacidade de planejar o futuro.
                             </p>
-                    <button>Agendar Consulta</button>
+                    <button type="button" class="btnAgendarConsulta">Agendar Consulta</button>
                 </div>
                 <img src="../assets/img/PlanejamentoFamiliar_especialidade.jpg" alt="">
             </div>
@@ -141,7 +151,7 @@
                         <p>
                             <strong>Avaliação e tratamento de malformações genitais:</strong> Diagnostica e, quando necessário, trata malformações do sistema reprodutor feminino que podem ser identificadas na infância ou adolescência.
                         </p>
-                    <button>Agendar Consulta</button>
+                    <button type="button" class="btnAgendarConsulta">Agendar Consulta</button>
                 </div>  
             </div>
         </div>
@@ -165,7 +175,7 @@
             </div>
         </div>
     </footer>
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/script.js" defer></script>
 </body>
 
 </html>

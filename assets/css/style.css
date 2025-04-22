@@ -116,7 +116,9 @@ h2{
    text-align: justify;
 }
 
+
 .tipos_especialidades .btnSaibaMais{
+   display: flex;
    height: 40px;
    width: 50%;
    border-radius: 10px;
@@ -125,11 +127,11 @@ h2{
    margin-top: 10px;
    background-color: #E4908A;
    cursor: pointer;
-}
-
-.tipos_especialidades .btnSaibaMais a{
    text-decoration: none;
+   align-items: center;
+   justify-content: center;
    color: black;
+   font-size: 14px;
 }
 
 .tipos_especialidades .btnSaibaMais:active{

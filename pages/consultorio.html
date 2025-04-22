@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/consultorio.css">
+    <link rel="stylesheet" href="../assets/css/elementos-gerais.css">
 
     <!-- Icon da página -->
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
@@ -21,9 +22,18 @@
             <li><a href="#consultorio">Consultório</a></li>
             <li><a href="./especialidade.html">Especialidades</a></li>
         </ul>
-        <button class="btnEntrarCadastrar" id="btnEntrarCadastrar"><a href="./loginUser.html">Entrar</a></button>
-        <img src="../assets/img/user.png" alt="Seja um usuário" class="usuario">
+        <a href="./loginUser.html">
+            <button class="btnEntrarCadastrar" id="btnEntrarCadastrar">Entrar</button>
+        </a>
+        
+        <button class="btnLogado"><a href="./areaPaciente.html"><img src="../assets/img/loginAtivo.png" alt="Usuário logado"></a></button>
     </nav>
+
+    <div class="stick-distancia">
+        <span class="information-stick icon-distancia"><img src="../assets/img/carro.png" alt="Tempo com carro"></span>
+        <span class="information-stick" id="distancia"></span>
+        <span class="information-stick" id="tempo"></span>
+    </div>
 
     <section id="consultorio">
         <div class="consultorio-container">
@@ -38,7 +48,7 @@
                         são essenciais para diagnósticos precisos e acompanhamento adequado. Nossos aparelhos são
                         qualidades sofisticada e bem higienizado.</p>
                     <br>
-                    <p><strong>Sala de exames equipada:</strong> A sala de exames deve conta com maca ginecológica,
+                    <p><strong>Sala de exames equipada:</strong> A sala de exames conta com maca ginecológica,
                         espéculos vaginais, materiais para coleta de exames e outros instrumentos necessários, todos de
                         otima qualidade.</p>
                     <br>
@@ -62,8 +72,7 @@
 
                 <div class="informacao-consultorio">
                     <h4>Consultório Dra. Ana Clara Silva</h4>
-                    <p>Rua das Flores Imaginárias, nº 777, Bairro dos Sonhos Perdidos, Cidade da Utopia, UF - CEP:
-                        00000-000
+                    <p>Av. Eng. Eusébio Stevaux, 823 - Santo Amaro, São Paulo - SP, 04696-000
                     </p>
                     <br>
                     <h4>Telefone</h4>
@@ -81,7 +90,7 @@
             <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
 
             <div class="informacoes">
-                <p>Rua das Flores Imaginárias, nº 777, Bairro dos Sonhos Perdidos, Cidade da Utopia, UF - CEP: 00000-000
+                <p>Av. Eng. Eusébio Stevaux, 823 - Santo Amaro, São Paulo - SP, 04696-000
                 </p> <br>
                 <p>(99) 99999-0000</p> <br>
                 <p> &copy;Todos os Direitos Reservado</p>
@@ -94,7 +103,7 @@
             </div>
         </div>
     </footer>
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/script.js" defer></script>
 </body>
 
 </html>

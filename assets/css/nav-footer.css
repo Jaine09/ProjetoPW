@@ -29,7 +29,20 @@ nav .logoInicial {
    margin: 0 20px 0 20px;
 }
 
+nav .btnLogado{
+   visibility: hidden;
+   display: none;
+   background: none;
+   border: none;
+   margin-right: 100px;
+   height: 40px;
+   width: 100px;
+   cursor: pointer;
+   align-items: center  ;
+}
+
 nav .btnEntrarCadastrar {
+   display: flex;
    margin-right: 100px;
    padding: 5px;
    height: 40px;
@@ -37,15 +50,16 @@ nav .btnEntrarCadastrar {
    border-radius: 5px;
    border: none;
    color: #A0445D;
+   font-weight: 600;
    background-color: #F4DADB;
    box-shadow: 1px 1px #EAA59F;
    cursor: pointer;
+   align-items: center;
+   justify-content: center;
 }
 
-nav .btnEntrarCadastrar a{
+nav a{
    text-decoration: none;
-   color: #A0445D;
-   font-weight: 600;
 }
 
 nav .btnEntrarCadastrar:active {
@@ -63,11 +77,6 @@ nav .btnEntrarCadastrar:hover a {
    color: white;
 }
 
-nav .usuario {
-   display: none;
-   margin-right: 50px;
-   cursor: pointer;
-}
 
 nav ul {
    list-style: none;

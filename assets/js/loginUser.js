@@ -1,7 +1,7 @@
-var btnCadastrar = document.getElementById('cadastrar');
-var btnEntrar = document.getElementById('entrar');
+const btnCadastrar = document.getElementById('cadastrar');
+const btnEntrar = document.getElementById('entrar');
 
-var body = document.querySelector('body');
+const body = document.querySelector('body');
 
 btnCadastrar.addEventListener('click', function () {
     body.className = 'cadastrar-js';
@@ -13,7 +13,8 @@ btnEntrar.addEventListener('click', function () {
 
 
 // Validando cadastro de dados do usuário
-function validarCadastroCompleto() {
+function validarCadastroCompleto(event) {
+    event.preventDefault();
     var nome = document.getElementById('nome').value;
     var dataNascimento = document.getElementById('dataNascimento').value;
     var telefone = document.getElementById('telefone').value;
@@ -63,12 +64,14 @@ function validarCadastroCompleto() {
             alert('CPF inválido!');
         } else {
             console.log('Cadastro realizado com sucesso! Calculando a distância...');
+            localStorage.setItem('usuarioLogado', 'true'); // Flag de login após cadastro bem-sucedido
             window.location.href = "./areaPaciente.html";
         }
     }
 }
 
-function validarCadastroCompletoComAcompanhante(){
+function validarCadastroCompletoComAcompanhante(event){
+    event.preventDefault();
     var nomeAcompanhante = document.getElementById('inpNomeAcompanhante').value;
     var cpfAcompanhante = document.getElementById('inpCpfAcompanhante').value;
     var telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante').value;
@@ -90,19 +93,21 @@ function validarCadastroCompletoComAcompanhante(){
         alert('CPF inválido!');
     } else {
         console.log('Cadastro do acompanhante realizado com sucesso!');
+        localStorage.setItem('usuarioLogado', 'true');
         window.location.href = "./areaPaciente.html";
     }
 }
 
-function validarLogin(){
+function validarLogin(event){
+    event.preventDefault();
     var email = document.getElementById('emailLogin').value;
     var senha = document.getElementById('senhaLogin').value;
 
     var informacoesUsuario = JSON.parse(localStorage.getItem('email'));
 
-    if (email === informacoesUsuario.email && senha === informacoesUsuario.senha) {
+    if (informacoesUsuario && email === informacoesUsuario.email && senha === informacoesUsuario.senha) {
         console.log('Login realizado com sucesso!');
-        alert('Login realizado com sucesso!');
+        localStorage.setItem('usuarioLogado', 'true');
         window.location.href = "./areaPaciente.html";
     } else {
         alert('Email ou senha inválidos!');
@@ -197,11 +202,11 @@ function calculaDistancia(latitude, longitude) {
 
                 console.log("Distância até o Senac:", distanciaEmQuilometros, "km");
                 console.log("Duração estimada:", duracaoFormatada);
-                
+
                 }else {
                 console.log("Não foi possível calcular a rota ou a estrutura da resposta é inesperada.");
                 }
-            
+
         })
         .catch(error => console.error('Erro ao calcular a distância:', error));
 }
@@ -210,10 +215,10 @@ function formatarDuracao(segundos) {
     const horas = Math.floor(segundos / 3600);
     const minutos = Math.floor((segundos % 3600) / 60);
     const segundosRestantes = Math.trunc(segundos % 60);
-  
+
     const horasFormatadas = String(horas).padStart(2, '0');
     const minutosFormatados = String(minutos).padStart(2, '0');
     const segundosFormatados = String(segundosRestantes).padStart(2, '0');
-  
+
     return `${horasFormatadas}:${minutosFormatados}:${segundosFormatados}`;
-  }
+}
