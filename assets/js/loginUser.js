@@ -11,7 +11,6 @@ btnEntrar.addEventListener('click', function () {
     body.className = 'entrar-js';
 });
 
-
 // Validando cadastro de dados do usuário
 function validarCadastroCompleto(event) {
     event.preventDefault();
@@ -22,51 +21,66 @@ function validarCadastroCompleto(event) {
     var email = document.getElementById('email').value;
     var senha = document.getElementById('senha').value;
     var cep = document.getElementById('cep').value;
-    var endereco = document.getElementById('endereco').value;
-    var bairro = document.getElementById('bairro').value;
-
-    var informacoesUsuario = {
-        nome: nome,
-        dataNascimento: dataNascimento,
-        telefone: telefone,
-        cpf: cpf,
-        email: email,
-        senha: senha,
-        cep: cep,
-        endereco: endereco,
-        bairro: bairro
-    };
-
-    localStorage.setItem('email', JSON.stringify(informacoesUsuario));
+    var enderecoInput = document.getElementById('endereco');
+    var bairroInput = document.getElementById('bairro');
+    var numero = document.getElementById('numero').value;
 
     var mensagem = document.getElementById('mensagemMenorIdade');
     var cadastroUsuario = document.getElementById('formUsuario');
     var cadastroAcompanhante = document.getElementById('formAcompanhante');
 
-    //Validando idade
     var dataAtual = new Date();
     var dataNasc = new Date(dataNascimento);
     var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
-
     var mensagemUsuario = 'Notamos que você é menor de idade, por favor, cadastre um acompanhante responsável.';
 
-    if (!nome || !dataNascimento || !telefone || !cpf  || !email|| !senha|| !cep || !endereco || !bairro) {
+    if (!nome || !dataNascimento || !telefone || !cpf || !email || !senha || !cep || !enderecoInput.value || !bairroInput.value) {
         alert('Preencha todos os campos!');
+    } else if (idade < 18) {
+        mensagem.textContent = mensagemUsuario;
+        cadastroUsuario.style.display = 'none';
+        cadastroAcompanhante.style.display = 'block';
+        validarCadastroCompletoComAcompanhante();
+    } else if (telefone.length < 9 || telefone.length > 12) {
+        alert('Telefone inválido!');
+    } else if (cpf.length < 12) {
+        alert('CPF inválido!');
     } else {
-        if(idade < 18) {
-            mensagem.textContent = mensagemUsuario;
-            cadastroUsuario.style.display = 'none';
-            cadastroAcompanhante.style.display = 'block';
-            validarCadastroCompletoComAcompanhante();
-        } else if (telefone.length < 9 || telefone.length > 12) {
-            alert('Telefone inválido!');
-        } else if (cpf.length < 12) {
-            alert('CPF inválido!');
-        } else {
-            console.log('Cadastro realizado com sucesso! Calculando a distância...');
-            localStorage.setItem('usuarioLogado', 'true'); // Flag de login após cadastro bem-sucedido
-            window.location.href = "./areaPaciente.html";
-        }
+        const cepNumerico = cep.replace(/\D/g, '');
+        const url = `https://viacep.com.br/ws/${cepNumerico}/json/`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    
+                    const informacoesUsuario = {
+                        nome: nome,
+                        dataNascimento: dataNascimento,
+                        telefone: telefone,
+                        cpf: cpf,
+                        email: email,
+                        senha: senha,
+                        cep: cep,
+                        endereco: data.logradouro,
+                        bairro: data.bairro,
+                        numero: numero,
+                        cidade: data.localidade,
+                        estado: data.uf
+                    };
+                    
+                    localStorage.setItem('email', JSON.stringify(informacoesUsuario));
+                    localStorage.setItem('usuarioLogado', 'true');
+                    console.log('Cadastro realizado com sucesso! Calculando a distância...');
+                    window.location.href = "./areaPaciente.html";
+                } else {
+                    alert('CEP inválido!');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o CEP:', error);
+                alert('Erro ao validar o CEP. Por favor, tente novamente.');
+            });
     }
 }
 
@@ -132,13 +146,11 @@ function validarCep() {
         .then(data => {
             if (data.erro) {
                 alert('CEP inválido!');
-
                 document.getElementById('endereco').value = '';
                 document.getElementById('bairro').value = '';
             } else {
                 const endereco = `${data.logradouro}`;
                 const bairro = `${data.bairro}`;
-
                 document.getElementById('endereco').value = endereco;
                 document.getElementById('bairro').value = bairro;
 
@@ -174,8 +186,6 @@ function distanciaLatLong(cidade) {
 }
 
 function calculaDistancia(latitude, longitude) {
-    var spanDistancia = document.getElementById('distancia');
-    var spanTempo = document.getElementById('tempo');
     var key = "b50baa0a696344b988cccf71229aa688";
     const latitudeSenac = -23.669388400000003;
     const longitudeSenac = -46.70129375;

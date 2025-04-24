@@ -9,7 +9,7 @@
 
 main{
     display: flex;
-    height: 100%;
+    min-height: 83vh;
 }
 
 #tituloPag{
@@ -26,7 +26,6 @@ main{
 #tituloPag span{
     font-size: 30px;
     color: var(--corTexto);
-    /* text-align: center; */
     font-style: italic;
 }
 
@@ -34,12 +33,9 @@ main{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-height: 83%;
-    max-height: 100%;
     width: 20%;
     background-color: var(--fundoSessoes);
     padding: 10px;
-    position: absolute;
     border-radius: 5px;
 }
 
@@ -49,7 +45,6 @@ main{
     margin: 0;
     width: 100%;
 }
-
 
 .menu li a {
     text-decoration: none;
@@ -89,10 +84,9 @@ main{
 
 section{
     margin-top: 20px;
-    margin-left: 20%;
     padding: 0 20px;
-    width: 75%;
-    height: 100%;
+    width: 80%;
+    height: auto;
 }
 
 /* tirando a visibolidade  */
@@ -201,9 +195,24 @@ td {
     justify-content: center;
     max-height: 90%;
 }
+.fieldsetAlterarDadosUsuários{
+    margin-bottom: 10px;
+}
 
-.novaSenha{
-    display: none;
+.novaSenha {
+    display: none; 
+    width: 100%;
+}
+
+.novaSenha label {
+    margin-bottom: 5px;
+    display: block; 
+    text-align: start; 
+    width: 100%; 
+}
+
+.novaSenha input{
+    margin-right: 30px;
 }
 
 .formAvaliacoes{
@@ -279,7 +288,7 @@ td {
     margin: 10px;
 }
 
-.btnAlterarInformacoes button, #btnEnviarAvaliacao{
+.btnAlterarInformacoes button, #editarDadosAcompanhante,#btnEnviarAvaliacao{
     background-color: var(--corBotao);
     color: white;
     border: var(--bordaBotaoForm);
@@ -288,6 +297,22 @@ td {
     cursor: pointer;
     border-radius: 20px;
     margin: 10px 0;
+}
+
+#editarDadosAcompanhante, #salvarInformacoesUsuario, #descartarInformacaoUsuario,
+#editarEndereco, #salvarEdicaoEndereco, #descartarAlteracaoEndereco{
+    justify-content: center;
+    display: none;
+}
+
+#salvarInformacoesUsuario:disabled, #descartarInformacaoUsuario:disabled, #editarEndereco:disabled, #salvarEdicaoEndereco:disabled, #descartarAlteracaoEndereco:disabled{
+    opacity: 0.9;
+    cursor: not-allowed;
+}
+
+#salvarInformacoesUsuario:disabled:active, #descartarInformacaoUsuario:disabled:active,
+#editarEndereco:disabled:active, #salvarEdicaoEndereco:disabled:active, #descartarAlteracaoEndereco:disabled:active{
+    transform: scale(0.98);
 }
 
 .fieldsetAgendarConsulta button{

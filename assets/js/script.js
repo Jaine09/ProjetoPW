@@ -1,4 +1,4 @@
-const loginOff = document.getElementById('btnSair');
+
 
 
 document.addEventListener('DOMContentLoaded', function () {

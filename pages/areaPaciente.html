@@ -29,7 +29,6 @@
     <div id="tituloPag">
         <h1>Olá, <span id="nomePaciente"></span></h1>
     </div>
-
     <main>
         <div class="menu">
             <ul>
@@ -45,7 +44,7 @@
             <div class="conteudoInicial">
                 <h2>Histórico de Consultas</h2>
                 <button type="button" id="agendarNovaConsulta" onclick="agendarConsulta()">Agendar Consulta</button>
-                
+
             </div>
             <table id="tabelaHistorico" class="tabelaHistorico">
                 <thead>
@@ -111,9 +110,11 @@
                         </div>
 
                         <div class="information-group novaSenha">
-                            <label for="confirmarSenha">Confirmar Senha</label>
-                            <input type="password" id="txtAlterarConfirmarSenha" name="confirmarSenha">
+                            <label for="confirmarSenha">Confirmar Senha:</label>
+                            <input type="password" id="txtConfirmarSenha" name="confirmarSenha">
+                            <span id="mensagemSenha"></span>
                         </div>
+                        <button type="button" id="editarDadosAcompanhante">Continuar</button>
                     </fieldset>
                 </form> <!-- Fim formulário alterar dados pessoais-->
                 <form action="" class="formAlterarDados" id="formAlterarDadosAcompanhante">
@@ -161,109 +162,111 @@
             </form> <!-- Fim formulário alterar dados do acompanhante-->
             
                 <div class=" btnAlterarInformacoes">
-                        <button type="button" id="editarInformações">Editar Informações</button>
-                        <button type="submit" id="salvarInformacoesUsuario">Salvar</button>
-                        <button type="reset" id="descartarInformacaoUsuario">Descartar Alterações</button>
-                </div>
+                            <button type="button" id="editarInformações" onclick="habilitarEdicao()">Editar
+                                Informações</button>
+                            <button type="submit" id="salvarInformacoesUsuario"onclick="salvarAlteracao()">Salvar</button>
+                            <button type="reset" id="descartarInformacaoUsuario" onclick="descartarAlteracao()">Descartar Alterações</button>
+                        </div>
             </div>
         </section>
 
         <section id="endereco">
             <div class="alterarEndereco">
-            <form action="" class="formEndereco" id="formEndereco">
-                <fieldset class="fieldsetAlterarEndereco">
-                    <legend>Alterar Endereço</legend>
-                    <p>Preencha os campos que deseja alterar.</p>
+                <form action="" class="formEndereco" id="formEndereco">
+                    <fieldset class="fieldsetAlterarEndereco">
+                        <legend>Alterar Endereço</legend>
+                        <p>Preencha os campos que deseja alterar.</p>
 
-                    <div class="information-group">
-                        <label for="cep">CEP:</label>
-                        <input type="text" id="alterarCep" name="cep">
-                    </div>
+                        <div class="information-group">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="alterarCep" name="cep">
+                        </div>
 
-                    <div class="information-group">
-                        <label for="rua">Rua:</label>
-                        <input type="text" id="alterarRua" name="rua">
-                    </div>
+                        <div class="information-group">
+                            <label for="rua">Rua:</label>
+                            <input type="text" id="alterarRua" name="rua">
+                        </div>
 
-                    <div class="information-group">
-                        <label for="numero">Número:</label>
-                        <input type="text" id="alterarNumero" name="numero">
-                    </div>
+                        <div class="information-group">
+                            <label for="numero">Número:</label>
+                            <input type="text" id="alterarNumero" name="numero">
+                        </div>
 
-                    <div class="information-group">
-                        <label for="bairro">Bairro:</label>
-                        <input type="text" id="alterarBairro" name="bairro">
-                    </div>
+                        <div class="information-group">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" id="alterarBairro" name="bairro">
+                        </div>
 
-                    <div class="information-group">
-                        <label for="cidade">Cidade:</label>
-                        <input type="text" id="alterarCidade" name="cidade">
-                    </div>
+                        <div class="information-group">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" id="alterarCidade" name="cidade">
+                        </div>
 
-                    <div class="information-group">
-                        <label for="estado">Estado:</label>
-                        <input type="text" id="alterarEstado" name="estado">
-                    </div>
-                </fieldset>
-            </form> <!-- Fim formulário alterar endereço-->
+                        <div class="information-group">
+                            <label for="estado">Estado:</label>
+                            <input type="text" id="alterarEstado" name="estado">
+                        </div>
+                    </fieldset>
+                </form> <!-- Fim formulário alterar endereço-->
 
                 <div class=" btnAlterarInformacoes">
-                    <button type="button" id="editarEndereco">Editar Endereço</button>
-                    <button type="submit" id="salvarEdicaoEndereco">Salvar</button>
-                    <button type="reset" id="descaetarAlteracaoEndereco">Descartar Alterações</button>
+                    <button type="button" id="editarEndereco" onclick="habilitarEdicaoEndereco()">Editar Endereço</button>
+                    <button type="submit" id="salvarEdicaoEndereco" onclick="salvarAlteracaoEndereço()">Salvar</button>
+                    <button type="reset" id="descartarAlteracaoEndereco" onclick="descartarAlteracaoEndereco()">Descartar Alterações</button>
                 </div>
             </div>
         </section>
 
         <section id="avaliacoes">
-                
-                    <div class="adicionarAvaliacao">
-                        <h2>Histórico de Avaliações</h2>
-                        <button type="button" id="adicionarNovaAvaliacao" onclick="adicionarAvaliacao()">Adicionar Avaliação</button>
+
+            <div class="adicionarAvaliacao">
+                <h2>Histórico de Avaliações</h2>
+                <button type="button" id="adicionarNovaAvaliacao" onclick="adicionarAvaliacao()">Adicionar
+                    Avaliação</button>
+            </div>
+            <table id="tabelaAvaliacoes" class="tabelaAvaliacoes">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Avaliação</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaAvaliacoes" class="tabelaAvaliacoes">
+                    <tr>
+                        <td>01/01/2023</td>
+                        <td>Avaliação 1</td>
+                        <td>5</td>
+                    </tr>
+                    <!-- As linhas da tabela serão preenchidas dinamicamente -->
+                </tbody>
+            </table>
+
+            <form action="" class="formAvaliacoes" id="formAvaliacoes" style="display: none;">
+                <fieldset class="fieldsetAvaliacoes">
+                    <legend>Avaliar</legend>
+                    <p>Deixe sua avaliação sobre a clínica e os profissionais.</p>
+
+                    <div class="information-group">
+                        <label for="avaliacao">Avaliação:</label> <br>
+                        <textarea id="avaliacao" name="avaliacao" rows="4" cols="50"></textarea>
                     </div>
-                    <table id="tabelaAvaliacoes" class="tabelaAvaliacoes">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Avaliação</th>
-                                <th>Nota</th>
-                            </tr>
-                        </thead>
-                        <tbody id="corpoTabelaAvaliacoes" class="tabelaAvaliacoes">
-                            <tr>
-                                <td>01/01/2023</td>
-                                <td>Avaliação 1</td>
-                                <td>5</td>
-                            </tr>
-                            <!-- As linhas da tabela serão preenchidas dinamicamente -->
-                        </tbody>
-                    </table>
-                
-                <form action="" class="formAvaliacoes" id="formAvaliacoes" style="display: none;">
-                    <fieldset class="fieldsetAvaliacoes">
-                        <legend>Avaliar</legend>
-                        <p>Deixe sua avaliação sobre a clínica e os profissionais.</p>
 
-                        <div class="information-group">
-                            <label for="avaliacao">Avaliação:</label> <br>
-                            <textarea id="avaliacao" name="avaliacao" rows="4" cols="50"></textarea>
-                        </div>
+                    <div class="information-group">
+                        <label for="nota">Nota:</label>
+                        <select id="nota" name="nota">
+                            <option value="" disabled selected>Selecione a nota</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
 
-                        <div class="information-group">
-                            <label for="nota">Nota:</label>
-                            <select id="nota" name="nota">
-                                <option value="" disabled selected>Selecione a nota</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" id="btnEnviarAvaliacao">Enviar Avaliação</button>
-                    </fieldset>
-                </form> <!-- Fim formulário avaliações-->
+                    <button type="submit" id="btnEnviarAvaliacao">Enviar Avaliação</button>
+                </fieldset>
+            </form> <!-- Fim formulário avaliações-->
         </section>
 
         <section id="agendarConsulta">
@@ -297,8 +300,8 @@
                 </fieldset>
         </section>
     </main>
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/areaPaciente.js"></script>
+    <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/areaPaciente.js" defer></script>
 </body>
 
 </html>
