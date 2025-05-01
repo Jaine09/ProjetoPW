@@ -32,7 +32,7 @@
         </div>
 
         <div class="container">
-            <div class="content primeiro-conteudo">
+            <div class="content primeiro-conteudo" id="login">
                 <div class="primeira-coluna">
                     <h2 class="titulo primeiro-titulo">Crie sua conta</h2>
                     <p class="descricao">Ainda não possui cadastro? <br>Cadastre-se clicando no botão abaixo</p>
@@ -72,7 +72,7 @@
                         <input type="email" placeholder="E-mail" id="email" required>
                         <input type="password" placeholder="Senha" id="senha" required>
                         
-                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto(event)">Cadastrar</button>
+                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto()">Cadastrar</button>
                     </form>
 
                     <span id="mensagemMenorIdade"></span>
@@ -93,7 +93,7 @@
                                 <option value="esposo">Esposo(a)</option>
                                 <option value="amigo">Amigo(a)</option>
                             </select>
-                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante(event)">Cadastrar</button>
+                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante()">Cadastrar</button>
                     </form>
                 </div>
             </div> <!--Final segunda coluna-->

@@ -34,6 +34,7 @@
             <ul>
                 <li id="acessarHistorico"><a href="#historico">Meu histórico</a></li>
                 <li id="acessarDadosPessoais"><a href="#dadosPessoais">Dados Pessoais</a></li>
+                <li id="acessarDadosAcompanhante"><a href="#dadosAcompanhante">Dados acompanhante</a></li>
                 <li id="acessarEndereco"><a href="#endereco">Endereço</a></li>
                 <li id="acessarAvaliacoes"><a href="#avaliacoes">Avaliações</a></li>
                 <li><button type="button" id="btnSair">Sair</button></li>
@@ -50,6 +51,7 @@
                 <thead>
                     <tr>
                         <th>Data</th>
+                        <th>Hora</th>
                         <th>Especialidade</th>
                         <th>Exames</th>
                         <th>Receitas médicas</th>
@@ -58,11 +60,11 @@
                 <tbody id="corpoTabelaHistorico" class="tabelaHistorico">
                     <tr>
                         <td>01/01/2023</td>
+                        <td>14:30</td>
                         <td>Cardiologia</td>
                         <td><a href="#">Exame de sangue</a></td>
                         <td><a href="#">Receita 1</a></td>
                     </tr>
-                    <!-- As linhas da tabela serão preenchidas dinamicamente -->
                 </tbody>
             </table>
         </section>
@@ -114,9 +116,20 @@
                             <input type="password" id="txtConfirmarSenha" name="confirmarSenha">
                             <span id="mensagemSenha"></span>
                         </div>
-                        <button type="button" id="editarDadosAcompanhante">Continuar</button>
                     </fieldset>
                 </form> <!-- Fim formulário alterar dados pessoais-->
+
+                <div class=" btnAlterarInformacoes">
+                    <button type="button" id="editarInformações" onclick="habilitarEdicao()">Editar Informações</button>
+                    <button type="submit" id="salvarInformacoesUsuario" onclick="salvarAlteracao()">Salvar</button>
+                    <button type="reset" id="descartarInformacaoUsuario" onclick="descartarAlteracao()">Descartar
+                        Alterações</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="dadosAcompanhante">
+            <div class="alterarDadosAcompanhante">
                 <form action="" class="formAlterarDados" id="formAlterarDadosAcompanhante">
                     <fieldset class="fieldsetAlterarDadosAcompanhante">
                         <legend>Alterar dados do acompanhante</legend>
@@ -125,6 +138,11 @@
                         <div class="information-group">
                             <label for="nomeAcompanhante">Nome do Acompanhante:</label>
                             <input type="text" id="nomeAcompanhante" name="nomeAcompanhante">
+                        </div>
+
+                        <div class="information-group">
+                            <label for="dataNascimento">Data de Nascimento</label>
+                            <input type="date" id="dataNascimento" name="dataNascimento">
                         </div>
 
                         <div class="information-group">
@@ -138,11 +156,6 @@
                         </div>
 
                         <div class="information-group">
-                            <label for="email">Email:</label>
-                            <input type="email" name="emailAcompanhante" id="emailAcompanhante">
-                        </div>
-
-                        <div class="information-group">
                             <label for="parentescoAcompanhante">Parentesco:</label>
                             <select id="parentescoAcompanhante" name="parentescoAcompanhante">
                                 <option value="" disabled selected>Selecione o parentesco</option>
@@ -152,21 +165,18 @@
                                 <option value="irmao">Irmão</option>
                                 <option value="irma">Irmã</option>
                                 <option value="esposo">Esposo(a)</option>
-                                <option value="amigo">Amigo(a)</option>
-                                <option value="outro">Outro</option>
+                                <option value="amigo">Tio(a)</option>
+                                <option value="amigo(a)">Amigo(a)</option>
                             </select>
-                            <input type="text" id="outroParentescoAcompanhante" name="outroParentescoAcompanhante"
-                                placeholder="Especifique outro parentesco" ">
-                    </div>
-                </fieldset>
-            </form> <!-- Fim formulário alterar dados do acompanhante-->
-            
-                <div class=" btnAlterarInformacoes">
-                            <button type="button" id="editarInformações" onclick="habilitarEdicao()">Editar
-                                Informações</button>
-                            <button type="submit" id="salvarInformacoesUsuario"onclick="salvarAlteracao()">Salvar</button>
-                            <button type="reset" id="descartarInformacaoUsuario" onclick="descartarAlteracao()">Descartar Alterações</button>
                         </div>
+                        <span id="mensagemAcompanhante"></span>
+                    </fieldset>
+                </form> 
+                    <div class=" btnAlterarInformacoes">
+                        <button type="button" id="editarInformacoesAcompanhante" onclick="editarDadosAcompanhante()">Editar Informações</button>
+                        <button type="submit" id="salvarInformacoesAcompanhante" onclick="salvarAlteracaoAcompanhante()">Salvar</button>
+                        <button type="reset" id="descartarInformacoesAcompanhante" onclick="descartarAlteracaoAcompanhante()">Descartar
+                    </div>
             </div>
         </section>
 
@@ -210,9 +220,11 @@
                 </form> <!-- Fim formulário alterar endereço-->
 
                 <div class=" btnAlterarInformacoes">
-                    <button type="button" id="editarEndereco" onclick="habilitarEdicaoEndereco()">Editar Endereço</button>
-                    <button type="submit" id="salvarEdicaoEndereco" onclick="salvarAlteracaoEndereço()">Salvar</button>
-                    <button type="reset" id="descartarAlteracaoEndereco" onclick="descartarAlteracaoEndereco()">Descartar Alterações</button>
+                    <button type="button" id="editarEndereco" onclick="habilitarEdicaoEndereco()">Editar
+                        Endereço</button>
+                    <button type="submit" id="salvarEdicaoEndereco" onclick="salvarAlteracaoEndereco()">Salvar</button>
+                    <button type="reset" id="descartarAlteracaoEndereco"
+                        onclick="descartarAlteracaoEndereco()">Descartar Alterações</button>
                 </div>
             </div>
         </section>
@@ -242,7 +254,10 @@
                 </tbody>
             </table>
 
-            <form action="" class="formAvaliacoes" id="formAvaliacoes" style="display: none;">
+        </section>
+
+        <section id="criarAvaliacao">
+            <form action="" class="formAvaliacoes" id="formAvaliacoes">
                 <fieldset class="fieldsetAvaliacoes">
                     <legend>Avaliar</legend>
                     <p>Deixe sua avaliação sobre a clínica e os profissionais.</p>
@@ -264,7 +279,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" id="btnEnviarAvaliacao">Enviar Avaliação</button>
+                    <button type="submit" id="btnEnviarAvaliacao" onclick="realizarAvaliacao(event)">Enviar Avaliação</button>
                 </fieldset>
             </form> <!-- Fim formulário avaliações-->
         </section>
@@ -296,7 +311,7 @@
                         <input type="time" id="horaConsulta" name="horaConsulta">
                     </div>
 
-                    <button type="submit" id="btnAgendarConsulta">Agendar Consulta</button>
+                    <button type="submit" id="btnAgendarConsulta" onclick="realizarAgendamento(event)">Agendar Consulta</button>
                 </fieldset>
         </section>
     </main>

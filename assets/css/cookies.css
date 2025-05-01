@@ -1,0 +1,51 @@
+/* ./assets/css/cookie-notice.css */
+.cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 15px 20px;
+    text-align: center;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cookie-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.cookie-notice a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cookie-notice a:hover {
+    text-decoration: underline;
+}
+
+.cookie-notice button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 20px;
+}
+
+.cookie-notice button:hover {
+    background-color: #0056b3;
+}
+
+/* Oculta o aviso por padrão (será mostrado via JavaScript se necessário) */
+.cookie-notice.hidden {
+    display: none;
+}

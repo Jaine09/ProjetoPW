@@ -52,7 +52,8 @@ main{
     font-size: 16px;
     padding: 15px;
     display: block;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
 }
 
 .menu li a:hover {
@@ -93,19 +94,16 @@ section{
 #historico{
     display: flex;
     flex-direction: column;
-    /* display: none; */
 }
 
 #dadosPessoais{
     display: none;
-    /* display: flex; */
     align-items: center;
     justify-content: center;
 }
 
 #endereco{
     display: none;
-    /* display: flex; */
     align-items: center;
     justify-content: center;
 }
@@ -119,9 +117,33 @@ section{
 
 #avaliacoes{
     display: none;
-    /* display: flex; */
     flex-direction: column;
 }
+
+#dadosAcompanhante{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#acessarDadosAcompanhante{
+    display: none;
+}
+
+#criarAvaliacao{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.formAvaliacoes{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin: 0 20px;
+}
+
 
 .conteudoInicial, .adicionarAvaliacao{
     display: flex;
@@ -188,7 +210,7 @@ td {
 
 /* Sessão de editar dados  e alterar endereço */
 
-.alterarDados, .alterarEndereco{
+.alterarDados, .alterarEndereco, .alterarDadosAcompanhante{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -215,13 +237,7 @@ td {
     margin-right: 30px;
 }
 
-.formAvaliacoes{
-    display: none;
-    /* display: flex; */
-    flex-direction: column; 
-    align-items: center;
-    margin: 0 20px;
-}
+
 
 .formAlterarDados, .formEndereco, .formAgendarConsulta{ /* formulario de alterar dados, endereço e agendar consulta*/
     display: flex;
@@ -230,9 +246,14 @@ td {
     margin: 0 20px;
 }
 
-.fieldsetAlterarDadosAcompanhante{
-    display: none;
-    /* display: flex; */
+#formAlterarDadosAcompanhante select{
+    padding: 10px;
+    height: 45px;
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    background-color: #f401;
 }
 
 .fieldsetAlterarDadosUsuários, .fieldsetAlterarDadosAcompanhante, .fieldsetAlterarEndereco, .fieldsetAgendarConsulta{
@@ -299,19 +320,19 @@ td {
     margin: 10px 0;
 }
 
-#editarDadosAcompanhante, #salvarInformacoesUsuario, #descartarInformacaoUsuario,
+#editarDadosAcompanhante, #salvarInformacoesUsuario, #descartarInformacaoUsuario, #editarInformacoesAcompanhante, #salvarInformacoesAcompanhante, #descartarInformacoesAcompanhante,
 #editarEndereco, #salvarEdicaoEndereco, #descartarAlteracaoEndereco{
     justify-content: center;
     display: none;
 }
 
-#salvarInformacoesUsuario:disabled, #descartarInformacaoUsuario:disabled, #editarEndereco:disabled, #salvarEdicaoEndereco:disabled, #descartarAlteracaoEndereco:disabled{
+#salvarInformacoesUsuario:disabled, #descartarInformacaoUsuario:disabled, #editarInformacoesAcompanhante:disabled, #salvarInformacoesAcompanhante:disabled, #descartarInformacoesAcompanhante:disabled, #editarEndereco:disabled, #salvarEdicaoEndereco:disabled, #descartarAlteracaoEndereco:disabled{
     opacity: 0.9;
     cursor: not-allowed;
 }
 
 #salvarInformacoesUsuario:disabled:active, #descartarInformacaoUsuario:disabled:active,
-#editarEndereco:disabled:active, #salvarEdicaoEndereco:disabled:active, #descartarAlteracaoEndereco:disabled:active{
+#editarEndereco:disabled:active,#editarInformacoesAcompanhante:disabled:active, #salvarInformacoesAcompanhante:disabled:active, #descartarInformacoesAcompanhante:disabled:active, #salvarEdicaoEndereco:disabled:active, #descartarAlteracaoEndereco:disabled:active{
     transform: scale(0.98);
 }
 
@@ -328,11 +349,11 @@ td {
 
 }
 
-.btnAlterarInformacoes button:active, #btnEnviarAvaliacao:active{
+.btnAlterarInformacoes button:active, #btnEnviarAvaliacao:active, #editarDadosAcompanhante:active{
     transform: scale(0.95);
 }
 
-.btnAlterarInformacoes button:hover, #btnEnviarAvaliacao:hover{
+.btnAlterarInformacoes button:hover, #btnEnviarAvaliacao:hover, #editarDadosAcompanhante:hover{
     background-color: #d77b7f;
     color: black;
 }
