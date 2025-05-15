@@ -5,6 +5,9 @@
 
 
 /* Estilizando página de login adm */
+.bodyLogin{
+    flex-direction: column;
+}
 
 .login {
     height: 60vh;
@@ -84,101 +87,205 @@
     transition: 0.3s;
 }
 
-/* Estilizando tela inicial do administrador */
-
-.telaPrincipal_container p{
-    font-family: "Inter", sans-serif;
-    font-size: 17px;
-    font-weight: 500;
-    font-style: italic;
-    justify-content: center;
-    align-items: center;
-    margin: 25px 5px 10px 5px;
-}
-
-.filter-container {
-    display: flex;
-    align-items: center; 
-    gap: 20px; 
-    margin: 30px 0 20px 50px;
-}
-
-.filter-container h2{
-    font-family: "Inter", sans-serif;
-    font-style: italic;
-    font-weight: 500;
-}
-
-.formPesquisa {
-    /* display: flex; */
-    display: none;
-    align-items: center; 
-    font-weight: 500;
-    gap: 10px; 
-    margin-left: auto;
-    margin-right: 60px;
-}
-
-.formPesquisa form {
-    display: flex;
-    align-items: center; 
-    gap: 10px; 
-}
-
-.filter-group {
-    display: flex;
-    align-items: center; 
-    gap: 5px; 
-}
 
 #imgTelaPrincipal{
     width: 80px;
 }
 
-/* Estilizando informações */
+/* Estilizando telas principais */
 
-#menu-adm{
+body{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    min-height: 100vh;
 }
 
-.menu-container{
+main{
+    display: block;
+    margin: 10px;
+    padding: 20px;
+}
+
+section{
+    padding: 20px;
+}
+
+.menu-adm .text-container{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.menu-adm-container{
-    padding: 10px 15px;
-    margin: 0 20px;
-    background: #f3d7e2;
-    font-weight: 500;
-    border-radius: 10px;
-    height: 100vh;
-    
-}
-
-.menu-adm-container h2{
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-style: italic;
     margin-bottom: 20px;
 }
 
-.menu-adm-container ul{
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
+.menu-adm .text-container h2{
+    font-size: 16px;
+    margin: 0 10px;
+    font-family:'Times New Roman', Times, serif
+}
+
+.menu-adm{
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+    background-color: #f7c1c4;
+    padding: 10px;
+    border-radius: 5px;
+    height: auto;
+}
+
+.menu-adm ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.menu-adm li a{
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu-adm li a:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+    color: black;
+    font-weight: 500;
+}
+
+.menu-adm ul li button{
+    background-color: #f59b9f;
+    border: 1px solid #6F233F;
+    border-radius: 5px;
+    width: 20px;
+    color: #6F233F;
+    font-weight: 200;
+    font-size: 16px;
+    padding: 10px;
+    width: 20%;
+    height: 30%;
+    margin: 20px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu-adm ul li button:hover {
+    background-color: #d77b7f;
+    color: black;
+    font-weight: bold;
+}
+
+#mensagemInicial{
+    font-family: "Inter", sans-serif;
+    font-size: 17px;
+    /* font-weight: 500; */
+    font-style: italic;
+    justify-content: center;
     align-items: center;
 }
 
-.menu-adm-container ul li a{
-    text-decoration: none;
+/* Adicionar filtro */
+
+.formPesquisa{
+    display: flex;
+    margin-top: 20px;
+}
+
+.filter-group{
+    margin-left: 10px;
+}
+
+.filter-group input[type = "text"], input[type = "date"]{
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 5px;
+    display: none;
+}
+
+/* Confirmação de consulta */
+
+.confirmarContainer{
+    display: none;
+    /* display: flex; */
+    width: 400px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: azure;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.btnconfirmarContainer{
+    height: 30px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btnconfirmarContainer:active{
+    transform: scale(0.9);
+}
+
+.confirmarContainer #confirmar{
+    border:1px solid #DA627D;
+    background-color: #f59b9f;
+    color: #6F233F;
+}
+
+.confirmarContainer #cancelar{
+    border:1px solid #6F233F;
+    background-color:#a53860;
     color: black;
+}
+
+.confirmarContainer #confirmar:hover{
+    border:1px solid #DA627D;
+    background-color: #f59b9f;
+    color: #6F233F;
+    font-weight: bold;
+}
+
+.confirmarContainer #cancelar:hover{
+    border:1px solid #6F233F;
+    background-color:#a53860;
+    color: black;
+    font-weight: bold;
+}
+
+/* Tabela de pacientes */
+#pacientesCadastrados{
+    display: flex;
+    flex-direction: column;
+}
+
+#consultas, #relatorio, #mensagens{
+    display: none;
+    flex-direction: column;
+}
+
+
+td {
+    border: 1px solid #FFE1E3;
+}
+
+.tabelaPacientes, .tabelaConsultas, .tabelaRelatorio, .tabelaMensagens{
+    width: 100%;
+    margin-top: 20px;
+    border: 2px solid #6F233F;
+}
+
+.tabelaPacientes th, .tabelaConsultas th, .tabelaRelatorio th, .tabelaMensagens th{
+    padding: 10px;
+    background-color: #FFE1E3;
+    color: #6F233F;
+}
+
+.corpoTabelaPacientes tr td, .corpoTabelaConsultas tr td, .corpoTabelaRelatorio tr td, .tabelaMensagens tr td{
+    text-align: center;
 }

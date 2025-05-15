@@ -26,6 +26,22 @@ if (loginOff) {
     });
 }
 
+window.addEventListener('load', () => {
+    const hash = window.location.hash;
+
+    const historico = document.getElementById('historico');
+    const sessaoAgendarConsulta = document.getElementById('agendarConsulta');
+
+    if (hash === '#agendarConsulta') {
+        historico.style.display = 'none';
+        sessaoAgendarConsulta.style.display = 'flex';
+    } else {
+        historico.style.display = 'flex';
+        sessaoAgendarConsulta.style.display = 'none';
+    }
+});
+
+
 //Listas do menu lateral
 const acessarHistorico = document.getElementById('acessarHistorico');
 const acessarDados = document.getElementById('acessarDadosPessoais');
@@ -701,6 +717,11 @@ function realizarAgendamento(event){
     const dataParts = dataConsultaInput.split('-');
     const dataFormatada = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
 
+    if(!especialidade || !dataConsultaInput || !horaConsulta){
+        alert("Preencha todos os campos para agendar a consulta!");
+        return;
+    }
+
     // Criar uma nova linha na tabela
     const novaLinha = corpoTabelaHistorico.insertRow();
     const colunaData = novaLinha.insertCell();
@@ -735,6 +756,11 @@ function realizarAvaliacao(event){
     const nota = notaSelecionadaElement.options[notaSelecionadaElement.selectedIndex].value;
     const formAvaliacao = document.getElementById('formAvaliacoes');
     const corpoTabelaAvaliacoes = document.getElementById('corpoTabelaAvaliacoes');
+
+    if(!avaliacaoTexto || !nota){
+        alert("Preencha todos os campos para enviar a avaliação!");
+        return;
+    }
 
     const data = new Date();
     const dia = String(data.getDate()).padStart(2, '0');

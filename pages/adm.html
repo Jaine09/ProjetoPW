@@ -14,101 +14,163 @@
 
 <body>
 
-    <nav>
-        <img src="../assets/img/logoClinica.png" alt="Logo: Silhueta do corpo feminino" class="logoInicial">
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="./consultorio.html">Consultório</a></li>
-            <li><a href="./especialidade.html">Especialidades</a></li>
-        </ul>
-    </nav>
+    <div class="menu-adm">
+        <div class="text-container">
+            <img src="../assets/img/imagenDoutora.png" alt="Imagem da doutora" id="imgTelaPrincipal">
+            <h2 id>Bem-vinda, Dra. Ana Clara Silva</h2>
+        </div>
 
-    <section class="session_TelaPrincipal">
+        <ul>
+            <li id="acessarPacientes"><a href="#pacientesCadastrados">Pacientes</a></li>
+            <li id="acessarConsultas"><a href="#consultas">Consultas</a></li>
+            <li id="acessarRelatorios"><a href="#relatorio">Relatórios</a></li>
+            <li id="acessarMensagens"><a href="#mensagens">Mensagens</a></li>
+            <li><button type="button" id="btnSair">Sair</button></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="conteudo-fixo">
+            <p id="mensagemInicial">
+                Seja bem-vinda ao portal de gerenciamento. Aqui você pode acessar todas as informações relacionadas aos pacientes.
+            </p>
+        </div>
+
+        <section id="pacientesCadastrados">
 
             <div class="filter-container">
-                <img src="../assets/img/imagenDoutora.png" alt="Imagem da doutora" id="imgTelaPrincipal">
-                <h2 id>Bem-vinda, Dra. Ana Clara Silva</h2>
+                <form class="formPesquisa">
+                    <label for="filtro">Filtrar por:</label>
 
-                <div class="formPesquisa">
-                    <form>
-                        <label for="filtro">Filtrar por:</label>
+                    <div class="filter-group">
+                        <input type="radio" name="radioNome" id="radioNome" value="nome">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
+                    </div>
 
-                        <div class="filter-group">
-                            <input type="radio" name="radioNome" id="radioNome" value="nome">
-                            <label for="nome">Nome</label>
-                            <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome"
-                                style="display: none;">
-                        </div>
-
-                        <div class="filter-group">
-                            <input type="radio" name="radioData" id="radioData" value="Data">
-                            <label for="data">Data</label>
-                            <input type="date" name="txtData" id="txtData" style="display: none;">
-                        </div>
-
-                    </form>
-
-                </div>
+                    <div class="filter-group">
+                        <input type="radio" name="radioData" id="radioData" value="Data">
+                        <label for="data">Data</label>
+                        <input type="date" name="txtData" id="txtData">
+                    </div>
+                </form>
             </div>
 
-            <div class="telaPrincipal_container">
-                <p>
-                    Olá, Dra. Ana Clara Silva! <br>
-                    Seja bem-vinda ao portal de gerenciamento de consultas. Aqui você pode acessar
-                    todas as informações relacionadas às consultas marcadas e aos históricos dos
-                    pacientes. 
-                </p>
-
-        </div>
-    </section>
-
-    <section id="menu-adm">
-        <div class="menu-container">
-        <div class="menu-adm-container">
-            <h2>Menu de Administração</h2>
-            <ul>
-                <li><a href="#">Pacientes Cadastrados</a></li>
-                <li><a href="#">Consultas Marcadas</a></li>
-                <li><a href="#">Histórico de Consultas</a></li>
-                <li><a href="#">Mensagens</a></li>
-            </ul>
-        </div>
-
-        <div class="menu-information">
-            <table id="tabelaConsultas">
-                <caption>Consultas Marcadas</caption>
-                <tr>
-                    <th>Data</th>
-                    <th>Nome do Paciente</th>
-                    <th>Especialidade</th>
-                    <th>Horário</th>
-                    <th>Status</th>
-                    <th>Observações</th>
-                </tr>
-
-                <tr>
-                    <td>10/10/2023</td>
-                    <td>Maria da Silva</td>
-                    <td>Mastologia</td>
-                    <td>14:00</td>
-                    <td>Confirmada</td>
-                    <td>Nenhuma</td>
-                </tr>
-
-                <tr>
-                    <td>10/10/2023</td>
-                    <td>Maria da Silva</td>
-                    <td>Mastologia</td>
-                    <td>14:00</td>
-                    <td>Confirmada</td>
-                    <td>Nenhuma</td>
-                </tr>
+            <table id="tabelaPacientes" class="tabelaPacientes">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Email</th>
+                        <th>Data Nascimento</th>
+                        <th>Endereço</th>
+                        <th>Exames</th>
+                        <th>Histórico</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaPacientes" class="corpoTabelaPacientes">
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>ana@gmail.com</td>
+                        <td>12/03/2005</td>
+                        <td>Rua das Flores</td>
+                        <td>Exame de Sangue</td>
+                        <td><a href="">Histórico</a></td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
-    </div>
-    </section>
-    <script src="../assets/js/script.js"></script>
+        </section>
 
+        <section id="consultas">
+            <div class="filter-container">
+                <form class="formPesquisa">
+                    <label for="filtro">Filtrar por:</label>
+
+                    <div class="filter-group">
+                        <input type="radio" name="radioNome" id="radioNome" value="nome">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
+                    </div>
+
+                    <div class="filter-group">
+                        <input type="radio" name="radioData" id="radioData" value="Data">
+                        <label for="data">Data</label>
+                        <input type="date" name="txtData" id="txtData">
+                    </div>
+                </form>
+            </div>
+
+            <table id="tabelaConsultas" class="tabelaConsultas">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Especialidade</th>
+                        <th>Data da consulta</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaConsultas" class="corpoTabelaConsultas">
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>Mastologia</td>
+                        <td>12/10/2025</td>
+                        <td><a href="#confirmarConsulta">A confirmar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="confirmarConsulta">
+                <div class="confirmarContainer">
+                    <button type="button" class="btnconfirmarContainer" id="confirmar">Confirmar consulta</button>
+                    <button type="button" class="btnconfirmarContainer" id="cancelar">Cancelar consulta</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="relatorio">
+            <table id="tabelaRelatorio" class="tabelaRelatorio">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Data</th>
+                        <th>Nota</th>
+                        <th>Avaliação</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaRelatorio" class="corpoTabelaRelatorio">
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>12/03/2005</td>
+                        <td>5</td>
+                        <td>Avaliação 1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="mensagens">
+            <table id="tabelaMensagens" class="tabelaMensagens">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaMensagens" class="corpoTabelaMensagens">
+                    <tr>
+                        <td>Ana Silva</td>                    
+                        <td>(11) 52366-4125</td>
+                        <td>ana@gmail.com</td>
+                        <td>Gostaria de auxilio</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+    <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/adm.js" defer></script>
 </body>
 
 </html>

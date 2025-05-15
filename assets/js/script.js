@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
     const btnLogar = document.querySelectorAll('.btnEntrarCadastrar');
@@ -52,8 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-
-
 
 const botoesAgendar = document.querySelectorAll('.btnAgendarConsulta');
 
