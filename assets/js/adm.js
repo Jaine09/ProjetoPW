@@ -50,9 +50,8 @@ if (acessarConsultas) {
     })
 }
 
-if(acessarRelatorios){
-    console.log('acessar relatorio acionado');
-    acessarRelatorios.addEventListener('click', function(){
+if (acessarRelatorios) {
+    acessarRelatorios.addEventListener('click', function () {
         mensagemInicial.textContent = 'Seja bem-vinda ao portal de gerenciamento de relatórios. Aqui você pode acessar todas as informações sobre a avalição dos pacientes.'
         relatorio.style.display = 'flex';
         consultas.style.display = 'none';
@@ -61,14 +60,44 @@ if(acessarRelatorios){
     })
 }
 
-if(acessarMensagens){
-    acessarMensagens.addEventListener('click', function(){
+if (acessarMensagens) {
+    acessarMensagens.addEventListener('click', function () {
         mensagemInicial.textContent = 'Seja bem-vinda ao portal de gerenciamento de mensagems. Aqui você pode acessar todas as mensagens enviadas por meio do site.'
         mensagens.style.display = 'flex';
         relatorio.style.display = 'none';
         consultas.style.display = 'none';
         pacientesCadastrados.style.display = 'none';
     })
+}
+
+// função para filtro
+function alternarCampos() {
+    const radioNomeChecked = document.getElementById("radioNome").checked;
+    const radioDataChecked = document.getElementById("radioData").checked;
+    const inpNome = document.getElementById("txtNome");
+    const inpData = document.getElementById("txtData");
+
+    inpNome.style.display = radioNomeChecked ? "flex" : "none";
+    inpData.style.display = radioDataChecked ? "flex" : "none";
+}
+
+function filtrarTabelaPacientes() {
+    const input = document.getElementById("txtNome");
+    const filtro = input.value.toUpperCase();
+    const tabela = document.getElementById("tabelaPacientes");
+    const linhas = tabela.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    for (let i = 0; i < linhas.length; i++) {
+        const colunaNome = linhas[i].getElementsByTagName("td")[0]; // Primeira coluna é o nome do paciente
+        if (colunaNome) {
+            const textoNome = colunaNome.textContent.toUpperCase();
+            if (textoNome.includes(filtro)) {
+                linhas[i].style.display = ""; // Mostra a linha
+            } else {
+                linhas[i].style.display = "none"; // Esconde a linha
+            }
+        }
+    }
 }
 
 

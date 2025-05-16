@@ -59,7 +59,7 @@ const sessaoAgendarConsulta = document.getElementById('agendarConsulta');
 
 //inputs do form dados
 const nomeInput = document.getElementById('txtAlterarNome');
-const dataNascimento = document.getElementById('txtAlterarDataNascimento');
+const dataNascimentoInput = document.getElementById('txtAlterarDataNascimento');
 const cpfInput = document.getElementById('txtAlterarCpf');
 const telefoneInput = document.getElementById('txtAlterarTelefone');
 const emailInput = document.getElementById('txtAlterarEmail');
@@ -276,9 +276,18 @@ function salvarAlteracao() {
     var confirmarSenhaInput = document.getElementById('txtConfirmarSenha').value;
     var mensagemSenha = document.getElementById('mensagemSenha');
 
-    var usuarioInfoString = localStorage.getItem('email');
-    var usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
+    var usuarioInfoString = localStorage.getItem('usuarios'); // Alterado para 'usuarios'
+    var usuarios = usuarioInfoString ? JSON.parse(usuarioInfoString) : [];
+    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
+    var usuarioLogadoIndex = usuarios.findIndex(usuario => usuario.email === usuarioLogadoEmail);
     var houveAlteracao = false;
+
+    if (usuarioLogadoIndex === -1) {
+        console.error("Usuário logado não encontrado no localStorage.");
+        return;
+    }
+
+    var usuarioInfo = { ...usuarios[usuarioLogadoIndex] }; // Cria uma cópia para comparar
 
     if (novaSenhaInput || confirmarSenhaInput) {
         if (novaSenhaInput === confirmarSenhaInput) {
@@ -305,14 +314,16 @@ function salvarAlteracao() {
     if (emailInput.value !== usuarioInfo.email) {
         usuarioInfo.email = emailInput.value;
         houveAlteracao = true;
+        localStorage.setItem('usuarioLogado', emailInput.value); // Atualiza o email logado
     }
 
     if (houveAlteracao) {
+        usuarios[usuarioLogadoIndex] = usuarioInfo; // Atualiza o array
+        localStorage.setItem('usuarios', JSON.stringify(usuarios)); // Salva o array atualizado
         if (salvar && descartar) {
             salvar.disabled = false;
             descartar.disabled = false;
         }
-        localStorage.setItem('email', JSON.stringify(usuarioInfo));
         desabilitarCampos()
     }
 }
@@ -324,14 +335,16 @@ function descartarAlteracao() {
     var novaSenhaInput = document.getElementById('txtNovaSenha').value;
     var confirmarSenhaInput = document.getElementById('txtConfirmarSenha').value;
 
-    const usuarioInfoString = localStorage.getItem('email');
-    const usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
+    var usuarioInfoString = localStorage.getItem('usuarios'); // Alterado para 'usuarios'
+    var usuarios = usuarioInfoString ? JSON.parse(usuarioInfoString) : [];
+    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
+    var usuarioLogado = usuarios.find(usuario => usuario.email === usuarioLogadoEmail);
 
     // Restaura os valores dos campos com os dados originais
-    nomeInput.value = usuarioInfo.nome || '';
-    telefoneInput.value = usuarioInfo.telefone || '';
-    emailInput.value = usuarioInfo.email || '';
-    senhaInput.value = usuarioInfo.senha || '';
+    nomeInput.value = usuarioLogado?.nome || '';
+    telefoneInput.value = usuarioLogado?.telefone || '';
+    emailInput.value = usuarioLogado?.email || '';
+    senhaInput.value = usuarioLogado?.senha || '';
     novaSenhaInput.value = '';
     confirmarSenhaInput.value = '';
 
@@ -349,7 +362,7 @@ function habilitarCampos() {
     senhaInput.disabled = false;
 
     nomeInput.setAttribute('placeholder', '');
-    dataNascimento.setAttribute('placeholder', '');
+    dataNascimentoInput.setAttribute('placeholder', '');
     cpfInput.setAttribute('placeholder', '');
     telefoneInput.setAttribute('placeholder', '');
     emailInput.setAttribute('placeholder', '');
@@ -358,40 +371,40 @@ function habilitarCampos() {
 
 function desabilitarCampos() {
     nomeInput.disabled = true;
-    dataNascimento.disabled = true;
+    dataNascimentoInput.disabled = true;
     cpfInput.disabled = true;
     telefoneInput.disabled = true;
     emailInput.disabled = true;
     senhaInput.disabled = true;
 
-    var usuarioInfoString = localStorage.getItem('email');
+    var usuarioInfoString = localStorage.getItem('usuarios'); // Alterado para 'usuarios'
+    var usuarios = usuarioInfoString ? JSON.parse(usuarioInfoString) : [];
+    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
+    var usuarioLogado = usuarios.find(usuario => usuario.email === usuarioLogadoEmail);
 
     var alterarSenha = document.querySelectorAll('.novaSenha');
-    if(alterarSenha){
+    if (alterarSenha) {
         alterarSenha.forEach(alteracao => {
             alteracao.style.display = 'none';
         });
     }
 
-    if (usuarioInfoString) {
-
-        var usuarioInfo = JSON.parse(usuarioInfoString);
-
-        nomeInput.value = usuarioInfo.nome || '';
-        dataNascimento.value = usuarioInfo.dataNascimento || '';
-        cpfInput.value = usuarioInfo.cpf || '';
-        telefoneInput.value = usuarioInfo.telefone || '';
-        emailInput.value = usuarioInfo.email || '';
-        senhaInput.value = usuarioInfo.senha || '';
+    if (usuarioLogado) {
+        nomeInput.value = usuarioLogado.nome || '';
+        dataNascimentoInput.value = usuarioLogado.dataNascimento || '';
+        cpfInput.value = usuarioLogado.cpf || '';
+        telefoneInput.value = usuarioLogado.telefone || '';
+        emailInput.value = usuarioLogado.email || '';
+        senhaInput.value = usuarioLogado.senha || '';
 
         nomeInput.setAttribute('placeholder', nomeInput.value);
-        dataNascimento.setAttribute('placeholder', dataNascimento.value);
+        dataNascimentoInput.setAttribute('placeholder', dataNascimentoInput.value);
         cpfInput.setAttribute('placeholder', cpfInput.value);
         telefoneInput.setAttribute('placeholder', telefoneInput.value);
         emailInput.setAttribute('placeholder', emailInput.value);
         senhaInput.setAttribute('placeholder', senhaInput.value);
     } else {
-        console.log("Nenhuma informação de usuário encontrada no localStorage.");
+        console.log("Nenhuma informação de usuário logado encontrada no localStorage.");
     }
 }
 

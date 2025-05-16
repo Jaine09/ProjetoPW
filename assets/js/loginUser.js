@@ -3,13 +3,17 @@ const btnEntrar = document.getElementById('entrar');
 
 const body = document.querySelector('body');
 
-btnCadastrar.addEventListener('click', function () {
-    body.className = 'cadastrar-js';
-});
+if (btnCadastrar) {
+    btnCadastrar.addEventListener('click', function () {
+        body.className = 'cadastrar-js';
+    });
+}
 
-btnEntrar.addEventListener('click', function () {
-    body.className = 'entrar-js';
-});
+if (btnEntrar) {
+    btnEntrar.addEventListener('click', function () {
+        body.className = 'entrar-js';
+    });
+}
 
 var cidade = "";
 var estado = "";
@@ -17,7 +21,7 @@ var estado = "";
 function validarCadastroCompleto() {
     var formAcompanhante = document.getElementById('formAcompanhante');
     var formPaciente = document.getElementById('formUsuario');
-   
+
     var nome = document.getElementById('nome').value;
     var dataNascimento = document.getElementById('dataNascimento').value;
     var telefone = document.getElementById('telefone').value;
@@ -38,7 +42,7 @@ function validarCadastroCompleto() {
     var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
     var mensagemUsuario = 'Notamos que você é menor de idade, por favor, cadastre um acompanhante responsável.';
 
-    if (nome == "" || dataNascimento == "" || telefone == "" || cpf == ""|| email == ""|| senha == "" || cep == "" || endereco == "" || bairro == "") {
+    if (nome == "" || dataNascimento == "" || telefone == "" || cpf == "" || email == "" || senha == "" || cep == "" || endereco == "" || bairro == "") {
         alert('Preencha todos os campos!');
     } else if (telefone.length < 9 || telefone.length > 12) {
         alert('Telefone inválido!');
@@ -49,43 +53,49 @@ function validarCadastroCompleto() {
         cadastroUsuario.style.display = 'none';
         cadastroAcompanhante.style.display = 'block';
         const informacoesUsuario = {
-            nome : nome,
-            dataNascimento : dataNascimento,
-            idade : idade,
-            telefone : telefone,
+            nome: nome,
+            dataNascimento: dataNascimento,
+            idade: idade,
+            telefone: telefone,
             cpf: cpf,
-            email : email,
-            senha : senha,
-            cep : cep,
-            endereco : endereco,
-            bairro : bairro,
-            numero : numero,
-            cidade : cidade,
-            estado : estado
-        }
-        localStorage.setItem('email', JSON.stringify(informacoesUsuario));
+            email: email,
+            senha: senha,
+            cep: cep,
+            endereco: endereco,
+            bairro: bairro,
+            numero: numero,
+            cidade: cidade,
+            estado: estado
+        };
+        let usuarios = localStorage.getItem('usuarios');
+        usuarios = usuarios ? JSON.parse(usuarios) : [];
+        usuarios.push(informacoesUsuario);
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        localStorage.setItem('usuarioLogado', email); // Salva o email do usuário logado
         formAcompanhante.style.display = "flex";
         formPaciente.style.display = "none";
-    }else {
-
+    } else {
         const informacoesUsuario = {
-            nome : nome,
-            dataNascimento : dataNascimento,
-            idade : idade,
-            telefone : telefone,
+            nome: nome,
+            dataNascimento: dataNascimento,
+            idade: idade,
+            telefone: telefone,
             cpf: cpf,
-            email : email,
-            senha : senha,
-            cep : cep,
-            endereco : endereco,
-            bairro : bairro,
-            numero : numero,
-            cidade : cidade,
-            estado : estado
-        }
+            email: email,
+            senha: senha,
+            cep: cep,
+            endereco: endereco,
+            bairro: bairro,
+            numero: numero,
+            cidade: cidade,
+            estado: estado
+        };
 
-        localStorage.setItem('email', JSON.stringify(informacoesUsuario));
-        localStorage.setItem('usuarioLogado', 'true');
+        let usuarios = localStorage.getItem('usuarios');
+        usuarios = usuarios ? JSON.parse(usuarios) : [];
+        usuarios.push(informacoesUsuario);
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        localStorage.setItem('usuarioLogado', email); // Salva o email do usuário logado
         console.log('Cadastro realizado com sucesso! Calculando a distância...');
         window.location.href = "./areaPaciente.html";
     }
@@ -98,21 +108,24 @@ function validarCadastroCompletoComAcompanhante() {
     var telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante').value;
     var parentescoAcompanhanteSelect = document.getElementById('parentescoAcompanhante');
     var parentescoAcompanhante = parentescoAcompanhanteSelect.value;
-    
+
     var dataAtual = new Date();
     var dataNasc = new Date(dataNascimentoAcompanhante);
     var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
 
     const informacoesAcompanhante = {
         nomeAcompanhante: nomeAcompanhante,
-        dataNascimentoAcompanhante : dataNascimentoAcompanhante,
-        idade : idade,
+        dataNascimentoAcompanhante: dataNascimentoAcompanhante,
+        idade: idade,
         cpfAcompanhante: cpfAcompanhante,
         telefoneAcompanhante: telefoneAcompanhante,
-        parentesco : parentescoAcompanhante
+        parentesco: parentescoAcompanhante
     };
 
-    localStorage.setItem('nomeAcompanhante', JSON.stringify(informacoesAcompanhante));
+    let acompanhantes = localStorage.getItem('acompanhantes');
+    acompanhantes = acompanhantes ? JSON.parse(acompanhantes) : [];
+    acompanhantes.push(informacoesAcompanhante);
+    localStorage.setItem('acompanhantes', JSON.stringify(acompanhantes));
 
     if (nomeAcompanhante == "" || cpfAcompanhante == "" || telefoneAcompanhante == "") {
         alert('Preencha todos os campos!');
@@ -122,21 +135,30 @@ function validarCadastroCompletoComAcompanhante() {
         alert('CPF inválido!');
     } else {
         console.log('Cadastro do acompanhante realizado com sucesso!');
-        localStorage.setItem('usuarioLogado', 'true');
+        localStorage.setItem('usuarioLogado', localStorage.getItem('email')); // Mantém o usuário menor de idade logado
         window.location.href = "./areaPaciente.html";
     }
 }
 
 function validarLogin(event) {
     event.preventDefault();
-    var email = document.getElementById('emailLogin').value;
-    var senha = document.getElementById('senhaLogin').value;
+    var emailLogin = document.getElementById('emailLogin').value;
+    var senhaLogin = document.getElementById('senhaLogin').value;
 
-    var informacoesUsuario = JSON.parse(localStorage.getItem('email'));
+    var usuarios = localStorage.getItem('usuarios');
+    usuarios = usuarios ? JSON.parse(usuarios) : [];
 
-    if (informacoesUsuario && email === informacoesUsuario.email && senha === informacoesUsuario.senha) {
+    let usuarioLogado = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].email === emailLogin && usuarios[i].senha === senhaLogin) {
+            usuarioLogado = usuarios[i];
+            break;
+        }
+    }
+
+    if (usuarioLogado) {
         console.log('Login realizado com sucesso!');
-        localStorage.setItem('usuarioLogado', 'true');
+        localStorage.setItem('usuarioLogado', emailLogin); // Salva o email do usuário logado
         window.location.href = "./areaPaciente.html";
     } else {
         alert('Email ou senha inválidos!');
@@ -151,6 +173,8 @@ function validarCep() {
         alert('CEP inválido!');
         document.getElementById('endereco').value = '';
         document.getElementById('bairro').value = '';
+        cidade = "";
+        estado = "";
         return;
     }
 
@@ -163,6 +187,8 @@ function validarCep() {
                 alert('CEP inválido!');
                 document.getElementById('endereco').value = '';
                 document.getElementById('bairro').value = '';
+                cidade = "";
+                estado = "";
             } else {
                 const endereco = `${data.logradouro}`;
                 const bairro = `${data.bairro}`;
@@ -171,8 +197,7 @@ function validarCep() {
                 document.getElementById('endereco').value = endereco;
                 document.getElementById('bairro').value = bairro;
 
-                const cidadeAPI = data.localidade;
-                distanciaLatLong(cidadeAPI);
+                distanciaLatLong(cidade);
             }
         })
         .catch(error => {
@@ -223,7 +248,6 @@ function calculaDistancia(latitude, longitude) {
                 const distanciaEmQuilometros = (distancia / 1000).toFixed(2);
                 const duracaoFormatada = formatarDuracao(duracaoSegundos);
 
-                // feito para ser acessado em todas as páginas
                 localStorage.setItem('distancia', distanciaEmQuilometros);
                 localStorage.setItem('tempo', duracaoFormatada);
 
