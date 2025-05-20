@@ -7,9 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const stickDistancia = document.querySelector('.stick-distancia');
 
     const usuarioLogado = localStorage.getItem('usuarioLogado'); // Verifica a flag
-    console.log(usuarioLogado)
 
-    if (usuarioLogado === 'true') {
+    if (usuarioLogado != null) {
         btnLogado.forEach(button => { // Itera sobre todos os elementos com a classe 'btnLogado'
             button.style.visibility = 'visible';
             button.style.display = 'flex';
@@ -56,7 +55,7 @@ if (botoesAgendar) {
     botoesAgendar.forEach(botao => {
         botao.addEventListener('click', function () {
             const usuarioLogado = localStorage.getItem('usuarioLogado');
-            if (usuarioLogado === 'true') {
+            if (usuarioLogado != null) {
                 window.location.href = "./areaPaciente.html#agendarConsulta";
             } else {
                 window.location.href = "./loginUser.html";
@@ -70,7 +69,7 @@ const botaoAgendarPagInicial = document.getElementById('btnAgendar_consulta');
 if (botaoAgendarPagInicial) {
     botaoAgendarPagInicial.addEventListener('click', function () {
         const usuarioLogado = localStorage.getItem('usuarioLogado');
-        if (usuarioLogado === 'true') {
+        if (usuarioLogado != null) {
             window.location.href = "./pages/areaPaciente.html#agendarConsulta";
         } else {
             window.location.href = "./pages/loginUser.html";

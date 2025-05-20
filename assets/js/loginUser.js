@@ -67,6 +67,7 @@ function validarCadastroCompleto() {
             cidade: cidade,
             estado: estado
         };
+
         let usuarios = localStorage.getItem('usuarios');
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
@@ -95,7 +96,12 @@ function validarCadastroCompleto() {
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        localStorage.setItem('usuarioLogado', email); // Salva o email do usuário logado
+
+        // ✅ Salvar individualmente também
+        localStorage.setItem(email, JSON.stringify(informacoesUsuario));
+
+        // ✅ Salvar usuário logado
+        localStorage.setItem('usuarioLogado', email);
         console.log('Cadastro realizado com sucesso! Calculando a distância...');
         window.location.href = "./areaPaciente.html";
     }

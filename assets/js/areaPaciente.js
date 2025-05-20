@@ -103,6 +103,7 @@ function pegandoNomeUsuario() {
 }
 
 pegandoNomeUsuario()
+carregarConsultasSalvas();
 
 if (acessarHistorico) {
     acessarHistorico.addEventListener('click', function () {
@@ -113,6 +114,7 @@ if (acessarHistorico) {
         avaliacoes.style.display = 'none';
         sessaoAgendarConsulta.style.display = 'none';
 
+        carregarConsultasSalvas();
     });
 }
 if (acessarDados) {
@@ -159,8 +161,8 @@ if (acessarDados) {
 
     });
 }
-if(acessarDadosAcompanhante){
-    acessarDadosAcompanhante.addEventListener('click', function (){
+if (acessarDadosAcompanhante) {
+    acessarDadosAcompanhante.addEventListener('click', function () {
         historico.style.display = 'none';
         dadosPessoais.style.display = 'none';
         endereco.style.display = 'none';
@@ -182,7 +184,7 @@ if(acessarDadosAcompanhante){
             descartar.disabled = true;
             const inputsDadosAcompanhante = dadosAcompanhante.querySelectorAll('input');
             const selectsDadosAcompanhante = dadosAcompanhante.querySelectorAll('select');
-           
+
             inputsDadosAcompanhante.forEach(elemento => {
                 elemento.addEventListener('input', () => {
                     salvar.disabled = false;
@@ -194,7 +196,7 @@ if(acessarDadosAcompanhante){
                 elemento.addEventListener('change', () => {
                     salvar.disabled = false;
                     descartar.disabled = false;
-                 });
+                });
             });
         }
     })
@@ -245,6 +247,8 @@ if (acessarAvaliacoes) {
         endereco.style.display = 'none';
         avaliacoes.style.display = 'flex';
         sessaoAgendarConsulta.style.display = 'none';
+
+        carregarAvaliacoesSalvas();
     });
 }
 
@@ -270,6 +274,7 @@ function salvarAlteracao() {
     //botões
     var salvar = document.getElementById('salvarInformacoesUsuario');
     var descartar = document.getElementById('descartarInformacaoUsuario');
+    var editarInformações = document.getElementById('editarInformações');
 
     //elementos form
     var novaSenhaInput = document.getElementById('txtNovaSenha').value;
@@ -290,6 +295,7 @@ function salvarAlteracao() {
     var usuarioInfo = { ...usuarios[usuarioLogadoIndex] }; // Cria uma cópia para comparar
 
     if (novaSenhaInput || confirmarSenhaInput) {
+        
         if (novaSenhaInput === confirmarSenhaInput) {
             usuarioInfo.senha = novaSenhaInput;
             houveAlteracao = true;
@@ -319,10 +325,12 @@ function salvarAlteracao() {
 
     if (houveAlteracao) {
         usuarios[usuarioLogadoIndex] = usuarioInfo; // Atualiza o array
+        localStorage.setItem(usuarioLogadoEmail, JSON.stringify(usuarioInfo));
         localStorage.setItem('usuarios', JSON.stringify(usuarios)); // Salva o array atualizado
         if (salvar && descartar) {
-            salvar.disabled = false;
-            descartar.disabled = false;
+            salvar.style.display = 'none';
+            descartar.style.display = 'none';
+            editarInformações.style.display = 'flex';
         }
         desabilitarCampos()
     }
@@ -377,25 +385,22 @@ function desabilitarCampos() {
     emailInput.disabled = true;
     senhaInput.disabled = true;
 
-    var usuarioInfoString = localStorage.getItem('usuarios'); // Alterado para 'usuarios'
-    var usuarios = usuarioInfoString ? JSON.parse(usuarioInfoString) : [];
-    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
-    var usuarioLogado = usuarios.find(usuario => usuario.email === usuarioLogadoEmail);
+    const usuarioInfo = JSON.parse(localStorage.getItem(localStorage.getItem('usuarioLogado')));
 
-    var alterarSenha = document.querySelectorAll('.novaSenha');
+    const alterarSenha = document.querySelectorAll('.novaSenha');
     if (alterarSenha) {
         alterarSenha.forEach(alteracao => {
             alteracao.style.display = 'none';
         });
     }
 
-    if (usuarioLogado) {
-        nomeInput.value = usuarioLogado.nome || '';
-        dataNascimentoInput.value = usuarioLogado.dataNascimento || '';
-        cpfInput.value = usuarioLogado.cpf || '';
-        telefoneInput.value = usuarioLogado.telefone || '';
-        emailInput.value = usuarioLogado.email || '';
-        senhaInput.value = usuarioLogado.senha || '';
+    if (usuarioInfo) {
+        nomeInput.value = usuarioInfo.nome || '';
+        dataNascimentoInput.value = usuarioInfo.dataNascimento || '';
+        cpfInput.value = usuarioInfo.cpf || '';
+        telefoneInput.value = usuarioInfo.telefone || '';
+        emailInput.value = usuarioInfo.email || '';
+        senhaInput.value = usuarioInfo.senha || '';
 
         nomeInput.setAttribute('placeholder', nomeInput.value);
         dataNascimentoInput.setAttribute('placeholder', dataNascimentoInput.value);
@@ -408,7 +413,7 @@ function desabilitarCampos() {
     }
 }
 
-function habilitarCamposAcompanhante(){
+function habilitarCamposAcompanhante() {
     nomeAcompanhante.disabled = false;
     dataNascAcompanhante.disabled = false;
     cpfAcompanhante.disabled = false;
@@ -419,7 +424,7 @@ function habilitarCamposAcompanhante(){
     dataNascAcompanhante.setAttribute('placeholder', '');
     cpfAcompanhante.setAttribute('placeholder', '');
     telAcompanhante.setAttribute('placeholder', '');
-       
+
 }
 
 function desabilitarCamposAcompanhante() {
@@ -428,9 +433,9 @@ function desabilitarCamposAcompanhante() {
     cpfAcompanhante.disabled = true;
     telAcompanhante.disabled = true;
     parentescoAcompanhanteSelect.disabled = true;
-        
+
     var acompanhanteInfoString = localStorage.getItem('nomeAcompanhante');
-    
+
     if (acompanhanteInfoString) {
 
         var acompanhanteInfo = JSON.parse(acompanhanteInfoString);
@@ -440,21 +445,21 @@ function desabilitarCamposAcompanhante() {
         cpfAcompanhante.value = acompanhanteInfo.cpfAcompanhante || '';
         telAcompanhante.value = acompanhanteInfo.telefoneAcompanhante || '';
         parentescoAcompanhanteSelect.value = acompanhanteInfo.parentesco || '';
-        
+
         parentescoAcompanhanteSelect.style.color = "black";
 
         nomeAcompanhante.setAttribute('placeholder', nomeAcompanhante.value);
         dataNascAcompanhante.setAttribute('placeholder', dataNascAcompanhante.value);
         cpfAcompanhante.setAttribute('placeholder', cpfAcompanhante.value);
         telAcompanhante.setAttribute('placeholder', telAcompanhante.value);
-       
+
     } else {
         alert("Não funcionou");
         console.log("Nenhuma informação de usuário encontrada no localStorage.");
     }
 }
 
-function editarDadosAcompanhante(){
+function editarDadosAcompanhante() {
     const habilitar = document.getElementById('editarInformacoesAcompanhante');
     const salvar = document.getElementById('salvarInformacoesAcompanhante');
     const descartar = document.getElementById('descartarInformacoesAcompanhante');
@@ -466,7 +471,7 @@ function editarDadosAcompanhante(){
     habilitarCamposAcompanhante();
 }
 
-function salvarAlteracaoAcompanhante(){
+function salvarAlteracaoAcompanhante() {
 
     var salvar = document.getElementById('salvarEdicaoEndereco');
     var descartar = document.getElementById('descartarAlteracaoEndereco');
@@ -476,19 +481,19 @@ function salvarAlteracaoAcompanhante(){
     var acompanhanteInfo = JSON.parse(acompanhanteInfoString);
     var houveAlteracao = false;
 
-    if(nomeAcompanhante.value != acompanhanteInfo.nomeAcompanhante){
+    if (nomeAcompanhante.value != acompanhanteInfo.nomeAcompanhante) {
         acompanhanteInfo.nomeAcompanhante = nomeAcompanhante.value;
         houveAlteracao = true;
     }
-    if(dataNascAcompanhante.value != acompanhanteInfo.dataNascimentoAcompanhante){
+    if (dataNascAcompanhante.value != acompanhanteInfo.dataNascimentoAcompanhante) {
         acompanhanteInfo.dataNascimentoAcompanhante = dataNascAcompanhante.value;
         houveAlteracao = true;
     }
-    if(cpfAcompanhante.value != acompanhanteInfo.cpfAcompanhante){
+    if (cpfAcompanhante.value != acompanhanteInfo.cpfAcompanhante) {
         acompanhanteInfo.cpfAcompanhante = cpfAcompanhante.value;
         houveAlteracao = true;
     }
-    if(telAcompanhante.value != acompanhanteInfo.telefoneAcompanhante){
+    if (telAcompanhante.value != acompanhanteInfo.telefoneAcompanhante) {
         acompanhanteInfo.telefoneAcompanhante = telAcompanhante.value;
         houveAlteracao = true;
     }
@@ -501,14 +506,14 @@ function salvarAlteracaoAcompanhante(){
     var dataNasc = new Date(dataNascAcompanhante);
     var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
 
-    if(idade < 18){
+    if (idade < 18) {
         mensagem = "O seu acompanhante deve ter no minímo 18 anos";
         if (salvar && descartar) {
             salvar.disabled = true;
             descartar.disabled = true;
         }
     }
-        
+
     if (houveAlteracao) {
         if (salvar && descartar) {
             salvar.disabled = false;
@@ -517,10 +522,10 @@ function salvarAlteracaoAcompanhante(){
         localStorage.setItem('nomeAcompanhante', JSON.stringify(acompanhanteInfo));
         desabilitarCamposAcompanhante();
     }
-    
+
 }
 
-function descartarAlteracaoAcompanhante(){
+function descartarAlteracaoAcompanhante() {
     var salvar = document.getElementById('salvarEdicaoEndereco');
     var descartar = document.getElementById('descartarAlteracaoEndereco');
 
@@ -546,22 +551,27 @@ function desabilitarCamposEndereco() {
     bairroInput.disabled = true;
     cidadeInput.disabled = true;
     estadoInput.disabled = true;
+    
 
-    var usuarioInfoString = localStorage.getItem('email');
+    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
+    var usuariosString = localStorage.getItem('usuarios');
+    console.log('Usuários:', usuariosString);
+    var usuarios = usuariosString ? JSON.parse(usuariosString) : [];
+    var usuarioInfo = usuarios.find(u => u.email === usuarioLogadoEmail);
+    console.log('Usuário encontrado:', usuarioInfo);
 
-    if (usuarioInfoString) {
 
-        var usuarioInfo = JSON.parse(usuarioInfoString);
-
+    if (usuarioInfo) {
         cepInput.value = usuarioInfo.cep || '';
         ruaInput.value = usuarioInfo.endereco || '';
-        numeroInput.value = usuarioInfo.numero;
+        numeroInput.value = usuarioInfo.numero || '';
         bairroInput.value = usuarioInfo.bairro || '';
         cidadeInput.value = usuarioInfo.cidade || '';
         estadoInput.value = usuarioInfo.estado || '';
 
         cepInput.setAttribute('placeholder', cepInput.value);
         ruaInput.setAttribute('placeholder', ruaInput.value);
+        numeroInput.setAttribute('placeholder', numeroInput.value);
         bairroInput.setAttribute('placeholder', bairroInput.value);
         cidadeInput.setAttribute('placeholder', cidadeInput.value);
         estadoInput.setAttribute('placeholder', estadoInput.value);
@@ -605,6 +615,7 @@ function salvarAlteracaoEndereco() {
     if (cepInput.value !== usuarioInfo.cep) {
         houveAlteracao = true;
         const cepNumerico = cepInput.value.replace(/\D/g, '');
+
 
         if (cepNumerico.length !== 8) {
             alert('CEP inválido!');
@@ -686,8 +697,31 @@ function salvarAlteracaoEndereco() {
             salvar.disabled = false;
             descartar.disabled = false;
         }
-        localStorage.setItem('email', JSON.stringify(usuarioInfo));
+        const usuarioEmail = localStorage.getItem('usuarioLogado');
+        if (usuarioEmail && typeof usuarioEmail === 'string') {
+            localStorage.setItem(usuarioEmail, JSON.stringify(usuarioInfo));
+
+            // Atualizar a distância e tempo
+            distanciaLatLong(usuarioInfo.cidade);
+
+            // Atualizar o stick de distância e tempo após um pequeno delay
+            const distanciaElement = document.getElementById('distancia');
+            const tempoElement = document.getElementById('tempo');
+            const stickDistancia = document.querySelector('.stick-distancia');
+
+            setTimeout(() => {
+                const novaDistancia = localStorage.getItem('distancia');
+                const novoTempo = localStorage.getItem('tempo');
+
+                if (novaDistancia && novoTempo) {
+                    if (distanciaElement) distanciaElement.textContent = `Distância: ${novaDistancia} km`;
+                    if (tempoElement) tempoElement.textContent = `Duração: ${novoTempo}`;
+                    if (stickDistancia) stickDistancia.style.display = 'block';
+                }
+            }, 1000);
+        }
     }
+
 }
 
 function descartarAlteracaoEndereco() {
@@ -716,7 +750,7 @@ function agendarConsulta() {
     sessaoAgendarConsulta.style.display = 'flex';
 }
 
-function realizarAgendamento(event){
+function realizarAgendamento(event) {
     event.preventDefault();
 
     const especialidadeSelecionada = document.getElementById('especialidade');
@@ -726,34 +760,59 @@ function realizarAgendamento(event){
     const formAgendarConsulta = document.getElementById('formAgendarConsulta');
     const corpoTabelaHistorico = document.getElementById('corpoTabelaHistorico');
 
-    // Formatar a data para o formato desejado (DD/MM/AAAA)
     const dataParts = dataConsultaInput.split('-');
     const dataFormatada = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
 
-    if(!especialidade || !dataConsultaInput || !horaConsulta){
+    if (!especialidade || !dataConsultaInput || !horaConsulta) {
         alert("Preencha todos os campos para agendar a consulta!");
         return;
     }
 
-    // Criar uma nova linha na tabela
-    const novaLinha = corpoTabelaHistorico.insertRow();
-    const colunaData = novaLinha.insertCell();
-    const colunaHora = novaLinha.insertCell();
-    const colunaEspecialidade = novaLinha.insertCell();
-    const colunaExames = novaLinha.insertCell();
-    const colunaReceitas = novaLinha.insertCell();
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (!usuarioLogado) {
+        alert('Usuário não está logado!');
+        return;
+    }
 
-    colunaData.textContent = dataFormatada;
-    colunaHora.textContent = horaConsulta;
-    colunaEspecialidade.textContent = especialidade;
-    colunaExames.innerHTML = 'Não adicionado'; 
-    colunaReceitas.innerHTML = 'Não adicionado'; 
+    const novaConsulta = {
+        data: dataFormatada,
+        hora: horaConsulta,
+        especialidade: especialidade,
+        exames: 'Não adicionado',
+        receitas: 'Não adicionado'
+    };
 
-    // Limpar o formulário e ocultar a seção de agendamento
+    let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
+    consultas.push(novaConsulta);
+    localStorage.setItem('consultas_' + usuarioLogado, JSON.stringify(consultas));
+
+    adicionarConsultaNaTabela(novaConsulta);
+
     formAgendarConsulta.reset();
     sessaoAgendarConsulta.style.display = 'none';
-    historico.style.display = 'flex'
+    historico.style.display = 'flex';
 }
+
+function adicionarConsultaNaTabela(consulta) {
+    const corpoTabela = document.getElementById('corpoTabelaHistorico');
+    const novaLinha = corpoTabela.insertRow();
+    novaLinha.insertCell().textContent = consulta.data;
+    novaLinha.insertCell().textContent = consulta.hora;
+    novaLinha.insertCell().textContent = consulta.especialidade;
+    novaLinha.insertCell().textContent = consulta.exames;
+    novaLinha.insertCell().textContent = consulta.receitas;
+}
+
+function carregarConsultasSalvas() {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    const corpoTabela = document.getElementById('corpoTabelaHistorico');
+
+    corpoTabela.innerHTML = "";
+
+    const consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
+    consultas.forEach(adicionarConsultaNaTabela);
+}
+
 const criarAvaliacao = document.getElementById('criarAvaliacao');
 
 function adicionarAvaliacao() {
@@ -761,17 +820,23 @@ function adicionarAvaliacao() {
     criarAvaliacao.style.display = 'flex';
 }
 
-function realizarAvaliacao(event){
+function realizarAvaliacao(event) {
     event.preventDefault();
 
     const avaliacaoTexto = document.getElementById('avaliacao').value;
     const notaSelecionadaElement = document.getElementById('nota');
     const nota = notaSelecionadaElement.options[notaSelecionadaElement.selectedIndex].value;
     const formAvaliacao = document.getElementById('formAvaliacoes');
-    const corpoTabelaAvaliacoes = document.getElementById('corpoTabelaAvaliacoes');
-
-    if(!avaliacaoTexto || !nota){
+    
+    if (!avaliacaoTexto || !nota) {
         alert("Preencha todos os campos para enviar a avaliação!");
+        return;
+    }
+
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+    if (!usuarioLogado) {
+        alert("Você precisa estar logado para enviar uma avaliação.");
         return;
     }
 
@@ -781,16 +846,109 @@ function realizarAvaliacao(event){
     const ano = String(data.getFullYear());
     const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    const novaLinha = corpoTabelaAvaliacoes.insertRow();
-    const colunaData = novaLinha.insertCell();
-    const colunaAvaliacao = novaLinha.insertCell();
-    const colunaNota = novaLinha.insertCell();
+    const novaAvaliacao = {
+        data: dataFormatada,
+        texto: avaliacaoTexto,
+        nota: nota
+    };
 
-    colunaData.textContent = dataFormatada;
-    colunaAvaliacao.textContent = avaliacaoTexto;
-    colunaNota.textContent = nota;
+    // Salvar avaliação no localStorage
+    let avaliacoesSalvas = JSON.parse(localStorage.getItem('avaliacoes_' + usuarioLogado)) || [];
+    avaliacoesSalvas.push(novaAvaliacao);
+    localStorage.setItem('avaliacoes_' + usuarioLogado, JSON.stringify(avaliacoesSalvas));
+
+    // Atualiza tabela na tela
+    carregarAvaliacoesSalvas();
 
     formAvaliacao.reset();
-    criarAvaliacao.style.display = 'none'; 
+    criarAvaliacao.style.display = 'none';
     avaliacoes.style.display = 'flex';
+}
+
+function carregarAvaliacoesSalvas() {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    const corpoTabela = document.getElementById('corpoTabelaAvaliacoes');
+
+    if (!corpoTabela || !usuarioLogado) return;
+
+    corpoTabela.innerHTML = ""; // Limpa linhas antigas
+
+    const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes_' + usuarioLogado)) || [];
+
+    avaliacoes.forEach(avaliacao => {
+        const novaLinha = corpoTabela.insertRow();
+        novaLinha.insertCell().textContent = avaliacao.data;
+        novaLinha.insertCell().textContent = avaliacao.texto;
+        novaLinha.insertCell().textContent = avaliacao.nota;
+    });
+}
+
+
+
+
+function distanciaLatLong(cidade) {
+    var key = "49ffd309156a4632b363734ab752f605";
+    var url = `https://api.geoapify.com/v1/geocode/search?text=${cidade}&format=json&apiKey=${key}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.results && data.results.length > 0) {
+                const longitude = data.results[0].lon;
+                const latitude = data.results[0].lat;
+                console.log("Latitude do usuário:", latitude);
+                console.log("Longitude do usuário:", longitude);
+                calculaDistancia(latitude, longitude);
+            } else {
+                console.log("Nenhum resultado encontrado para a cidade.");
+            }
+        })
+        .catch(error => console.log('error', error));
+}
+
+function calculaDistancia(latitude, longitude) {
+    var key = "b50baa0a696344b988cccf71229aa688";
+    const latitudeSenac = -23.669388400000003;
+    const longitudeSenac = -46.70129375;
+    const url2 = `https://api.geoapify.com/v1/routing?waypoints=${latitude},${longitude}|${latitudeSenac},${longitudeSenac}&mode=drive&apiKey=${key}`;
+
+    fetch(url2)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição de roteamento: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.features && data.features.length > 0 && data.features[0].properties) {
+                const distancia = data.features[0].properties.distance;
+                const duracaoSegundos = data.features[0].properties.time;
+
+                const distanciaEmQuilometros = (distancia / 1000).toFixed(2);
+                const duracaoFormatada = formatarDuracao(duracaoSegundos);
+
+                localStorage.setItem('distancia', distanciaEmQuilometros);
+                localStorage.setItem('tempo', duracaoFormatada);
+
+                console.log("Distância até o Senac:", distanciaEmQuilometros, "km");
+                console.log("Duração estimada:", duracaoFormatada);
+
+            } else {
+                console.log("Não foi possível calcular a rota ou a estrutura da resposta é inesperada.");
+            }
+
+        })
+        .catch(error => console.error('Erro ao calcular a distância:', error));
+}
+
+function formatarDuracao(segundos) {
+    const horas = Math.floor(segundos / 3600);
+    const minutos = Math.floor((segundos % 3600) / 60);
+    const segundosRestantes = Math.trunc(segundos % 60);
+
+    const horasFormatadas = String(horas).padStart(2, '0');
+    const minutosFormatados = String(minutos).padStart(2, '0');
+    const segundosFormatados = String(segundosRestantes).padStart(2, '0');
+
+    return `${horasFormatadas}:${minutosFormatados}:${segundosFormatados}`;
 }
