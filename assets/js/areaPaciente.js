@@ -81,23 +81,24 @@ const cidadeInput = document.getElementById('alterarCidade');
 const estadoInput = document.getElementById('alterarEstado');
 
 function pegandoNomeUsuario() {
-
-    var usuarioInfoString = localStorage.getItem('email');
-    var usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
-
-    const nomeDoPaciente = usuarioInfo.nome;
-    const nomePacienteSpan = document.getElementById('nomePaciente');
-
-    if (nomePacienteSpan) {
-        nomePacienteSpan.textContent = nomeDoPaciente;
-    } else {
-        console.error("Elemento com ID 'nomePaciente' não encontrado no HTML.");
+    const emailLogado = localStorage.getItem('usuarioLogado');
+    if (!emailLogado) {
+        console.warn("Usuário não logado.");
+        return;
     }
 
-    var acessarDadosAcompanhante = document.getElementById('acessarDadosAcompanhante');
+    const usuarioInfoString = localStorage.getItem(emailLogado);
+    const usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
 
+    const nomePacienteSpan = document.getElementById('nomePaciente');
+    if (nomePacienteSpan && usuarioInfo.nome) {
+        nomePacienteSpan.textContent = usuarioInfo.nome;
+    } else {
+        console.warn("Elemento 'nomePaciente' não encontrado ou nome ausente.");
+    }
 
-    if (usuarioInfo.idade < 18) {
+    const acessarDadosAcompanhante = document.getElementById('acessarDadosAcompanhante');
+    if (acessarDadosAcompanhante && usuarioInfo.idade < 18) {
         acessarDadosAcompanhante.style.display = "flex";
     }
 }
@@ -434,11 +435,15 @@ function desabilitarCamposAcompanhante() {
     telAcompanhante.disabled = true;
     parentescoAcompanhanteSelect.disabled = true;
 
-    var acompanhanteInfoString = localStorage.getItem('nomeAcompanhante');
+    const acompanhantesString = localStorage.getItem('acompanhantes');
+    const acompanhantes = acompanhantesString ? JSON.parse(acompanhantesString) : [];
 
-    if (acompanhanteInfoString) {
+    const emailLogado = localStorage.getItem('usuarioLogado');
 
-        var acompanhanteInfo = JSON.parse(acompanhanteInfoString);
+    // Procurar acompanhante correspondente ao usuário logado
+    const acompanhanteInfo = acompanhantes.find(a => a.emailUsuario === emailLogado) || acompanhantes[acompanhantes.length - 1];
+
+    if (acompanhanteInfo) {
 
         nomeAcompanhante.value = acompanhanteInfo.nomeAcompanhante || '';
         dataNascAcompanhante.value = acompanhanteInfo.dataNascimentoAcompanhante || '';
@@ -454,7 +459,6 @@ function desabilitarCamposAcompanhante() {
         telAcompanhante.setAttribute('placeholder', telAcompanhante.value);
 
     } else {
-        alert("Não funcionou");
         console.log("Nenhuma informação de usuário encontrada no localStorage.");
     }
 }
@@ -551,34 +555,28 @@ function desabilitarCamposEndereco() {
     bairroInput.disabled = true;
     cidadeInput.disabled = true;
     estadoInput.disabled = true;
-    
 
-    var usuarioLogadoEmail = localStorage.getItem('usuarioLogado');
-    var usuariosString = localStorage.getItem('usuarios');
-    console.log('Usuários:', usuariosString);
-    var usuarios = usuariosString ? JSON.parse(usuariosString) : [];
-    var usuarioInfo = usuarios.find(u => u.email === usuarioLogadoEmail);
-    console.log('Usuário encontrado:', usuarioInfo);
+    const emailLogado = localStorage.getItem('usuarioLogado');
+    if (!emailLogado) return;
 
+    const usuarioInfoString = localStorage.getItem(emailLogado);
+    const usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
 
-    if (usuarioInfo) {
-        cepInput.value = usuarioInfo.cep || '';
-        ruaInput.value = usuarioInfo.endereco || '';
-        numeroInput.value = usuarioInfo.numero || '';
-        bairroInput.value = usuarioInfo.bairro || '';
-        cidadeInput.value = usuarioInfo.cidade || '';
-        estadoInput.value = usuarioInfo.estado || '';
+    cepInput.value = usuarioInfo.cep || '';
+    ruaInput.value = usuarioInfo.endereco || '';
+    numeroInput.value = usuarioInfo.numero || '';
+    bairroInput.value = usuarioInfo.bairro || '';
+    cidadeInput.value = usuarioInfo.cidade || '';
+    estadoInput.value = usuarioInfo.estado || '';
 
-        cepInput.setAttribute('placeholder', cepInput.value);
-        ruaInput.setAttribute('placeholder', ruaInput.value);
-        numeroInput.setAttribute('placeholder', numeroInput.value);
-        bairroInput.setAttribute('placeholder', bairroInput.value);
-        cidadeInput.setAttribute('placeholder', cidadeInput.value);
-        estadoInput.setAttribute('placeholder', estadoInput.value);
-    } else {
-        console.log("Nenhuma informação de usuário encontrada no localStorage.");
-    }
+    cepInput.setAttribute('placeholder', cepInput.value);
+    ruaInput.setAttribute('placeholder', ruaInput.value);
+    numeroInput.setAttribute('placeholder', numeroInput.value);
+    bairroInput.setAttribute('placeholder', bairroInput.value);
+    cidadeInput.setAttribute('placeholder', cidadeInput.value);
+    estadoInput.setAttribute('placeholder', estadoInput.value);
 }
+
 
 function habilitarEdicaoEndereco() {
     cepInput.disabled = false;

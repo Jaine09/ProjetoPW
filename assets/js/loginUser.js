@@ -52,6 +52,7 @@ function validarCadastroCompleto() {
         mensagem.textContent = mensagemUsuario;
         cadastroUsuario.style.display = 'none';
         cadastroAcompanhante.style.display = 'block';
+
         const informacoesUsuario = {
             nome: nome,
             dataNascimento: dataNascimento,
@@ -71,8 +72,12 @@ function validarCadastroCompleto() {
         let usuarios = localStorage.getItem('usuarios');
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
+
+        // ✅ Salvando corretamente
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        localStorage.setItem('usuarioLogado', email); // Salva o email do usuário logado
+        localStorage.setItem(email, JSON.stringify(informacoesUsuario)); // essencial
+        localStorage.setItem('usuarioLogado', email); // usado em todas as telas
+
         formAcompanhante.style.display = "flex";
         formPaciente.style.display = "none";
     } else {
@@ -141,10 +146,10 @@ function validarCadastroCompletoComAcompanhante() {
         alert('CPF inválido!');
     } else {
         console.log('Cadastro do acompanhante realizado com sucesso!');
-        localStorage.setItem('usuarioLogado', localStorage.getItem('email')); // Mantém o usuário menor de idade logado
         window.location.href = "./areaPaciente.html";
     }
 }
+
 
 function validarLogin(event) {
     event.preventDefault();
