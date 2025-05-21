@@ -361,7 +361,7 @@ input[type="tel"]{
    width: 125px;
 }
 
-.form-container #btnEnviar{
+.form-container #btnEnviarMensagem{
    border-radius: 10px;
    width: 100px;
    height: 40px;
@@ -373,11 +373,11 @@ input[type="tel"]{
    margin-top: 5px;
 }
 
-.form-container #btnEnviar:active{
+.form-container #btnEnviarMensagem:active{
    transform: scale(0.9);
 }
 
-.form-container #btnEnviar:hover{
+.form-container #btnEnviarMensagem:hover{
    color: white;
    box-shadow: none;
 }

@@ -290,3 +290,19 @@ td {
 .corpoTabelaPacientes tr td, .corpoTabelaConsultas tr td, .corpoTabelaRelatorio tr td, .tabelaMensagens tr td{
     text-align: center;
 }
+
+.status-realizada {
+  color: #DB627D;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.status-pendente {
+  color: #A53861;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+}

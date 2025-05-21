@@ -181,25 +181,26 @@
 
             <form class="form-container">
                 <h1>Tire suas dúvidas</h1>
+                <span id="msgErro"></span>
 
                 <div class="form-row">
                     <label for="nome" id="lblNome">Nome:</label>
-                    <input type="text" id="txtNome" required>
+                    <input type="text" id="txtNomeMensagem" required>
 
                     <label for="telefone" id="lblTelefone">Telefone:</label>
-                    <input type="tel" id="txtTelefone" required>
+                    <input type="tel" id="txtTelefoneMensagem" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email" id="lblEmail">E-mail:</label>
-                    <input type="email" id="txtEmail" required>
+                    <input type="email" id="txtEmailMensagem" required>
                 </div>
 
                 <div class="form-group">
                     <label for="mensagem" id="lblMensagem">Digite sua mensagem...</label>
                     <textarea name="mensagem" id="txtMensagem" rows="10" cols="50"></textarea>
                 </div>
-                <button type="submit" onclick="" id="btnEnviar">Enviar</button>
+                <button type="submit" onclick="enviarMensagem()" id="btnEnviarMensagem">Enviar</button>
             </form>
 
             <div class="slogan-container">
@@ -236,7 +237,7 @@
     </div>
 
     <script src="./assets/js/script.js" defer></script>
-    <script src="./assets/js/cookie-script.js" defer></script>
+    <script src="./assets/js/pagPrincipal.js" defer></script>
 
 </body>
 </html>

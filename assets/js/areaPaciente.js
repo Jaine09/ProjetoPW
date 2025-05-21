@@ -104,7 +104,7 @@ function pegandoNomeUsuario() {
 }
 
 pegandoNomeUsuario()
-carregarConsultasSalvas();
+carregarConsultasPaciente()
 
 if (acessarHistorico) {
     acessarHistorico.addEventListener('click', function () {
@@ -115,7 +115,7 @@ if (acessarHistorico) {
         avaliacoes.style.display = 'none';
         sessaoAgendarConsulta.style.display = 'none';
 
-        carregarConsultasSalvas();
+        carregarConsultasPaciente()
     });
 }
 if (acessarDados) {
@@ -777,7 +777,8 @@ function realizarAgendamento(event) {
         hora: horaConsulta,
         especialidade: especialidade,
         exames: 'Não adicionado',
-        receitas: 'Não adicionado'
+        receitas: 'Não adicionado',
+        status: 'Realizada'
     };
 
     let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
@@ -801,15 +802,50 @@ function adicionarConsultaNaTabela(consulta) {
     novaLinha.insertCell().textContent = consulta.receitas;
 }
 
-function carregarConsultasSalvas() {
-    const usuarioLogado = localStorage.getItem('usuarioLogado');
-    const corpoTabela = document.getElementById('corpoTabelaHistorico');
+function carregarConsultasPaciente() {
+    const email = localStorage.getItem('usuarioLogado');
+    const corpoTabela = document.getElementById('corpoHistoricoConsultas');
 
-    corpoTabela.innerHTML = "";
+    if (!email || !corpoTabela) return;
 
-    const consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
-    consultas.forEach(adicionarConsultaNaTabela);
+    const consultas = JSON.parse(localStorage.getItem('consultas_' + email)) || [];
+
+    corpoTabela.innerHTML = '';
+
+    consultas.forEach(consulta => {
+        const linha = corpoTabela.insertRow();
+
+        linha.insertCell().textContent = consulta.especialidade || '-';
+        linha.insertCell().textContent = consulta.data || '-';
+
+        // Coluna Exame
+        const cellExame = linha.insertCell();
+        if (consulta.exame) {
+            const linkExame = document.createElement('a');
+            linkExame.href = consulta.exame;
+            linkExame.download = 'exame';
+            linkExame.textContent = 'Baixar';
+            linkExame.target = '_blank';
+            cellExame.appendChild(linkExame);
+        } else {
+            cellExame.textContent = 'Nenhum';
+        }
+
+        // Coluna Receita
+        const cellReceita = linha.insertCell();
+        if (consulta.receita) {
+            const linkReceita = document.createElement('a');
+            linkReceita.href = consulta.receita;
+            linkReceita.download = 'receita';
+            linkReceita.textContent = 'Baixar';
+            linkReceita.target = '_blank';
+            cellReceita.appendChild(linkReceita);
+        } else {
+            cellReceita.textContent = 'Nenhuma';
+        }
+    });
 }
+
 
 const criarAvaliacao = document.getElementById('criarAvaliacao');
 
