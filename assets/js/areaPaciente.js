@@ -103,8 +103,8 @@ function pegandoNomeUsuario() {
     }
 }
 
-pegandoNomeUsuario()
-carregarConsultasPaciente()
+pegandoNomeUsuario();
+carregarConsultasPaciente();
 
 if (acessarHistorico) {
     acessarHistorico.addEventListener('click', function () {
@@ -296,7 +296,7 @@ function salvarAlteracao() {
     var usuarioInfo = { ...usuarios[usuarioLogadoIndex] }; // Cria uma cópia para comparar
 
     if (novaSenhaInput || confirmarSenhaInput) {
-        
+
         if (novaSenhaInput === confirmarSenhaInput) {
             usuarioInfo.senha = novaSenhaInput;
             houveAlteracao = true;
@@ -601,126 +601,82 @@ function habilitarEdicaoEndereco() {
 }
 
 function salvarAlteracaoEndereco() {
-    var salvar = document.getElementById('salvarEdicaoEndereco');
-    var descartar = document.getElementById('descartarAlteracaoEndereco');
+    const salvar = document.getElementById('salvarEdicaoEndereco');
+    const descartar = document.getElementById('descartarAlteracaoEndereco');
 
+    const emailLogado = localStorage.getItem('usuarioLogado');
+    const usuarioString = localStorage.getItem(emailLogado);
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    var usuarioInfoString = localStorage.getItem('email');
-    var usuarioInfo = usuarioInfoString ? JSON.parse(usuarioInfoString) : {};
-    var houveAlteracao = false;
+    if (!usuarioString || !emailLogado) return;
 
-    // Verifica se o CEP foi alterado
-    if (cepInput.value !== usuarioInfo.cep) {
-        houveAlteracao = true;
-        const cepNumerico = cepInput.value.replace(/\D/g, '');
+    const usuario = JSON.parse(usuarioString);
+    let houveAlteracao = false;
 
-
-        if (cepNumerico.length !== 8) {
-            alert('CEP inválido!');
-            cepInput.value = usuarioInfo.cep || ''; // Restaura o valor anterior
-            ruaInput.value = usuarioInfo.endereco || '';
-            numeroInput.value = usuarioInfo.numero || '';
-            bairroInput.value = usuarioInfo.bairro || '';
-            cidadeInput.value = usuarioInfo.cidade || '';
-            estadoInput.value = usuarioInfo.estado || '';
-            return;
-        }
-
-        const url = `https://viacep.com.br/ws/${cepNumerico}/json/`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.erro) {
-                    alert('CEP inválido!');
-                    cepInput.value = usuarioInfo.cep || '';
-                    ruaInput.value = usuarioInfo.endereco || '';
-                    numeroInput.value = usuarioInfo.numero || '';
-                    bairroInput.value = usuarioInfo.bairro || '';
-                    cidadeInput.value = usuarioInfo.cidade || '';
-                    estadoInput.value = usuarioInfo.estado || '';
-                } else {
-                    usuarioInfo.cep = cepInput.value;
-                    usuarioInfo.endereco = data.logradouro;
-                    usuarioInfo.bairro = data.bairro;
-                    usuarioInfo.cidade = data.localidade;
-                    usuarioInfo.estado = data.uf;
-
-                    ruaInput.value = data.logradouro;
-                    bairroInput.value = data.bairro;
-                    cidadeInput.value = data.localidade;
-                    estadoInput.value = data.uf;
-
-                    localStorage.setItem('email', JSON.stringify(usuarioInfo));
-                    alert("Endereço atualizado pelo CEP!");
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar o CEP:', error);
-                alert('Erro ao buscar o CEP. Por favor, tente novamente.');
-                cepInput.value = usuarioInfo.cep || '';
-                ruaInput.value = usuarioInfo.endereco || '';
-                numeroInput.value = usuarioInfo.numero || '';
-                bairroInput.value = usuarioInfo.bairro || '';
-                cidadeInput.value = usuarioInfo.cidade || '';
-                estadoInput.value = usuarioInfo.estado || '';
-            });
-    }
-
-
-    if (ruaInput.value !== usuarioInfo.endereco) {
-        usuarioInfo.endereco = ruaInput.value;
+    if (cepInput.value !== usuario.cep) {
+        usuario.cep = cepInput.value;
         houveAlteracao = true;
     }
-    if (numeroInput.value !== usuarioInfo.numero) {
-        usuarioInfo.numero = numeroInput.value;
+    if (ruaInput.value !== usuario.endereco) {
+        usuario.endereco = ruaInput.value;
         houveAlteracao = true;
     }
-    if (bairroInput.value !== usuarioInfo.bairro) {
-        usuarioInfo.bairro = bairroInput.value;
+    if (numeroInput.value !== usuario.numero) {
+        usuario.numero = numeroInput.value;
         houveAlteracao = true;
     }
-    if (cidadeInput.value !== usuarioInfo.cidade) {
-        usuarioInfo.cidade = cidadeInput.value;
+    if (bairroInput.value !== usuario.bairro) {
+        usuario.bairro = bairroInput.value;
         houveAlteracao = true;
     }
-    if (estadoInput.value !== usuarioInfo.estado) {
-        usuarioInfo.estado = estadoInput.value;
+    if (cidadeInput.value !== usuario.cidade) {
+        usuario.cidade = cidadeInput.value;
+        houveAlteracao = true;
+    }
+    if (estadoInput.value !== usuario.estado) {
+        usuario.estado = estadoInput.value;
         houveAlteracao = true;
     }
 
     if (houveAlteracao) {
-        console.log("Salvando alterações no endereço...");
-        if (salvar && descartar) {
-            salvar.disabled = false;
-            descartar.disabled = false;
+        // Salva dados individuais do usuário
+        localStorage.setItem(emailLogado, JSON.stringify(usuario));
+
+        // Atualiza o array "usuarios"
+        const index = usuarios.findIndex(u => u.email === emailLogado);
+        if (index !== -1) {
+            usuarios[index] = usuario;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
         }
-        const usuarioEmail = localStorage.getItem('usuarioLogado');
-        if (usuarioEmail && typeof usuarioEmail === 'string') {
-            localStorage.setItem(usuarioEmail, JSON.stringify(usuarioInfo));
 
-            // Atualizar a distância e tempo
-            distanciaLatLong(usuarioInfo.cidade);
+        // Atualiza distância
+        distanciaLatLong(usuario.cidade);
 
-            // Atualizar o stick de distância e tempo após um pequeno delay
-            const distanciaElement = document.getElementById('distancia');
-            const tempoElement = document.getElementById('tempo');
-            const stickDistancia = document.querySelector('.stick-distancia');
+        // Atualiza o stick de distância/tempo depois de um pequeno atraso
+        const distanciaElement = document.getElementById('distancia');
+        const tempoElement = document.getElementById('tempo');
+        const stickDistancia = document.querySelector('.stick-distancia');
 
-            setTimeout(() => {
-                const novaDistancia = localStorage.getItem('distancia');
-                const novoTempo = localStorage.getItem('tempo');
+        setTimeout(() => {
+            const novaDistancia = localStorage.getItem('distancia');
+            const novoTempo = localStorage.getItem('tempo');
 
-                if (novaDistancia && novoTempo) {
-                    if (distanciaElement) distanciaElement.textContent = `Distância: ${novaDistancia} km`;
-                    if (tempoElement) tempoElement.textContent = `Duração: ${novoTempo}`;
-                    if (stickDistancia) stickDistancia.style.display = 'block';
-                }
-            }, 1000);
-        }
+            if (novaDistancia && novoTempo) {
+                if (distanciaElement) distanciaElement.textContent = `Distância: ${novaDistancia} km`;
+                if (tempoElement) tempoElement.textContent = `Duração: ${novoTempo}`;
+                if (stickDistancia) stickDistancia.style.display = 'block';
+            }
+        }, 1000);
+
+        alert("Endereço salvo com sucesso.");
     }
 
+    if (salvar && descartar) {
+        salvar.disabled = true;
+        descartar.disabled = true;
+    }
 }
+
 
 function descartarAlteracaoEndereco() {
     const salvarBotao = document.getElementById('salvarEdicaoEndereco');
@@ -778,7 +734,7 @@ function realizarAgendamento(event) {
         especialidade: especialidade,
         exames: 'Não adicionado',
         receitas: 'Não adicionado',
-        status: 'Realizada'
+        status: 'Pendente'
     };
 
     let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
@@ -804,7 +760,8 @@ function adicionarConsultaNaTabela(consulta) {
 
 function carregarConsultasPaciente() {
     const email = localStorage.getItem('usuarioLogado');
-    const corpoTabela = document.getElementById('corpoHistoricoConsultas');
+    const corpoTabela = document.getElementById('corpoTabelaHistorico');
+
 
     if (!email || !corpoTabela) return;
 
@@ -861,7 +818,7 @@ function realizarAvaliacao(event) {
     const notaSelecionadaElement = document.getElementById('nota');
     const nota = notaSelecionadaElement.options[notaSelecionadaElement.selectedIndex].value;
     const formAvaliacao = document.getElementById('formAvaliacoes');
-    
+
     if (!avaliacaoTexto || !nota) {
         alert("Preencha todos os campos para enviar a avaliação!");
         return;
@@ -917,8 +874,41 @@ function carregarAvaliacoesSalvas() {
     });
 }
 
+function buscarEndereco() {
+    ruaInput.value = '';
+    bairroInput.value = '';
+    cidadeInput.value = '';
+    estadoInput.value = '';
 
+    const cep = cepInput.value.replace(/\D/g, '');
 
+    if (cep.length !== 8) {
+        alert('CEP inválido! Por favor, digite 8 dígitos.');
+        return;
+    }
+
+    // URL da API do ViaCEP
+    const url = `https://viacep.com.br/ws/${cep}/json/`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.erro) {
+                alert('CEP não encontrado.');
+                return;
+            }
+            ruaInput.value = data.logradouro;
+            bairroInput.value = data.bairro;
+            cidadeInput.value = data.localidade;
+            estadoInput.value = data.uf;
+
+            numeroInput.focus();
+        })
+        .catch(error => {
+            console.error('Erro ao buscar o CEP:', error);
+            alert('Ocorreu um erro ao buscar o CEP. Tente novamente mais tarde.');
+        });
+}
 
 function distanciaLatLong(cidade) {
     var key = "49ffd309156a4632b363734ab752f605";
