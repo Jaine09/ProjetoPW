@@ -192,6 +192,18 @@ td {
     border: 1px solid var(--fundoSessoes);
 }
 
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table td {
+  word-break: break-word;
+  max-width: 200px;
+  padding: 6px;
+  text-align: left;
+}
+
 #tabelaHistorico, #tabelaAvaliacoes{
     width: 100%;
     margin-top: 20px;

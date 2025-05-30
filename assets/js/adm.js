@@ -2,7 +2,7 @@ function acionarEntrarAdm() {
     var txtEmailAdm = document.getElementById('txtEmail').value;
     var txtSenhaAdm = document.getElementById('txtSenha').value;
 
-    if (txtEmailAdm == "admin@gmail.com" && txtSenhaAdm == "admin123") {
+    if (txtEmailAdm == "draAna@gmail.com" && txtSenhaAdm == "admin123") {
         window.location.href = "adm.html";
     } else {
         alert("Usuário incorreto");
@@ -41,8 +41,8 @@ if (acessarPacientes) {
         mensagens.style.display = 'none';
 
         carregarPacientesParaAdm();
-        document.getElementById("txtNome").addEventListener("input", aplicarFiltroPacientes);
-        document.getElementById("txtData").addEventListener("change", aplicarFiltroPacientes);
+        document.getElementById("txtNomePaciente").addEventListener("input", aplicarFiltroPacientes);
+        document.getElementById("txtDataPaciente").addEventListener("change", aplicarFiltroPacientes);
     })
 }
 
@@ -55,8 +55,9 @@ if (acessarConsultas) {
         mensagens.style.display = 'none';
         
         carregarConsultasParaAdm();
-        document.getElementById("txtNome").addEventListener("input", aplicarFiltroConsultas);
-        document.getElementById("txtData").addEventListener("change", aplicarFiltroConsultas);
+        document.getElementById("txtNomeConsulta").addEventListener("input", aplicarFiltroConsultas);
+        document.getElementById("txtDataConsulta").addEventListener("change", aplicarFiltroConsultas);
+        
     })
 }
 
@@ -84,15 +85,18 @@ if (acessarMensagens) {
 }
 
 // função para filtro
-function alternarCampos() {
-    const radioNomeChecked = document.getElementById("radioNome").checked;
-    const radioDataChecked = document.getElementById("radioData").checked;
-    const inpNome = document.getElementById("txtNome");
-    const inpData = document.getElementById("txtData");
+function alternarCampos(elemento) {
+    const container = elemento.closest("form");
 
-    inpNome.style.display = radioNomeChecked ? "flex" : "none";
-    inpData.style.display = radioDataChecked ? "flex" : "none";
+    const radioNome = container.querySelector(".radioNome");
+    const radioData = container.querySelector(".radioData");
+    const inputNome = container.querySelector(".txtNome");
+    const inputData = container.querySelector(".txtData");
+
+    inputNome.style.display = radioNome.checked ? "flex" : "none";
+    inputData.style.display = radioData.checked ? "flex" : "none";
 }
+
 
 function carregarPacientesParaAdm() {
     const usuariosString = localStorage.getItem('usuarios');
@@ -252,8 +256,8 @@ function aplicarFiltroPacientes() {
 }
 
 function aplicarFiltroConsultas() {
-    const filtroNome = document.getElementById("txtNome").value.toLowerCase();
-    const filtroData = document.getElementById("txtData").value;
+    const filtroNome = document.getElementById("txtNomeConsulta").value.toLowerCase();
+    const filtroData = document.getElementById("txtDataConsulta").value;
     const corpoTabela = document.getElementById("corpoTabelaConsultas");
     const linhas = corpoTabela.getElementsByTagName("tr");
 
@@ -270,3 +274,73 @@ function aplicarFiltroConsultas() {
 }
 
 
+let codigoGerado = "";
+let emailUsuario = "";
+
+function abrirModal() {
+    document.getElementById("modalRecuperacao").style.display = "flex";
+    document.getElementById("mensagem").innerText = "";
+    document.getElementById("mensagem").style.color = "black";
+    document.getElementById("verificacao").style.display = "none";
+    document.getElementById("formRecuperacao").reset();
+}
+
+function fecharModal() {
+    document.getElementById("modalRecuperacao").style.display = "none";
+}
+
+function enviarCodigo(event) {
+    event.preventDefault();
+    emailUsuario = document.getElementById("emailRecuperacao").value.trim();
+
+    if (!emailUsuario) {
+        document.getElementById("mensagem").innerText = "Por favor, insira um e-mail válido.";
+        document.getElementById("mensagem").style.color = "red";
+        return;
+    }
+
+    // Gera código secreto
+    codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Mensagem simulada com atraso
+    document.getElementById("mensagem").innerText = "Enviando código...";
+    document.getElementById("mensagem").style.color = "black";
+
+    setTimeout(() => {
+        document.getElementById("formRecuperacao").style.display = "none";
+        document.getElementById("mensagem").innerText =
+            `Um código de verificação foi enviado para ${emailUsuario}.`;
+        document.getElementById("mensagem").style.color = "green";
+        document.getElementById("verificacao").style.display = "block";
+    }, 1000);
+}
+
+function verificarCodigo() {
+    const digitado = document.getElementById("codigoDigitado").value.trim();
+
+    if (!digitado) {
+        document.getElementById("mensagem").innerText = "Digite o código recebido.";
+        document.getElementById("mensagem").style.color = "red";
+        return;
+    }
+
+    if (digitado === codigoGerado) {
+        setTimeout(() => {
+            document.getElementById("modalRecuperacao").style.display = "none";
+            document.getElementById("mensagem").innerText = "✅ Código verificado! Você pode acessar sua área.";
+            document.getElementById("mensagem").style.color = "green";
+            window.location.href = "adm.html";
+        }, 1000);
+        
+    } else {
+        document.getElementById("mensagem").innerText = "❌ Código incorreto. Tente novamente.";
+        document.getElementById("mensagem").style.color = "red";
+    }
+}
+
+// (Opcional) Atalho para desenvolvedor exibir código no navegador
+document.addEventListener("keydown", (e) => {
+    if (e.altKey && e.key.toLowerCase() === "c") {
+        alert("🔒 Código (dev): " + codigoGerado);
+    }
+});

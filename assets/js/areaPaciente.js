@@ -108,7 +108,7 @@ carregarConsultasPaciente();
 
 if (acessarHistorico) {
     acessarHistorico.addEventListener('click', function () {
-        historico.style.display = 'flex';
+        historico.style.display = 'block';
         dadosPessoais.style.display = 'none';
         dadosAcompanhante.style.display = "none";
         endereco.style.display = 'none';
@@ -745,7 +745,7 @@ function realizarAgendamento(event) {
 
     formAgendarConsulta.reset();
     sessaoAgendarConsulta.style.display = 'none';
-    historico.style.display = 'flex';
+    historico.style.display = 'block';
 }
 
 function adicionarConsultaNaTabela(consulta) {
@@ -772,6 +772,7 @@ function carregarConsultasPaciente() {
     consultas.forEach(consulta => {
         const linha = corpoTabela.insertRow();
 
+        linha.insertCell().textContent = consulta.hora || '-';
         linha.insertCell().textContent = consulta.especialidade || '-';
         linha.insertCell().textContent = consulta.data || '-';
 

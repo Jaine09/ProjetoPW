@@ -10,18 +10,19 @@
 }
 
 .login {
-    height: 60vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .login-container {
+    display: flex;
+    justify-content: center;
     margin-top: 50px;
-    max-height: 600px;
+    height: 70vh;
     width: 400px;
-    background-color: #FFA5AB;
-    padding: 35px;
+    background-color: #ffa5ab97;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -30,27 +31,36 @@
 }
 
 .login .login-container h3 {
-    font-weight: 600;
+    font-size: 30px;
     color: #A53860;
+    font-family: 'Dancing Script', cursive;
 }
 
 .login .login-container h4 {
-    font-weight: 400;
+    font-size: 25px;
     color: #a53860;
-    font-style: italic;
+    margin-bottom: 50px;
+    font-family: 'Dancing Script', cursive;
 }
 
 .login .login-container img {
     max-width: 100px;
     max-height: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .login-container a {
     text-decoration: none;
-    color: black;
+    color: #6F233F;
     font-size: 12px;
     margin-top: 10px;
+}
+
+.login-container p{
+    font-size: 12px;
+    color: black;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
 }
 
 .login_form {
@@ -60,12 +70,13 @@
 }
 
 .login_form label {
-    font-weight: 500;
+    font-size: 20px;
     margin-right: 10px;
+    font-family: 'Dancing Script', cursive;
 }
 
 .login_form input {
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
     border: none;
     height: 20px;
@@ -76,8 +87,10 @@
     width: 100px;
     height: 30px;
     border-radius: 10px;
-    background-color: #DA627D;
-    border: solid 2px #A53860;
+    background-color: #dc738a;
+    border: solid 2px #c35d82;
+    font-weight: 600;
+    color: #6F233F;
     cursor: pointer;
 }
 
@@ -87,11 +100,85 @@
     transition: 0.3s;
 }
 
-
 #imgTelaPrincipal{
     width: 80px;
 }
 
+.modalRecuperacao {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-recuperacao {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content-recuperacao h2 {
+  color: #A53860;
+  font-family: 'Dancing Script', cursive;
+  margin-bottom: 20px;
+}
+
+.modal-content-recuperacao input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-content-recuperacao button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-content-recuperacao button[type="submit"] {
+  background-color: #dc738a;
+  color: #fff;
+}
+
+.modal-content-recuperacao .btn-cancelar {
+  background-color: #ccc;
+}
+
+.mensagem-confirmacao {
+  color: green;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+#verificacao{
+    display:none; 
+    margin-top: 20px;
+}
+
+#verificacao input[type="text"]{
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
 /* Estilizando telas principais */
 
 body{

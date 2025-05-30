@@ -43,15 +43,15 @@
                     <label for="filtro">Filtrar por:</label>
 
                     <div class="filter-group">
-                        <input type="radio" name="opcao" id="radioNome" value="nome" onclick="alternarCampos()">
+                        <input type="radio" name="opcao" class="radioNome" value="nome" onclick="alternarCampos(this)">
                         <label for="nome">Nome</label>
-                        <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
+                        <input type="text" name="txtNomePaciente" id="txtNomePaciente" class="txtNome" placeholder="Digite o nome">
                     </div>
 
                     <div class="filter-group">
-                        <input type="radio" name="opcao" id="radioData" value="Data" onclick="alternarCampos()">
+                        <input type="radio" name="opcao" class="radioData" value="Data" onclick="alternarCampos(this)">
                         <label for="data">Data</label>
-                        <input type="date" name="txtData" id="txtData">
+                        <input type="date" name="txtDataPaciente" id="txtDataPaciente" class="txtData">
                     </div>
                 </form>
             </div>
@@ -79,15 +79,15 @@
                     <label for="filtro">Filtrar por:</label>
 
                     <div class="filter-group">
-                        <input type="radio" name="opcao" id="radioNome" value="nome" onclick="alternarCampos()">
+                        <input type="radio" name="opcao" class="radioNome" value="nome" onclick="alternarCampos(this)">
                         <label for="nome">Nome</label>
-                        <input type="text" name="txtNome" id="txtNome" placeholder="Digite o nome">
+                        <input type="text" name="txtNomeConsulta" id="txtNomeConsulta" class="txtNome" placeholder="Digite o nome">
                     </div>
 
                     <div class="filter-group">
-                        <input type="radio" name="opcao" id="radioData" value="Data" onclick="alternarCampos()">
+                        <input type="radio" name="opcao" class="radioData" value="Data" onclick="alternarCampos(this)">
                         <label for="data">Data</label>
-                        <input type="date" name="txtData" id="txtData">
+                        <input type="date" name="txtDataConsulta" id="txtDataConsulta" class="txtData">
                     </div>
                 </form>
             </div>

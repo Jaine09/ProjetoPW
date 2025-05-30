@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/adm.css">
 
-    <!-- Icon da página -->
-    <link rel="shortcut icon" type="imagex/png" href="./assets/img/logoClinica.png">
+   <!-- Icon da página -->
+    <link rel="shortcut icon" type="imagex/png" href="../assets/img/logoClinica.png">
 </head>
 
 <body class="bodyLogin">
@@ -33,14 +33,36 @@
                 <br>
                 <br>
                 <label for="senha" id="lblSenha">Senha:</label>
-                <input type="password" name="txtSenha" id="txtSenha"> 
+                <input type="password" name="txtSenha" id="txtSenha">
                 <br>
                 <br>
                 <button type="button" id="btnEntrarAdm" onclick="acionarEntrarAdm()">Entrar</button>
             </form>
-            <a href="#">Esqueceu sua senha? Clique aqui para recuperá-la.</a>
+            <p>Esqueceu sua senha? <a href="#" onclick="abrirModal()">Clique aqui para recuperá-la.</a></p>
         </div>
     </div>
+
+   <div id="modalRecuperacao" class="modalRecuperacao" >
+        <div class="modal-content-recuperacao">
+            <h2>Recuperar Senha</h2>
+            <form id="formRecuperacao" onsubmit="enviarCodigo(event)">
+                <input type="email" name="email" id="emailRecuperacao" placeholder="Digite seu e-mail" required />
+                <button type="submit">Enviar código</button>
+                <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+            </form>
+
+            <div id="verificacao">
+                <p>Enviamos um código para seu e-mail. Digite abaixo:</p>
+                <input type="text" id="codigoDigitado" placeholder="Digite o código">
+                <button onclick="verificarCodigo()">Verificar</button>
+                <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+            </div>
+
+            <p class="mensagem-confirmacao" id="mensagem"></p>
+        </div>
+    </div>
+
     <script src="../assets/js/adm.js"></script>
 </body>
+
 </html>
