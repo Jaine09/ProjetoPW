@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
     background-color: aliceblue;
 }
 
@@ -10,8 +10,8 @@
     border-radius: 20px;
     background-color: #FFE1E3;
     width: 52vw;
-    height: 80vh;
-    margin:50px 0;
+    height: 95vh;
+    margin: 50px 0;
     justify-content: space-between;
     align-items: center;
     position: relative;
@@ -42,7 +42,8 @@
 
 .titulo {
     font-weight: bold;
-    text-transform: capitalize; /*transformando a primeira letra em maiúscula*/
+    text-transform: capitalize;
+    /*transformando a primeira letra em maiúscula*/
 }
 
 .primeiro-titulo {
@@ -59,14 +60,15 @@
 .descricao {
     font-size: 12px;
     color: white;
-    line-height: 20px; /*espaçamento entre as linhas*/
+    line-height: 20px;
+    /*espaçamento entre as linhas*/
 }
 
-#adm{
+#adm {
     margin-top: 5px;
 }
 
-#adm a{
+#adm a {
     color: #6F233F;
     font-size: 12px;
     font-weight: 400;
@@ -85,8 +87,10 @@
 
 .primeira-coluna {
     text-align: center;
-    width: 40%; /*definindo como o item será posicionado*/
-    z-index: 10; /*colocando o item acima do background*/
+    width: 40%;
+    /*definindo como o item será posicionado*/
+    z-index: 10;
+    /*colocando o item acima do background*/
 }
 
 .segunda-coluna {
@@ -118,20 +122,20 @@
 }
 
 .form-cadastro .btn {
-    margin: 5px;
+    margin: 5px 0 0 0;
 }
 
-#formAcompanhante{
+#formAcompanhante {
     display: none;
 }
 
-#formAcompanhante label{
+#formAcompanhante label {
     color: rgb(51, 49, 49);
     font-size: 15px;
     margin: 0 10px;
 }
 
-#formAcompanhante select{
+#formAcompanhante select {
     padding: 10px;
     height: 45px;
     width: 100%;
@@ -139,7 +143,8 @@
     background-color: #f401;
     margin: 8px;
 }
-#mensagemMenorIdade{
+
+#mensagemMenorIdade {
     margin: 15px 20px;
     text-align: center;
     color: rgb(87, 79, 79);
@@ -196,10 +201,10 @@
 
 .segundo-btn:active {
     transform: scale(0.9);
-    
+
 }
 
-.segundo-btn:hover a{
+.segundo-btn:hover a {
     color: white;
 }
 
@@ -265,4 +270,54 @@
 .entrar-js .segundo-conteudo .primeira-coluna,
 .entrar-js .segundo-conteudo .segunda-coluna {
     z-index: -1;
+}
+
+.modal {
+    color: #A0445D;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-conteudo {
+    background: #FFE1E3;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-conteudo input {
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+}
+
+#btnVerificar, #btnSalvarNovaSenha{
+    background-color: #d15c7b;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btnVerificar:hover, #btnSalvarNovaSenha:hover {
+    background-color: #a0445d;
+    color: white;
+}
+
+#voltar{
+    display: block;
+    margin-top: 15px; 
+    color:#6F233F;
+    text-decoration: none;
 }

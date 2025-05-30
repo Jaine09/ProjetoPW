@@ -27,7 +27,7 @@
 
         <div class="stick-distancia">
             <span class="icon-distancia"></span>
-            <span  id="distancia"></span>
+            <span id="distancia"></span>
             <span id="tempo"></span>
         </div>
 
@@ -44,7 +44,7 @@
                     <form class="form">
                         <input type="email" placeholder="Email" id="emailLogin" required>
                         <input type="password" placeholder="Password" id="senhaLogin" required>
-                        <a href="" class="senha">Esqueceu sua senha?</a>
+                        <a href="" class="senha" onclick="abrirModalRecuperacao(); return false;">Esqueceu sua senha?</a>
                         <button class="btn segundo-btn" onclick="validarLogin(event)">Entrar</button>
                         <p id="adm"><a href="./loginAdm.html">Administração</a></p>
                     </form>
@@ -59,7 +59,8 @@
                 </div>
                 <div class="segunda-coluna">
                     <h2 class="titulo segundo-titulo titulosOff">Seja Bem-Vinda</h2>
-                    <p class="descricao descricao-login titulosOff">A porta de entrada para cuidar de você, por você.</p>
+                    <p class="descricao descricao-login titulosOff">A porta de entrada para cuidar de você, por você.
+                    </p>
                     <form action="" class="form form-cadastro" id="formUsuario">
                         <input type="text" placeholder="Nome Completo" id="nome" required>
                         <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required>
@@ -68,35 +69,61 @@
                         <input type="text" placeholder="CEP" id="cep" onblur="validarCep()" required>
                         <input type="text" placeholder="Endereco" id="endereco" readonly>
                         <input type="text" placeholder="Bairro" id="bairro" readonly>
-                        <input type="text" placeholder="Número" id="numero" >
+                        <input type="text" placeholder="Número" id="numero">
                         <input type="email" placeholder="E-mail" id="email" required>
+                        <input type="text" id="palavraChave" placeholder="Palavra-chave de recuperação" required>
                         <input type="password" placeholder="Senha" id="senha" required>
-                        
-                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario" onclick="validarCadastroCompleto()">Cadastrar</button>
+
+                        <button type="button" class="btn segundo-btn" id="cadastrarUsuario"
+                            onclick="validarCadastroCompleto()">Cadastrar</button>
                     </form>
 
                     <span id="mensagemMenorIdade"></span>
-                    
+
                     <form class="form form-cadastro" id="formAcompanhante">
-                        <input type="text" placeholder="Nome Completo do Acompanhante" id="inpNomeAcompanhante" required>
-                        <input type="date" placeholder="Data de Nascimento do Acompanhante" id="inpDataNascimentoAcompanhante" required>
+                        <input type="text" placeholder="Nome Completo do Acompanhante" id="inpNomeAcompanhante"
+                            required>
+                        <input type="date" placeholder="Data de Nascimento do Acompanhante"
+                            id="inpDataNascimentoAcompanhante" required>
                         <input type="text" placeholder="CPF do Acompanhante" id="inpCpfAcompanhante" required>
                         <input type="tel" placeholder="Telefone" id="inpTelefoneAcompanhante" required>
                         <label for="parentescoAcompanhante">Parentesco:</label>
-                            <select id="parentescoAcompanhante" name="parentescoAcompanhante">
-                                <option value="" disabled selected>Selecione o parentesco</option>
-                                <option value="filho">Filho(a)</option>
-                                <option value="mae">Mãe</option>
-                                <option value="pai">Pai</option>
-                                <option value="irmao">Irmão</option>
-                                <option value="irma">Irmã</option>
-                                <option value="esposo">Esposo(a)</option>
-                                <option value="amigo">Amigo(a)</option>
-                            </select>
-                            <button type="button" class="btn segundo-btn"  onclick="validarCadastroCompletoComAcompanhante()">Cadastrar</button>
+                        <select id="parentescoAcompanhante" name="parentescoAcompanhante">
+                            <option value="" disabled selected>Selecione o parentesco</option>
+                            <option value="filho">Filho(a)</option>
+                            <option value="mae">Mãe</option>
+                            <option value="pai">Pai</option>
+                            <option value="irmao">Irmão</option>
+                            <option value="irma">Irmã</option>
+                            <option value="esposo">Esposo(a)</option>
+                            <option value="amigo">Amigo(a)</option>
+                        </select>
+                        <button type="button" class="btn segundo-btn"
+                            onclick="validarCadastroCompletoComAcompanhante()">Cadastrar</button>
                     </form>
                 </div>
             </div> <!--Final segunda coluna-->
+
+            <!-- Modal de Recuperação de Senha -->
+            <div id="modalRecuperacaoSenha" class="modal" style="display: none;">
+                <div class="modal-conteudo">
+                    
+                    <div id="recuperar">
+                    <h3>Recuperar Senha</h3>
+                    <input type="email" id="emailRecuperacao" placeholder="Digite seu e-mail" required>
+                    <input type="text" id="palavraChaveRecuperacao" placeholder="Palavra-chave de recuperação" required>
+                    <button id="btnVerificar" onclick="verificarPalavraChave()">Verificar</button>
+                    </div>
+
+                    <div id="novaSenhaSecao" style="display: none;">
+                        <input type="password" id="novaSenhaInput" placeholder="Nova senha">
+                        <button id="btnSalvarNovaSenha" onclick="salvarNovaSenha()">Salvar Nova Senha</button>
+                    </div>
+                    <p id="mensagemRecuperacao"></p>
+
+                     <a href="#" id="voltar" onclick="fecharModalRecuperacao()" >← Voltar</a>
+                </div>
+            </div>
         </div>
 
     </main>

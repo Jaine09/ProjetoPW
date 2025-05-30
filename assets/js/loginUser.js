@@ -32,6 +32,7 @@ function validarCadastroCompleto() {
     var endereco = document.getElementById('endereco').value;
     var bairro = document.getElementById('bairro').value;
     var numero = document.getElementById('numero').value;
+    var palavraChave = document.getElementById('palavraChave').value;
 
     var mensagem = document.getElementById('mensagemMenorIdade');
     var cadastroUsuario = document.getElementById('formUsuario');
@@ -43,7 +44,15 @@ function validarCadastroCompleto() {
     var mensagemUsuario = 'Notamos que você é menor de idade, por favor, cadastre um acompanhante responsável.';
 
     if (nome == "" || dataNascimento == "" || telefone == "" || cpf == "" || email == "" || senha == "" || cep == "" || endereco == "" || bairro == "") {
-        alert('Preencha todos os campos!');
+        mensagem.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+        mensagem.style.color = 'gray';
+        return;
+    } else if (senha.length < 6) {
+        mensagem.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+        mensagem.style.color = 'gray';
+    } else if (palavraChave.trim() === "") {
+        mensagem.textContent = 'Por favor, defina uma palavra-chave para recuperação de senha.';
+        mensagem.style.color = 'gray';
     } else if (telefone.length < 9 || telefone.length > 12) {
         alert('Telefone inválido!');
     } else if (cpf.length < 12) {
@@ -66,7 +75,8 @@ function validarCadastroCompleto() {
             bairro: bairro,
             numero: numero,
             cidade: cidade,
-            estado: estado
+            estado: estado,
+            palavraChave: palavraChave
         };
 
         let usuarios = localStorage.getItem('usuarios');
@@ -94,7 +104,8 @@ function validarCadastroCompleto() {
             bairro: bairro,
             numero: numero,
             cidade: cidade,
-            estado: estado
+            estado: estado,
+            palavraChave: palavraChave
         };
 
         let usuarios = localStorage.getItem('usuarios');
@@ -283,4 +294,75 @@ function formatarDuracao(segundos) {
     const segundosFormatados = String(segundosRestantes).padStart(2, '0');
 
     return `${horasFormatadas}:${minutosFormatados}:${segundosFormatados}`;
+}
+
+let emailUsuarioRec = "";
+
+function abrirModalRecuperacao() {
+    const modal = document.getElementById("modalRecuperacaoSenha");
+    const recuperar = document.getElementById("recuperar");
+    const novaSenhaSecao = document.getElementById("novaSenhaSecao");
+    const mensagem = document.getElementById("mensagemRecuperacao");
+
+    modal.style.display = "flex";
+    recuperar.style.display = "block";
+    novaSenhaSecao.style.display = "none";
+    mensagem.innerText = "";
+
+    // Limpar campos anteriores
+    document.getElementById("emailRecuperacao").value = "";
+    document.getElementById("palavraChaveRecuperacao").value = "";
+    document.getElementById("novaSenhaInput").value = "";
+}
+
+function fecharModalRecuperacao() {
+    document.getElementById("modalRecuperacaoSenha").style.display = "none";
+}
+
+function verificarPalavraChave() {
+    const email = document.getElementById("emailRecuperacao").value.trim();
+    const chave = document.getElementById("palavraChaveRecuperacao").value.trim();
+    const mensagem = document.getElementById("mensagemRecuperacao");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const usuario = usuarios.find(u => u.email === email);
+
+    if (!usuario) {
+        mensagem.innerText = "Usuário não encontrado.";
+        return;
+    }
+
+    if (usuario.palavraChave !== chave) {
+        mensagem.innerText = "Palavra-chave incorreta.";
+        return;
+    }
+
+    emailUsuarioRec = email;
+    mensagem.innerText = "Redefina sua senha.";
+    document.getElementById("recuperar").style.display = "none";
+    document.getElementById("novaSenhaSecao").style.display = "block";
+}
+
+function salvarNovaSenha() {
+    const novaSenha = document.getElementById("novaSenhaInput").value.trim();
+    const mensagem = document.getElementById("mensagemRecuperacao");
+
+    if (!novaSenha) {
+        mensagem.innerText = "Digite uma nova senha válida.";
+        return;
+    }
+
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const index = usuarios.findIndex(u => u.email === emailUsuarioRec);
+
+    if (index !== -1) {
+        usuarios[index].senha = novaSenha;
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        localStorage.setItem(emailUsuarioRec, JSON.stringify(usuarios[index]));
+        mensagem.innerText = "Senha redefinida com sucesso!";
+
+        // fechar modal após alguns segundos
+        setTimeout(() => {
+            fecharModalRecuperacao();
+        }, 1500);
+    }
 }
