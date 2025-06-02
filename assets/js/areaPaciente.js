@@ -63,6 +63,7 @@ const dataNascimentoInput = document.getElementById('txtAlterarDataNascimento');
 const cpfInput = document.getElementById('txtAlterarCpf');
 const telefoneInput = document.getElementById('txtAlterarTelefone');
 const emailInput = document.getElementById('txtAlterarEmail');
+const palavraChaveInput = document.getElementById('txtAlterarPalavraChave');
 const senhaInput = document.getElementById('txtAlterarSenha');
 
 //inputs form acompanhante
@@ -324,6 +325,11 @@ function salvarAlteracao() {
         localStorage.setItem('usuarioLogado', emailInput.value); // Atualiza o email logado
     }
 
+    if (palavraChaveInput.value !== usuarioInfo.palavraChave) {
+        usuarioInfo.palavraChave = palavraChaveInput.value;
+        houveAlteracao = true;
+    }
+
     if (houveAlteracao) {
         usuarios[usuarioLogadoIndex] = usuarioInfo; // Atualiza o array
         localStorage.setItem(usuarioLogadoEmail, JSON.stringify(usuarioInfo));
@@ -354,6 +360,7 @@ function descartarAlteracao() {
     telefoneInput.value = usuarioLogado?.telefone || '';
     emailInput.value = usuarioLogado?.email || '';
     senhaInput.value = usuarioLogado?.senha || '';
+    palavraChaveInput.value = usuarioLogado?.palavraChave || '';
     novaSenhaInput.value = '';
     confirmarSenhaInput.value = '';
 
@@ -368,6 +375,7 @@ function habilitarCampos() {
     nomeInput.disabled = false;
     telefoneInput.disabled = false;
     emailInput.disabled = false;
+    palavraChaveInput.disabled = false;
     senhaInput.disabled = false;
 
     nomeInput.setAttribute('placeholder', '');
@@ -375,6 +383,7 @@ function habilitarCampos() {
     cpfInput.setAttribute('placeholder', '');
     telefoneInput.setAttribute('placeholder', '');
     emailInput.setAttribute('placeholder', '');
+    palavraChaveInput.setAttribute('placeholder', '');
     senhaInput.setAttribute('placeholder', '');
 }
 
@@ -384,6 +393,7 @@ function desabilitarCampos() {
     cpfInput.disabled = true;
     telefoneInput.disabled = true;
     emailInput.disabled = true;
+    palavraChaveInput.disabled = true;
     senhaInput.disabled = true;
 
     const usuarioInfo = JSON.parse(localStorage.getItem(localStorage.getItem('usuarioLogado')));
@@ -401,6 +411,7 @@ function desabilitarCampos() {
         cpfInput.value = usuarioInfo.cpf || '';
         telefoneInput.value = usuarioInfo.telefone || '';
         emailInput.value = usuarioInfo.email || '';
+        palavraChaveInput.value = usuarioInfo.palavraChave || '';
         senhaInput.value = usuarioInfo.senha || '';
 
         nomeInput.setAttribute('placeholder', nomeInput.value);
@@ -408,6 +419,7 @@ function desabilitarCampos() {
         cpfInput.setAttribute('placeholder', cpfInput.value);
         telefoneInput.setAttribute('placeholder', telefoneInput.value);
         emailInput.setAttribute('placeholder', emailInput.value);
+        palavraChaveInput.setAttribute('placeholder', palavraChaveInput.value);
         senhaInput.setAttribute('placeholder', senhaInput.value);
     } else {
         console.log("Nenhuma informação de usuário logado encontrada no localStorage.");
