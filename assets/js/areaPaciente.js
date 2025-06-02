@@ -714,6 +714,15 @@ function realizarAgendamento(event) {
     const formAgendarConsulta = document.getElementById('formAgendarConsulta');
     const corpoTabelaHistorico = document.getElementById('corpoTabelaHistorico');
 
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    const dataConsulta = new Date(dataConsultaInput);
+    if (dataConsulta <= hoje) {
+        alert("A data da consulta deve ser posterior à data atual.");
+        return;
+    }
+
     const dataParts = dataConsultaInput.split('-');
     const dataFormatada = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
 
