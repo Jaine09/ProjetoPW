@@ -15,6 +15,52 @@ if (btnEntrar) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const telefonePaciente = document.getElementById('telefone');
+    const telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante');
+
+    if (telefonePaciente) aplicarMascaraTelefone(telefonePaciente);
+    if (telefoneAcompanhante) aplicarMascaraTelefone(telefoneAcompanhante);
+
+    const cpfCadastro = document.getElementById('cpf');
+    const cpfAcompanhante = document.getElementById('inpCpfAcompanhante');
+
+    if (cpfCadastro) aplicarMascaraCPF(cpfCadastro);
+    if (cpfAcompanhante) aplicarMascaraCPF(cpfAcompanhante);
+});
+
+
+function aplicarMascaraTelefone(input) {
+    input.addEventListener('input', function (e) {
+        let valor = input.value.replace(/\D/g, '');
+
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        if (valor.length <= 10) {
+            // Formato para telefones fixos (XX) XXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+        } else {
+            // Formato para celulares (XX) XXXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+        }
+    });
+}
+
+function aplicarMascaraCPF(input) {
+    input.addEventListener('input', function () {
+        let valor = input.value.replace(/\D/g, '');
+
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+        input.value = valor;
+    });
+}
+
+
 var cidade = "";
 var estado = "";
 // Validando cadastro de dados do usuário
@@ -45,18 +91,37 @@ function validarCadastroCompleto() {
 
     if (nome == "" || dataNascimento == "" || telefone == "" || cpf == "" || email == "" || senha == "" || cep == "" || endereco == "" || bairro == "") {
         mensagem.textContent = 'Por favor, preencha todos os campos obrigatórios.';
-        mensagem.style.color = 'gray';
+        mensagem.style.color = 'red';
         return;
-    } else if (senha.length < 6) {
+    }
+
+    let usuarios = localStorage.getItem('usuarios');
+    usuarios = usuarios ? JSON.parse(usuarios) : [];
+
+    // Verifica duplicidade
+    const emailExistente = usuarios.some(user => user.email === email);
+    const cpfExistente = usuarios.some(user => user.cpf === cpf);
+
+    if (emailExistente) {
+        mensagem.textContent = 'Este e-mail já está cadastrado.';
+        mensagem.style.color = 'red';
+        return;
+    }
+
+    if (cpfExistente) {
+        mensagem.textContent = 'Este CPF já está cadastrado.';
+        mensagem.style.color = 'red';
+        return;
+    }
+
+    if (senha.length < 6) {
         mensagem.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-        mensagem.style.color = 'gray';
+        mensagem.style.color = 'red';
+        return;
     } else if (palavraChave.trim() === "") {
         mensagem.textContent = 'Por favor, defina uma palavra-chave para recuperação de senha.';
-        mensagem.style.color = 'gray';
-    } else if (telefone.length < 9 || telefone.length > 12) {
-        alert('Telefone inválido!');
-    } else if (cpf.length < 12) {
-        alert('CPF inválido!');
+        mensagem.style.color = 'red';
+        return;
     } else if (idade < 18) {
         mensagem.textContent = mensagemUsuario;
         cadastroUsuario.style.display = 'none';
@@ -83,10 +148,20 @@ function validarCadastroCompleto() {
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
 
-        // ✅ Salvando corretamente
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        localStorage.setItem(email, JSON.stringify(informacoesUsuario)); // essencial
-        localStorage.setItem('usuarioLogado', email); // usado em todas as telas
+        // Salvar temporariamente dados do menor
+        localStorage.setItem('nomeTemp', nome);
+        localStorage.setItem('dataNascimentoTemp', dataNascimento);
+        localStorage.setItem('telefoneTemp', telefone);
+        localStorage.setItem('cpfTemp', cpf);
+        localStorage.setItem('emailTemp', email);
+        localStorage.setItem('senhaTemp', senha);
+        localStorage.setItem('cepTemp', cep);
+        localStorage.setItem('enderecoTemp', endereco);
+        localStorage.setItem('bairroTemp', bairro);
+        localStorage.setItem('numeroTemp', numero);
+        localStorage.setItem('cidadeTemp', cidade);
+        localStorage.setItem('estadoTemp', estado);
+        localStorage.setItem('palavraChaveTemp', palavraChave);
 
         formAcompanhante.style.display = "flex";
         formPaciente.style.display = "none";
@@ -129,6 +204,7 @@ function validarCadastroCompletoComAcompanhante() {
     var cpfAcompanhante = document.getElementById('inpCpfAcompanhante').value;
     var telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante').value;
     var parentescoAcompanhanteSelect = document.getElementById('parentescoAcompanhante');
+    var mensagem = document.getElementById('mensagemMenorIdade');
     var parentescoAcompanhante = parentescoAcompanhanteSelect.value;
 
     var dataAtual = new Date();
@@ -146,16 +222,71 @@ function validarCadastroCompletoComAcompanhante() {
 
     let acompanhantes = localStorage.getItem('acompanhantes');
     acompanhantes = acompanhantes ? JSON.parse(acompanhantes) : [];
-    acompanhantes.push(informacoesAcompanhante);
-    localStorage.setItem('acompanhantes', JSON.stringify(acompanhantes));
+
+    const cpfExistente = acompanhantes.some(a => a.cpfAcompanhante === cpfAcompanhante);
+
+    if (cpfExistente) {
+        alert("Este CPF de acompanhante já está cadastrado.");
+        return;
+    }
 
     if (nomeAcompanhante == "" || cpfAcompanhante == "" || telefoneAcompanhante == "") {
-        alert('Preencha todos os campos!');
-    } else if (telefoneAcompanhante.length < 9 || telefoneAcompanhante.length > 12) {
-        alert('Telefone inválido!');
-    } else if (cpfAcompanhante.length < 12) {
-        alert('CPF inválido!');
+        mensagem.textContent = 'Por favor, preencha todos os campos.';
+        mensagem.style.color = 'red';
+        return;
+    } else if (idade < 18) {
+        mensagem.textContent = 'Por favor, cadastre um acompanhante maior de idade.';
+        mensagem.style.color = 'red';
+        return;
     } else {
+        // ✅ Agora salva o menor de idade
+        const nome = localStorage.getItem('nomeTemp');
+        const dataNascimento = localStorage.getItem('dataNascimentoTemp');
+        const telefone = localStorage.getItem('telefoneTemp');
+        const cpf = localStorage.getItem('cpfTemp');
+        const email = localStorage.getItem('emailTemp');
+        const senha = localStorage.getItem('senhaTemp');
+        const cep = localStorage.getItem('cepTemp');
+        const endereco = localStorage.getItem('enderecoTemp');
+        const bairro = localStorage.getItem('bairroTemp');
+        const numero = localStorage.getItem('numeroTemp');
+        const cidade = localStorage.getItem('cidadeTemp');
+        const estado = localStorage.getItem('estadoTemp');
+        const palavraChave = localStorage.getItem('palavraChaveTemp');
+
+        const idade = new Date().getFullYear() - new Date(dataNascimento).getFullYear();
+
+        const informacoesUsuario = {
+            nome, dataNascimento, idade, telefone, cpf, email, senha,
+            cep, endereco, bairro, numero, cidade, estado, palavraChave
+        };
+
+        let usuarios = localStorage.getItem('usuarios');
+        usuarios = usuarios ? JSON.parse(usuarios) : [];
+        usuarios.push(informacoesUsuario);
+
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        localStorage.setItem(email, JSON.stringify(informacoesUsuario));
+        localStorage.setItem('usuarioLogado', email);
+
+        // Limpa temporários
+        localStorage.removeItem('nomeTemp');
+        localStorage.removeItem('dataNascimentoTemp');
+        localStorage.removeItem('telefoneTemp');
+        localStorage.removeItem('cpfTemp');
+        localStorage.removeItem('emailTemp');
+        localStorage.removeItem('senhaTemp');
+        localStorage.removeItem('cepTemp');
+        localStorage.removeItem('enderecoTemp');
+        localStorage.removeItem('bairroTemp');
+        localStorage.removeItem('numeroTemp');
+        localStorage.removeItem('cidadeTemp');
+        localStorage.removeItem('estadoTemp');
+        localStorage.removeItem('palavraChaveTemp');
+
+        acompanhantes.push(informacoesAcompanhante);
+        localStorage.setItem('acompanhantes', JSON.stringify(acompanhantes));
+
         console.log('Cadastro do acompanhante realizado com sucesso!');
         window.location.href = "./areaPaciente.html";
     }

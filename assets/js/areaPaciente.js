@@ -26,22 +26,6 @@ if (loginOff) {
     });
 }
 
-window.addEventListener('load', () => {
-    const hash = window.location.hash;
-
-    const historico = document.getElementById('historico');
-    const sessaoAgendarConsulta = document.getElementById('agendarConsulta');
-
-    if (hash === '#agendarConsulta') {
-        historico.style.display = 'none';
-        sessaoAgendarConsulta.style.display = 'flex';
-    } else {
-        historico.style.display = 'flex';
-        sessaoAgendarConsulta.style.display = 'none';
-    }
-});
-
-
 //Listas do menu lateral
 const acessarHistorico = document.getElementById('acessarHistorico');
 const acessarDados = document.getElementById('acessarDadosPessoais');
@@ -80,6 +64,57 @@ const numeroInput = document.getElementById('alterarNumero');
 const bairroInput = document.getElementById('alterarBairro');
 const cidadeInput = document.getElementById('alterarCidade');
 const estadoInput = document.getElementById('alterarEstado');
+
+window.addEventListener('load', () => {
+    const hash = window.location.hash;
+
+    const historico = document.getElementById('historico');
+    const sessaoAgendarConsulta = document.getElementById('agendarConsulta');
+
+    if (hash === '#agendarConsulta') {
+        historico.style.display = 'none';
+        sessaoAgendarConsulta.style.display = 'flex';
+    } else {
+        historico.style.display = 'flex';
+        sessaoAgendarConsulta.style.display = 'none';
+    }
+
+   if(telefoneInput){aplicarMascaraTelefone(telefoneInput);}
+   if(telAcompanhante){aplicarMascaraTelefone(telAcompanhante);}
+   if(cpfInput){aplicarMascaraCPF(cpfInput);}
+   if(cpfAcompanhante){aplicarMascaraCPF(cpfAcompanhante);}
+});
+
+
+function aplicarMascaraTelefone(input) {
+    input.addEventListener('input', function (e) {
+        let valor = input.value.replace(/\D/g, '');
+
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        if (valor.length <= 10) {
+            // Formato para telefones fixos (XX) XXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+        } else {
+            // Formato para celulares (XX) XXXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+        }
+    });
+}
+
+function aplicarMascaraCPF(input) {
+    input.addEventListener('input', function () {
+        let valor = input.value.replace(/\D/g, '');
+
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+        input.value = valor;
+    });
+}
 
 function pegandoNomeUsuario() {
     const emailLogado = localStorage.getItem('usuarioLogado');

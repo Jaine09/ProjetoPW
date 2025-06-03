@@ -9,7 +9,11 @@ function acionarEntrarAdm() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', carregarPacientesParaAdm);
+document.addEventListener('DOMContentLoaded', () => {
+    carregarPacientesParaAdm();
+    document.getElementById("txtNomePaciente").addEventListener("input", aplicarFiltroPacientes);
+    document.getElementById("txtDataPaciente").addEventListener("change", aplicarFiltroPacientes);
+});
 
 const loginOff = document.getElementById('btnSair');
 if (loginOff) {
@@ -30,7 +34,8 @@ const mensagemInicial = document.getElementById('mensagemInicial');
 const pacientesCadastrados = document.getElementById('pacientesCadastrados');
 const consultas = document.getElementById('consultas');
 const relatorio = document.getElementById('relatorio');
-const mensagens = document.getElementById('mensagens')
+const mensagens = document.getElementById('mensagens');
+
 
 if (acessarPacientes) {
     acessarPacientes.addEventListener('click', function () {
@@ -40,9 +45,10 @@ if (acessarPacientes) {
         relatorio.style.display = 'none';
         mensagens.style.display = 'none';
 
-        carregarPacientesParaAdm();
         document.getElementById("txtNomePaciente").addEventListener("input", aplicarFiltroPacientes);
         document.getElementById("txtDataPaciente").addEventListener("change", aplicarFiltroPacientes);
+        carregarPacientesParaAdm();
+        
     })
 }
 
@@ -54,9 +60,9 @@ if (acessarConsultas) {
         relatorio.style.display = 'none';
         mensagens.style.display = 'none';
         
-        carregarConsultasParaAdm();
         document.getElementById("txtNomeConsulta").addEventListener("input", aplicarFiltroConsultas);
         document.getElementById("txtDataConsulta").addEventListener("change", aplicarFiltroConsultas);
+        carregarConsultasParaAdm();
         
     })
 }
@@ -110,9 +116,11 @@ function carregarPacientesParaAdm() {
 
         linha.insertCell().textContent = usuario.nome || '-';
         linha.insertCell().textContent = usuario.email || '-';
-        linha.insertCell().textContent = usuario.dataNascimento || '-';
+        linha.insertCell().textContent = formatarDataExibicao(usuario.dataNascimento) || '-';
         linha.insertCell().textContent = `${usuario.endereco || ''}, ${usuario.numero || ''}, ${usuario.cidade || ''}` || '-';
     });
+
+    aplicarFiltroPacientes();
 }
 
 function carregarConsultasParaAdm() {
@@ -142,7 +150,7 @@ function carregarConsultasParaAdm() {
 
             linha.insertCell().textContent = usuario.nome;
             linha.insertCell().textContent = consulta.especialidade || '-';
-            linha.insertCell().textContent = consulta.data || '-';
+            linha.insertCell().textContent = formatarDataExibicao(usuario.dataNascimento) || '-';
             linha.insertCell().textContent = consulta.hora || '-';
 
             // Coluna Exame
@@ -234,8 +242,8 @@ function carregarMensagens() {
 
 
 function aplicarFiltroPacientes() {
-    const filtroNome = document.getElementById("txtNome").value.toLowerCase();
-    const filtroData = document.getElementById("txtData").value;
+    const filtroNome = document.getElementById("txtNomePaciente").value.toLowerCase();
+    const filtroData = document.getElementById("txtDataPaciente").value;
     const corpoTabela = document.getElementById("corpoTabelaPacientes");
     const linhas = corpoTabela.getElementsByTagName("tr");
 
@@ -255,6 +263,15 @@ function aplicarFiltroPacientes() {
     }
 }
 
+function formatarDataExibicao(dataISO) {
+    if (!dataISO) return '';
+    const partes = dataISO.split('-'); // ["2024", "05", "01"]
+    if (partes.length !== 3) return dataISO;
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+
+
 function aplicarFiltroConsultas() {
     const filtroNome = document.getElementById("txtNomeConsulta").value.toLowerCase();
     const filtroData = document.getElementById("txtDataConsulta").value;
@@ -264,18 +281,28 @@ function aplicarFiltroConsultas() {
     for (let i = 0; i < linhas.length; i++) {
         const celulas = linhas[i].getElementsByTagName("td");
         const nome = celulas[0]?.textContent.toLowerCase() || '';
-        const data = celulas[2]?.textContent || '';
+        const dataConsulta = celulas[2]?.textContent || '';
 
         const correspondeNome = nome.includes(filtroNome);
-        const correspondeData = filtroData === "" || data.includes(filtroData.split("-").reverse().join("/"));
+
+        let correspondeData = true;
+        if (filtroData !== "") {
+            const partesData = dataConsulta.split('/');
+            if (partesData.length === 3) {
+                const dia = partesData[0].padStart(2, '0');
+                const mes = partesData[1].padStart(2, '0');
+                const ano = partesData[2];
+                const dataFormatada = `${ano}-${mes}-${dia}`;
+                correspondeData = (dataFormatada === filtroData);
+            } else {
+                correspondeData = false;
+            }
+        }
 
         linhas[i].style.display = (correspondeNome && correspondeData) ? "" : "none";
     }
 }
 
-
-let codigoGerado = "";
-let emailUsuario = "";
 
 function abrirModal() {
     document.getElementById("modalRecuperacao").style.display = "flex";
@@ -288,6 +315,9 @@ function abrirModal() {
 function fecharModal() {
     document.getElementById("modalRecuperacao").style.display = "none";
 }
+
+var codigoGerado = "";
+var emailUsuario = "";
 
 function enviarCodigo(event) {
     event.preventDefault();
@@ -302,7 +332,6 @@ function enviarCodigo(event) {
     // Gera código secreto
     codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Mensagem simulada com atraso
     document.getElementById("mensagem").innerText = "Enviando código...";
     document.getElementById("mensagem").style.color = "black";
 
@@ -338,9 +367,9 @@ function verificarCodigo() {
     }
 }
 
-// (Opcional) Atalho para desenvolvedor exibir código no navegador
 document.addEventListener("keydown", (e) => {
     if (e.altKey && e.key.toLowerCase() === "c") {
         alert("🔒 Código (dev): " + codigoGerado);
     }
 });
+
