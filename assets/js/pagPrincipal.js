@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adiciona um ouvinte de evento ao botão de aceitar
     acceptCookiesButton.addEventListener('click', function() {
-        setCookie(cookieName, 'accepted', 30); // Define o cookie de consentimento por 30 dias
+        setCookie(cookieName, 'accepted', 1); // Define o cookie de consentimento por 1 dia
         cookieNotice.classList.add('hidden');
     });
 });
