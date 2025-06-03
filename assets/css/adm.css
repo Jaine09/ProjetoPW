@@ -357,7 +357,6 @@ section{
     flex-direction: column;
 }
 
-
 td {
     border: 1px solid #FFE1E3;
 }
@@ -378,6 +377,21 @@ td {
     text-align: center;
 }
 
+input[type="file"] {
+  width: 130px;
+  font-size: 12px;
+}
+
+input[type="file"]::file-selector-button {
+  display: block;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
 .status-realizada {
   color: #DB627D;
   font-weight: 400;
@@ -392,4 +406,69 @@ td {
   padding: 4px 8px;
   border-radius: 4px;
   text-align: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background:#eab9bc;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal h2 {
+  margin: 0 0 20px;
+  color: #6F233F;
+}
+
+#infoConsulta{
+    margin: 10px 5px;
+    color: #6F233F;
+}
+
+.confirm {
+  background-color: #74b575;
+  color: black;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: #e76258;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm:hover, .cancel:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+#fechar{
+    background-color: #eab9bc;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }

@@ -55,19 +55,25 @@
                         <th>Especialidade</th>
                         <th>Exames</th>
                         <th>Receitas médicas</th>
+                        <th>Status</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaHistorico" class="tabelaHistorico">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                 </tbody>
             </table>
         </section>
+
+        <div id="modalConfirmarDesmarcar" class="modal-overlay" style="display: none;">
+            <div class="modal">
+                <h2>Gerenciar Consulta</h2>
+                <p id="infoConsulta"></p>
+                <button class="confirm" onclick="confirmarConsulta()">Confirmar</button>
+                <button class="cancel" onclick="desmarcarConsulta()">Desmarcar</button>
+                <br><br>
+                <button id="fechar" onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
 
         <section id="dadosPessoais">
             <div class="alterarDados">
@@ -176,12 +182,15 @@
                         </div>
                         <span id="mensagemAcompanhante"></span>
                     </fieldset>
-                </form> 
-                    <div class=" btnAlterarInformacoes">
-                        <button type="button" id="editarInformacoesAcompanhante" onclick="editarDadosAcompanhante()">Editar Informações</button>
-                        <button type="submit" id="salvarInformacoesAcompanhante" onclick="salvarAlteracaoAcompanhante()">Salvar</button>
-                        <button type="reset" id="descartarInformacoesAcompanhante" onclick="descartarAlteracaoAcompanhante()">Descartar
-                    </div>
+                </form>
+                <div class=" btnAlterarInformacoes">
+                    <button type="button" id="editarInformacoesAcompanhante" onclick="editarDadosAcompanhante()">Editar
+                        Informações</button>
+                    <button type="submit" id="salvarInformacoesAcompanhante"
+                        onclick="salvarAlteracaoAcompanhante()">Salvar</button>
+                    <button type="reset" id="descartarInformacoesAcompanhante"
+                        onclick="descartarAlteracaoAcompanhante()">Descartar
+                </div>
             </div>
         </section>
 
@@ -284,7 +293,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" id="btnEnviarAvaliacao" onclick="realizarAvaliacao(event)">Enviar Avaliação</button>
+                    <button type="submit" id="btnEnviarAvaliacao" onclick="realizarAvaliacao(event)">Enviar
+                        Avaliação</button>
                 </fieldset>
             </form> <!-- Fim formulário avaliações-->
         </section>
@@ -316,7 +326,8 @@
                         <input type="time" id="horaConsulta" name="horaConsulta">
                     </div>
 
-                    <button type="submit" id="btnAgendarConsulta" onclick="realizarAgendamento(event)">Agendar Consulta</button>
+                    <button type="submit" id="btnAgendarConsulta" onclick="realizarAgendamento(event)">Agendar
+                        Consulta</button>
                 </fieldset>
         </section>
     </main>

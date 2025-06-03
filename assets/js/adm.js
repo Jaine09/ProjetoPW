@@ -48,7 +48,7 @@ if (acessarPacientes) {
         document.getElementById("txtNomePaciente").addEventListener("input", aplicarFiltroPacientes);
         document.getElementById("txtDataPaciente").addEventListener("change", aplicarFiltroPacientes);
         carregarPacientesParaAdm();
-        
+
     })
 }
 
@@ -59,11 +59,11 @@ if (acessarConsultas) {
         pacientesCadastrados.style.display = 'none';
         relatorio.style.display = 'none';
         mensagens.style.display = 'none';
-        
+
         document.getElementById("txtNomeConsulta").addEventListener("input", aplicarFiltroConsultas);
         document.getElementById("txtDataConsulta").addEventListener("change", aplicarFiltroConsultas);
         carregarConsultasParaAdm();
-        
+
     })
 }
 
@@ -155,26 +155,49 @@ function carregarConsultasParaAdm() {
 
             // Coluna Exame
             const cellExame = linha.insertCell();
-            const inputExame = document.createElement('input');
-            inputExame.type = 'file';
-            inputExame.accept = '.pdf,.doc,.docx';
-            inputExame.onchange = (e) => salvarArquivoConsulta(usuario.email, index, 'exame', e.target.files[0]);
-            cellExame.appendChild(inputExame);
+            if (consulta.status !== 'Desmarcada' && consulta.status !== 'Cancelada') {
+                const inputExame = document.createElement('input');
+                inputExame.type = 'file';
+                inputExame.accept = '.pdf,.doc,.docx';
+                inputExame.onchange = (e) => salvarArquivoConsulta(usuario.email, index, 'exame', e.target.files[0]);
+                cellExame.appendChild(inputExame);
+            } else {
+                cellExame.textContent = 'N/A';
+            }
 
             // Coluna Receita
             const cellReceita = linha.insertCell();
-            const inputReceita = document.createElement('input');
-            inputReceita.type = 'file';
-            inputReceita.accept = '.pdf,.doc,.docx';
-            inputReceita.onchange = (e) => salvarArquivoConsulta(usuario.email, index, 'receita', e.target.files[0]);
-            cellReceita.appendChild(inputReceita);
+            if (consulta.status !== 'Desmarcada' && consulta.status !== 'Cancelada') {
+                const inputReceita = document.createElement('input');
+                inputReceita.type = 'file';
+                inputReceita.accept = '.pdf,.doc,.docx';
+                inputReceita.onchange = (e) => salvarArquivoConsulta(usuario.email, index, 'receita', e.target.files[0]);
+                cellReceita.appendChild(inputReceita);
+            } else {
+                cellReceita.textContent = 'N/A';
+            }
 
             const cellStatus = linha.insertCell();
             const statusSpan = document.createElement('span');
             statusSpan.textContent = consulta.status || 'Pendente';
             statusSpan.className = (consulta.status === 'Realizada') ? 'status-realizada' : 'status-pendente';
             cellStatus.appendChild(statusSpan);
-           
+
+            const acoes = linha.insertCell();
+            if (consulta.status === 'Pendente') {
+                const btnAbrirModal = document.createElement('button');
+                btnAbrirModal.textContent = '⋮';
+                btnAbrirModal.style.backgroundColor = 'transparent';
+                btnAbrirModal.style.width = '30px';
+                btnAbrirModal.style.height = '30px';
+                btnAbrirModal.style.border = 'none';
+                btnAbrirModal.style.cursor = 'pointer';
+                btnAbrirModal.onclick = () => abrirModalConsulta(usuario.email, index, consulta);
+                acoes.appendChild(btnAbrirModal);
+            } else {
+                acoes.textContent = 'Consulta ' + consulta.status;
+            }
+
         });
 
         if (consultasAtualizadas) {
@@ -183,6 +206,47 @@ function carregarConsultasParaAdm() {
 
         aplicarFiltroConsultas();
     });
+}
+
+let consultaSelecionadaIndex = null;
+let consultaSelecionadaEmail = null;
+
+function abrirModalConsulta(email, index, consulta) {
+    consultaSelecionadaIndex = index;
+    consultaSelecionadaEmail = email;
+    const info = `Consulta de ${consulta.especialidade} marcada para ${consulta.data} às ${consulta.hora}. Confirmar ou desmarcar?`;
+    document.getElementById('infoConsulta').textContent = info;
+    document.getElementById('modalConfirmarDesmarcar').style.display = 'flex';
+}
+
+function fecharModalConsulta() {
+    document.getElementById('modalConfirmarDesmarcar').style.display = 'none';
+    consultaSelecionadaIndex = null;
+    consultaSelecionadaEmail = null;
+}
+
+function marcarComoRealizada() {
+    atualizarStatusConsulta(consultaSelecionadaEmail, consultaSelecionadaIndex, 'Realizada');
+    fecharModalConsulta();
+}
+
+function marcarComoDesmarcada() {
+    atualizarStatusConsulta(consultaSelecionadaEmail, consultaSelecionadaIndex, 'Desmarcada');
+    fecharModalConsulta();
+}
+
+function atualizarStatusConsulta(email, index, novoStatus) {
+    const chave = 'consultas_' + email;
+    let consultas = JSON.parse(localStorage.getItem(chave)) || [];
+
+    if (consultas[index]) {
+        consultas[index].status = novoStatus;
+        localStorage.setItem(chave, JSON.stringify(consultas));
+        carregarConsultasParaAdm();
+        if (localStorage.getItem('usuarioLogado') === email) {
+            carregarConsultasPaciente();
+        }
+    }
 }
 
 function salvarArquivoConsulta(email, index, tipo, arquivo) {
@@ -223,7 +287,7 @@ function carregarRelatorioParaAdm() {
             linha.insertCell().textContent = avaliacao.texto || '-';
         });
     });
-  }
+}
 
 function carregarMensagens() {
     const mensagensSalvas = JSON.parse(localStorage.getItem('mensagens')) || [];
@@ -360,7 +424,7 @@ function verificarCodigo() {
             document.getElementById("mensagem").style.color = "green";
             window.location.href = "adm.html";
         }, 1000);
-        
+
     } else {
         document.getElementById("mensagem").innerText = "❌ Código incorreto. Tente novamente.";
         document.getElementById("mensagem").style.color = "red";

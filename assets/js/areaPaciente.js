@@ -79,10 +79,10 @@ window.addEventListener('load', () => {
         sessaoAgendarConsulta.style.display = 'none';
     }
 
-   if(telefoneInput){aplicarMascaraTelefone(telefoneInput);}
-   if(telAcompanhante){aplicarMascaraTelefone(telAcompanhante);}
-   if(cpfInput){aplicarMascaraCPF(cpfInput);}
-   if(cpfAcompanhante){aplicarMascaraCPF(cpfAcompanhante);}
+    if (telefoneInput) { aplicarMascaraTelefone(telefoneInput); }
+    if (telAcompanhante) { aplicarMascaraTelefone(telAcompanhante); }
+    if (cpfInput) { aplicarMascaraCPF(cpfInput); }
+    if (cpfAcompanhante) { aplicarMascaraCPF(cpfAcompanhante); }
 });
 
 
@@ -751,6 +751,8 @@ function agendarConsulta() {
     sessaoAgendarConsulta.style.display = 'flex';
 }
 
+let consultaSelecionadaIndex = null;
+
 function realizarAgendamento(event) {
     event.preventDefault();
 
@@ -759,7 +761,6 @@ function realizarAgendamento(event) {
     const dataConsultaInput = document.getElementById('dataConsulta').value;
     const horaConsulta = document.getElementById('horaConsulta').value;
     const formAgendarConsulta = document.getElementById('formAgendarConsulta');
-    const corpoTabelaHistorico = document.getElementById('corpoTabelaHistorico');
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -784,11 +785,6 @@ function realizarAgendamento(event) {
         return;
     }
 
-    if (!usuarioLogado) {
-        alert('Usuário não está logado!');
-        return;
-    }
-
     let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
 
     const isDuplicate = consultas.some(consulta => {
@@ -797,7 +793,7 @@ function realizarAgendamento(event) {
 
     if (isDuplicate) {
         alert("Já existe uma consulta agendada para o mesmo dia e hora. Por favor, escolha outro horário ou dia.");
-        return; 
+        return;
     }
 
     const novaConsulta = {
@@ -809,46 +805,29 @@ function realizarAgendamento(event) {
         status: 'Pendente'
     };
 
-    
     consultas.push(novaConsulta);
     localStorage.setItem('consultas_' + usuarioLogado, JSON.stringify(consultas));
 
-    adicionarConsultaNaTabela(novaConsulta);
-
+    carregarConsultasPaciente();
     formAgendarConsulta.reset();
     sessaoAgendarConsulta.style.display = 'none';
     historico.style.display = 'block';
 }
 
-function adicionarConsultaNaTabela(consulta) {
-    const corpoTabela = document.getElementById('corpoTabelaHistorico');
-    const novaLinha = corpoTabela.insertRow();
-    novaLinha.insertCell().textContent = consulta.data;
-    novaLinha.insertCell().textContent = consulta.hora;
-    novaLinha.insertCell().textContent = consulta.especialidade;
-    novaLinha.insertCell().textContent = consulta.exames;
-    novaLinha.insertCell().textContent = consulta.receitas;
-}
-
 function carregarConsultasPaciente() {
     const email = localStorage.getItem('usuarioLogado');
     const corpoTabela = document.getElementById('corpoTabelaHistorico');
-
-
     if (!email || !corpoTabela) return;
 
     const consultas = JSON.parse(localStorage.getItem('consultas_' + email)) || [];
-
     corpoTabela.innerHTML = '';
 
-    consultas.forEach(consulta => {
+    consultas.forEach((consulta, index) => {
         const linha = corpoTabela.insertRow();
-
+        linha.insertCell().textContent = consulta.data || '-';
         linha.insertCell().textContent = consulta.hora || '-';
         linha.insertCell().textContent = consulta.especialidade || '-';
-        linha.insertCell().textContent = consulta.data || '-';
 
-        // Coluna Exame
         const cellExame = linha.insertCell();
         if (consulta.exame) {
             const linkExame = document.createElement('a');
@@ -873,9 +852,60 @@ function carregarConsultasPaciente() {
         } else {
             cellReceita.textContent = 'Nenhuma';
         }
+
+        linha.insertCell().textContent = consulta.status || 'Pendente';
+
+        const acoes = linha.insertCell();
+        if (consulta.status === 'Pendente') {
+            const btnAbrirModal = document.createElement('button');
+            btnAbrirModal.textContent = '⋮';
+            btnAbrirModal.style.backgroundColor = 'transparent';
+            btnAbrirModal.style.width = '30px';
+            btnAbrirModal.style.height = '30px';
+            btnAbrirModal.style.border = 'none';
+            btnAbrirModal.style.cursor = 'pointer';
+            btnAbrirModal.onclick = () => abrirModal(index, consulta);
+            acoes.appendChild(btnAbrirModal);
+        } else {
+            acoes.textContent = 'Consulta ' + consulta.status;
+        }
     });
 }
 
+function abrirModal(index, consulta) {
+    consultaSelecionadaIndex = index;
+    const info = `Data: ${consulta.data} | Hora: ${consulta.hora} | Especialidade: ${consulta.especialidade}`;
+    document.getElementById('infoConsulta').textContent = info;
+    document.getElementById('modalConfirmarDesmarcar').style.display = 'flex';
+}
+
+function fecharModal() {
+    document.getElementById('modalConfirmarDesmarcar').style.display = 'none';
+    consultaSelecionadaIndex = null;
+}
+
+function confirmarConsulta() {
+    atualizarStatusConsulta(consultaSelecionadaIndex, 'Confirmada');
+    fecharModal();
+}
+
+function desmarcarConsulta() {
+    atualizarStatusConsulta(consultaSelecionadaIndex, 'Cancelada');
+    fecharModal();
+}
+
+function atualizarStatusConsulta(index, novoStatus) {
+    const email = localStorage.getItem('usuarioLogado');
+    if (!email) return;
+
+    let consultas = JSON.parse(localStorage.getItem('consultas_' + email)) || [];
+    if (!consultas[index]) return;
+
+    consultas[index].status = novoStatus;
+    localStorage.setItem('consultas_' + email, JSON.stringify(consultas));
+
+    carregarConsultasPaciente();
+}
 
 const criarAvaliacao = document.getElementById('criarAvaliacao');
 

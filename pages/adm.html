@@ -32,7 +32,8 @@
     <main>
         <div class="conteudo-fixo">
             <p id="mensagemInicial">
-                Seja bem-vinda ao portal de gerenciamento. Aqui você pode acessar todas as informações relacionadas aos pacientes.
+                Seja bem-vinda ao portal de gerenciamento. Aqui você pode acessar todas as informações relacionadas aos
+                pacientes.
             </p>
         </div>
 
@@ -45,7 +46,8 @@
                     <div class="filter-group">
                         <input type="radio" name="opcao" class="radioNome" value="nome" onclick="alternarCampos(this)">
                         <label for="nome">Nome</label>
-                        <input type="text" name="txtNomePaciente" id="txtNomePaciente" class="txtNome" placeholder="Digite o nome">
+                        <input type="text" name="txtNomePaciente" id="txtNomePaciente" class="txtNome"
+                            placeholder="Digite o nome">
                     </div>
 
                     <div class="filter-group">
@@ -78,7 +80,8 @@
                     <div class="filter-group">
                         <input type="radio" name="opcao" class="radioNome" value="nome" onclick="alternarCampos(this)">
                         <label for="nome">Nome</label>
-                        <input type="text" name="txtNomeConsulta" id="txtNomeConsulta" class="txtNome" placeholder="Digite o nome">
+                        <input type="text" name="txtNomeConsulta" id="txtNomeConsulta" class="txtNome"
+                            placeholder="Digite o nome">
                     </div>
 
                     <div class="filter-group">
@@ -99,13 +102,25 @@
                         <th>Exames</th>
                         <th>Receitas</th>
                         <th>Status</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaConsultas" class="corpoTabelaConsultas">
-                    
+
                 </tbody>
             </table>
         </section>
+
+        <div id="modalConfirmarDesmarcar" class="modal-overlay" style="display: none;">
+            <div class="modal">
+                <h2>Gerenciar Consulta</h2>
+                <p id="infoConsulta"></p>
+                <button class="confirm" onclick="marcarComoRealizada()">Marcar como Realizada</button>
+                <button class="cancel" onclick="marcarComoDesmarcada()">Desmarcar</button>
+                <br><br>
+                <button id="fechar" onclick="fecharModalConsulta()">Fechar</button>
+            </div>
+        </div>
 
         <section id="relatorio">
             <table id="tabelaRelatorio" class="tabelaRelatorio">
@@ -118,7 +133,7 @@
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaRelatorio" class="corpoTabelaRelatorio">
-                    
+
                 </tbody>
             </table>
         </section>
@@ -134,12 +149,7 @@
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaMensagens" class="corpoTabelaMensagens">
-                    <tr>
-                        <td>Ana Silva</td>                    
-                        <td>(11) 52366-4125</td>
-                        <td>ana@gmail.com</td>
-                        <td>Gostaria de auxilio</td>
-                    </tr>
+
                 </tbody>
             </table>
         </section>
