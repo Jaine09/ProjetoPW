@@ -784,6 +784,22 @@ function realizarAgendamento(event) {
         return;
     }
 
+    if (!usuarioLogado) {
+        alert('Usuário não está logado!');
+        return;
+    }
+
+    let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
+
+    const isDuplicate = consultas.some(consulta => {
+        return consulta.data === dataFormatada && consulta.hora === horaConsulta;
+    });
+
+    if (isDuplicate) {
+        alert("Já existe uma consulta agendada para o mesmo dia e hora. Por favor, escolha outro horário ou dia.");
+        return; 
+    }
+
     const novaConsulta = {
         data: dataFormatada,
         hora: horaConsulta,
@@ -793,7 +809,7 @@ function realizarAgendamento(event) {
         status: 'Pendente'
     };
 
-    let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
+    
     consultas.push(novaConsulta);
     localStorage.setItem('consultas_' + usuarioLogado, JSON.stringify(consultas));
 

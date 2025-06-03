@@ -150,7 +150,7 @@ function carregarConsultasParaAdm() {
 
             linha.insertCell().textContent = usuario.nome;
             linha.insertCell().textContent = consulta.especialidade || '-';
-            linha.insertCell().textContent = formatarDataExibicao(usuario.dataNascimento) || '-';
+            linha.insertCell().textContent = formatarDataExibicao(consulta.data) || '-';
             linha.insertCell().textContent = consulta.hora || '-';
 
             // Coluna Exame
@@ -174,7 +174,7 @@ function carregarConsultasParaAdm() {
             statusSpan.textContent = consulta.status || 'Pendente';
             statusSpan.className = (consulta.status === 'Realizada') ? 'status-realizada' : 'status-pendente';
             cellStatus.appendChild(statusSpan);
-            // linha.insertCell().textContent = consulta.status || 'A confirmar';
+           
         });
 
         if (consultasAtualizadas) {
