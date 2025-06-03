@@ -34,18 +34,23 @@ document.addEventListener('DOMContentLoaded', function () {
         setCookie(cookieName, 'accepted', 1); // Define o cookie de consentimento por 1 dia
         cookieNotice.classList.add('hidden');
     });
+
+    const telefoneInput = document.getElementById('txtTelefoneMensagem')
+    if(telefoneInput){aplicarMascaraTelefone(telefoneInput);}
 });
+
+
 
 function enviarMensagem() {
     let nomeUsuario = document.getElementById('txtNomeMensagem').value;
-    let telefoneInput = document.getElementById('txtTelefoneMensagem');
+    let telefone = document.getElementById('txtTelefoneMensagem').value;
     let email = document.getElementById('txtEmailMensagem').value;
     let txtmensagem = document.getElementById('txtMensagem').value;
     let mensagemErro = document.getElementById('msgErro');
 
-    if(telefoneInput)aplicarMascaraTelefone(telefoneInput);
+    
 
-    if (!nomeUsuario || !telefoneInput.value || !email || !txtmensagem) {
+    if (!nomeUsuario || !telefone || !email || !txtmensagem) {
         mensagemErro.textContent = "Preencha todos os campos!";
         mensagemErro.style.color = "red";
         return;
@@ -55,7 +60,7 @@ function enviarMensagem() {
 
         const novaMensagem = {
             nome: nomeUsuario,
-            telefone: telefoneInput.value, 
+            telefone: telefone, 
             email: email,
             mensagem: txtmensagem
         };
@@ -79,19 +84,18 @@ function limparCampos() {
     document.getElementById('txtMensagem').value = '';
 }
 
-function aplicarMascaraTelefone(inputElement) {
-    inputElement.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, ''); 
-        let maskedValue = '';
+function aplicarMascaraTelefone(input) {
+    input.addEventListener('input', function (e) {
+        let valor = input.value.replace(/\D/g, '');
 
-        if (value.length > 0) {
+        if (valor.length > 11) valor = valor.slice(0, 11);
 
-            if (value.length > 10) {
-                maskedValue = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
-            } else { 
-                maskedValue = `(${value.substring(0, 2)}) ${value.substring(2, 6)}-${value.substring(6, 10)}`;
-            }
+        if (valor.length <= 10) {
+            // Formato para telefones fixos (XX) XXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+        } else {
+            // Formato para celulares (XX) XXXXX-XXXX
+            input.value = valor.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
         }
-        e.target.value = maskedValue;
     });
 }
