@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cookieNotice = document.getElementById('cookie-notice');
     const acceptCookiesButton = document.getElementById('accept-cookies');
     const cookieName = 'cookieConsent';
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const cookieString = document.cookie;
         const nameEQ = name + "=";
         const ca = cookieString.split(';');
-        for(let i = 0; i < ca.length; i++) {
+        for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
             while (c.charAt(0) === ' ') c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Adiciona um ouvinte de evento ao botão de aceitar
-    acceptCookiesButton.addEventListener('click', function() {
+    acceptCookiesButton.addEventListener('click', function () {
         setCookie(cookieName, 'accepted', 1); // Define o cookie de consentimento por 1 dia
         cookieNotice.classList.add('hidden');
     });
@@ -38,40 +38,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function enviarMensagem() {
     let nomeUsuario = document.getElementById('txtNomeMensagem').value;
-    let telefone = document.getElementById('txtTelefoneMensagem').value;
+    let telefoneInput = document.getElementById('txtTelefoneMensagem');
     let email = document.getElementById('txtEmailMensagem').value;
     let txtmensagem = document.getElementById('txtMensagem').value;
     let mensagemErro = document.getElementById('msgErro');
 
-    if (telefone.length < 9 || telefone.length > 12) {
-        alert('Telefone inválido!');
-        return;
-    }
+    if(telefoneInput)aplicarMascaraTelefone(telefoneInput);
 
-    if (!nomeUsuario || !telefone || !email || !txtmensagem) {
+    if (!nomeUsuario || !telefoneInput.value || !email || !txtmensagem) {
         mensagemErro.textContent = "Preencha todos os campos!";
         mensagemErro.style.color = "red";
         return;
+    } else {
+        mensagemErro.style.color = "green";
+        mensagemErro.textContent = "Mensagem enviada com sucesso!";
+
+        const novaMensagem = {
+            nome: nomeUsuario,
+            telefone: telefoneInput.value, 
+            email: email,
+            mensagem: txtmensagem
+        };
+
+        let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
+        mensagens.push(novaMensagem);
+        localStorage.setItem('mensagens', JSON.stringify(mensagens));
+
+        limparCampos();
+        setTimeout(() => {
+            mensagemErro.textContent = "";
+        }, 3000);
+        return;
     }
-
-    const novaMensagem = {
-        nome: nomeUsuario,
-        telefone: telefone,
-        email: email,
-        mensagem: txtmensagem
-    };
-
-    let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
-    mensagens.push(novaMensagem);
-    localStorage.setItem('mensagens', JSON.stringify(mensagens));
-
-    mensagemErro.style.color = "green";
-    mensagemErro.textContent = "Mensagem enviada com sucesso!";
-
-    limparCampos();
-    setTimeout(() => {
-        mensagemErro.textContent = "";
-    }, 3000);
 }
 
 function limparCampos() {
@@ -79,4 +77,21 @@ function limparCampos() {
     document.getElementById('txtTelefoneMensagem').value = '';
     document.getElementById('txtEmailMensagem').value = '';
     document.getElementById('txtMensagem').value = '';
+}
+
+function aplicarMascaraTelefone(inputElement) {
+    inputElement.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); 
+        let maskedValue = '';
+
+        if (value.length > 0) {
+
+            if (value.length > 10) {
+                maskedValue = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
+            } else { 
+                maskedValue = `(${value.substring(0, 2)}) ${value.substring(2, 6)}-${value.substring(6, 10)}`;
+            }
+        }
+        e.target.value = maskedValue;
+    });
 }
