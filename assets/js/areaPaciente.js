@@ -483,18 +483,9 @@ function desabilitarCamposAcompanhante() {
     parentescoAcompanhanteSelect.disabled = true;
 
     const usuarioLogado = localStorage.getItem('usuarioLogado');
-    let acompanhantes = localStorage.getItem('acompanhantes');
+    let acompanhantes = JSON.parse(localStorage.getItem('acompanhantes'));
 
-    try {
-        acompanhantes = JSON.parse(acompanhantes);
-        if (!Array.isArray(acompanhantes)) {
-            acompanhantes = [acompanhantes];
-        }
-    } catch (e) {
-        acompanhantes = [];
-    }
-
-    const acompanhanteInfo = acompanhantes.find(a => a.emailUsuario === usuarioLogado);
+    const acompanhanteInfo = acompanhantes.find(a => a.usuarioMenor === usuarioLogado);
 
     if (acompanhanteInfo) {
         nomeAcompanhante.value = acompanhanteInfo.nomeAcompanhante || '';

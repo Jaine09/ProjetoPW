@@ -15,6 +15,23 @@ if (btnEntrar) {
     });
 }
 
+window.addEventListener('beforeunload', () => {
+    localStorage.removeItem('nomeTemp');
+    localStorage.removeItem('dataNascimentoTemp');
+    localStorage.removeItem('telefoneTemp');
+    localStorage.removeItem('cpfTemp');
+    localStorage.removeItem('emailTemp');
+    localStorage.removeItem('senhaTemp');
+    localStorage.removeItem('cepTemp');
+    localStorage.removeItem('enderecoTemp');
+    localStorage.removeItem('bairroTemp');
+    localStorage.removeItem('numeroTemp');
+    localStorage.removeItem('cidadeTemp');
+    localStorage.removeItem('estadoTemp');
+    localStorage.removeItem('palavraChaveTemp');
+
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const telefonePaciente = document.getElementById('telefone');
     const telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante');
@@ -59,7 +76,6 @@ function aplicarMascaraCPF(input) {
         input.value = valor;
     });
 }
-
 
 var cidade = "";
 var estado = "";
@@ -144,10 +160,6 @@ function validarCadastroCompleto() {
             palavraChave: palavraChave
         };
 
-        let usuarios = localStorage.getItem('usuarios');
-        usuarios = usuarios ? JSON.parse(usuarios) : [];
-        usuarios.push(informacoesUsuario);
-
         // Salvar temporariamente dados do menor
         localStorage.setItem('nomeTemp', nome);
         localStorage.setItem('dataNascimentoTemp', dataNascimento);
@@ -162,6 +174,11 @@ function validarCadastroCompleto() {
         localStorage.setItem('cidadeTemp', cidade);
         localStorage.setItem('estadoTemp', estado);
         localStorage.setItem('palavraChaveTemp', palavraChave);
+
+
+        let usuarios = localStorage.getItem('usuarios');
+        usuarios = usuarios ? JSON.parse(usuarios) : [];
+        usuarios.push(informacoesUsuario);
 
         formAcompanhante.style.display = "flex";
         formPaciente.style.display = "none";
@@ -209,42 +226,29 @@ function validarCadastroCompletoComAcompanhante() {
 
     var dataAtual = new Date();
     var dataNasc = new Date(dataNascimentoAcompanhante);
-    var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
+    var idadeAcompanhante = dataAtual.getFullYear() - dataNasc.getFullYear();
 
-    const emailUsuario = localStorage.getItem('emailTemp'); 
+    let cpfMenor = localStorage.getItem('cpfTemp');
+    let acompanhantes = JSON.parse(localStorage.getItem('acompanhantes'));
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    const informacoesAcompanhante = {
-        nomeAcompanhante,
-        dataNascimentoAcompanhante,
-        idade,
-        cpfAcompanhante,
-        telefoneAcompanhante,
-        parentesco,
-        emailUsuario
-    };
+    const cpfExistenteUsuario = Array.isArray(usuarios) &&
+        usuarios.some(u => u.cpf === cpfAcompanhante);
 
-    let acompanhantes = localStorage.getItem('acompanhantes');
-    try {
-        acompanhantes = JSON.parse(acompanhantes);
-        if (!Array.isArray(acompanhantes)) {
-            acompanhantes = [acompanhantes];
-        }
-    } catch (e) {
-        acompanhantes = [];
-    }
+    const cpfExistenteAcompanhante = Array.isArray(acompanhantes) &&
+        acompanhantes.some(a => a.cpfAcompanhante === cpfAcompanhante);
 
-    const cpfExistente = acompanhantes.some(a => a.cpfAcompanhante === cpfAcompanhante);
+    const cpfIgualMenor = cpfMenor === cpfAcompanhante;
 
-    if (cpfExistente) {
-        alert("Este CPF de acompanhante já está cadastrado.");
-        return;
+    if (cpfExistenteUsuario || cpfExistenteAcompanhante || cpfIgualMenor) {
+        alert("CPF já existente.");
     }
 
     if (nomeAcompanhante === "" || cpfAcompanhante === "" || telefoneAcompanhante === "") {
         mensagem.textContent = 'Por favor, preencha todos os campos.';
         mensagem.style.color = 'red';
         return;
-    } else if (idade < 18) {
+    } else if (idadeAcompanhante < 18) {
         mensagem.textContent = 'Por favor, cadastre um acompanhante maior de idade.';
         mensagem.style.color = 'red';
         return;
@@ -271,12 +275,23 @@ function validarCadastroCompletoComAcompanhante() {
             cep, endereco, bairro, numero, cidade, estado, palavraChave
         };
 
+
         let usuarios = localStorage.getItem('usuarios');
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
         localStorage.setItem(email, JSON.stringify(informacoesUsuario));
         localStorage.setItem('usuarioLogado', email);
+
+        const informacoesAcompanhante = {
+        nomeAcompanhante: nomeAcompanhante,
+        dataNascimentoAcompanhante: dataNascimentoAcompanhante,
+        idade: idadeAcompanhante,
+        cpfAcompanhante: cpfAcompanhante,
+        telefoneAcompanhante: telefoneAcompanhante,
+        parentesco: parentescoAcompanhante,
+        usuarioMenor: localStorage.getItem('usuarioLogado')
+        };
 
         // Limpa os dados temporários
         localStorage.removeItem('nomeTemp');
@@ -294,14 +309,19 @@ function validarCadastroCompletoComAcompanhante() {
         localStorage.removeItem('palavraChaveTemp');
 
         // Salva o acompanhante vinculado
-        acompanhantes.push(informacoesAcompanhante);
+
+        if (Array.isArray(acompanhantes)) {
+            acompanhantes.push(informacoesAcompanhante);
+        } else {
+            acompanhantes = [informacoesAcompanhante];
+        }
+
         localStorage.setItem('acompanhantes', JSON.stringify(acompanhantes));
 
         console.log('Cadastro do acompanhante realizado com sucesso!');
         window.location.href = "./areaPaciente.html";
     }
 }
-
 
 function validarLogin(event) {
     event.preventDefault();
