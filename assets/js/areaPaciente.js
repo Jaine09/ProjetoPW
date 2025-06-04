@@ -52,7 +52,7 @@ const senhaInput = document.getElementById('txtAlterarSenha');
 
 //inputs form acompanhante
 const nomeAcompanhante = document.getElementById('nomeAcompanhante');
-const dataNascAcompanhante = document.getElementById('dataNascimento');
+const dataNascAcompanhante = document.getElementById('dataNascAcompanhante');
 const cpfAcompanhante = document.getElementById('cpfAcompanhante');
 const telAcompanhante = document.getElementById('telefoneAcompanhante');
 const parentescoAcompanhanteSelect = document.getElementById('parentescoAcompanhante');
@@ -482,16 +482,21 @@ function desabilitarCamposAcompanhante() {
     telAcompanhante.disabled = true;
     parentescoAcompanhanteSelect.disabled = true;
 
-    const acompanhantesString = localStorage.getItem('acompanhantes');
-    const acompanhantes = acompanhantesString ? JSON.parse(acompanhantesString) : [];
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    let acompanhantes = localStorage.getItem('acompanhantes');
 
-    const emailLogado = localStorage.getItem('usuarioLogado');
+    try {
+        acompanhantes = JSON.parse(acompanhantes);
+        if (!Array.isArray(acompanhantes)) {
+            acompanhantes = [acompanhantes];
+        }
+    } catch (e) {
+        acompanhantes = [];
+    }
 
-    // Procurar acompanhante correspondente ao usuário logado
-    const acompanhanteInfo = acompanhantes.find(a => a.emailUsuario === emailLogado) || acompanhantes[acompanhantes.length - 1];
+    const acompanhanteInfo = acompanhantes.find(a => a.emailUsuario === usuarioLogado);
 
     if (acompanhanteInfo) {
-
         nomeAcompanhante.value = acompanhanteInfo.nomeAcompanhante || '';
         dataNascAcompanhante.value = acompanhanteInfo.dataNascimentoAcompanhante || '';
         cpfAcompanhante.value = acompanhanteInfo.cpfAcompanhante || '';
@@ -500,15 +505,16 @@ function desabilitarCamposAcompanhante() {
 
         parentescoAcompanhanteSelect.style.color = "black";
 
-        nomeAcompanhante.setAttribute('placeholder', nomeAcompanhante.value);
-        dataNascAcompanhante.setAttribute('placeholder', dataNascAcompanhante.value);
-        cpfAcompanhante.setAttribute('placeholder', cpfAcompanhante.value);
-        telAcompanhante.setAttribute('placeholder', telAcompanhante.value);
-
+        nomeAcompanhante.setAttribute('placeholder', acompanhanteInfo.nomeAcompanhante || '');
+        dataNascAcompanhante.setAttribute('placeholder', acompanhanteInfo.dataNascimentoAcompanhante || '');
+        cpfAcompanhante.setAttribute('placeholder', acompanhanteInfo.cpfAcompanhante || '');
+        telAcompanhante.setAttribute('placeholder', acompanhanteInfo.telefoneAcompanhante || '');
     } else {
-        console.log("Nenhuma informação de usuário encontrada no localStorage.");
+        console.log("Nenhuma informação de acompanhante encontrada para o usuário logado.");
     }
 }
+
+
 
 function editarDadosAcompanhante() {
     const habilitar = document.getElementById('editarInformacoesAcompanhante');
@@ -523,65 +529,79 @@ function editarDadosAcompanhante() {
 }
 
 function salvarAlteracaoAcompanhante() {
+    const salvar = document.getElementById('salvarInformacoesAcompanhante');
+    const descartar = document.getElementById('descartarInformacoesAcompanhante');
+    const editarInformações = document.getElementById('editarInformacoesAcompanhante');
+    const mensagem = document.getElementById('mensagemAcompanhante');
 
-    var salvar = document.getElementById('salvarEdicaoEndereco');
-    var descartar = document.getElementById('descartarAlteracaoEndereco');
-    var mensagem = document.getElementById('mensagemAcompanhante');
 
-    var acompanhanteInfoString = localStorage.getItem('nomeAcompanhante');
-    var acompanhanteInfo = JSON.parse(acompanhanteInfoString);
-    var houveAlteracao = false;
+    let acompanhanteInfo = JSON.parse(localStorage.getItem('dadosAcompanhante') || '{}');
 
-    if (nomeAcompanhante.value != acompanhanteInfo.nomeAcompanhante) {
+    let houveAlteracao = false;
+
+    if (nomeAcompanhante.value !== acompanhanteInfo.nomeAcompanhante) {
         acompanhanteInfo.nomeAcompanhante = nomeAcompanhante.value;
         houveAlteracao = true;
     }
-    if (dataNascAcompanhante.value != acompanhanteInfo.dataNascimentoAcompanhante) {
+
+    if (dataNascAcompanhante.value !== acompanhanteInfo.dataNascimentoAcompanhante) {
         acompanhanteInfo.dataNascimentoAcompanhante = dataNascAcompanhante.value;
         houveAlteracao = true;
     }
-    if (cpfAcompanhante.value != acompanhanteInfo.cpfAcompanhante) {
+
+    if (cpfAcompanhante.value !== acompanhanteInfo.cpfAcompanhante) {
         acompanhanteInfo.cpfAcompanhante = cpfAcompanhante.value;
         houveAlteracao = true;
     }
-    if (telAcompanhante.value != acompanhanteInfo.telefoneAcompanhante) {
+
+    if (telAcompanhante.value !== acompanhanteInfo.telefoneAcompanhante) {
         acompanhanteInfo.telefoneAcompanhante = telAcompanhante.value;
         houveAlteracao = true;
     }
-    if (parentescoAcompanhanteSelect.value != acompanhanteInfo.parentesco) {
+
+    if (parentescoAcompanhanteSelect.value !== acompanhanteInfo.parentesco) {
         acompanhanteInfo.parentesco = parentescoAcompanhanteSelect.value;
         houveAlteracao = true;
     }
 
-    var dataAtual = new Date();
-    var dataNasc = new Date(dataNascAcompanhante);
-    var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
+    // Verifica idade mínima
+    const dataAtual = new Date();
+    const dataNasc = new Date(dataNascAcompanhante.value);
+    let idade = dataAtual.getFullYear() - dataNasc.getFullYear();
+    const m = dataAtual.getMonth() - dataNasc.getMonth();
+    if (m < 0 || (m === 0 && dataAtual.getDate() < dataNasc.getDate())) {
+        idade--;
+    }
 
     if (idade < 18) {
-        mensagem = "O seu acompanhante deve ter no minímo 18 anos";
-        if (salvar && descartar) {
-            salvar.disabled = true;
-            descartar.disabled = true;
-        }
+        mensagem.textContent = "O seu acompanhante deve ter no mínimo 18 anos";
+        salvar.disabled = true;
+        descartar.disabled = true;
+        return;
+    } else {
+        mensagem.textContent = "";
     }
 
+    // Se houve alteração, salva no localStorage
     if (houveAlteracao) {
+        localStorage.setItem('acompanhantes', JSON.stringify(acompanhanteInfo)); 
+
         if (salvar && descartar) {
-            salvar.disabled = false;
-            descartar.disabled = false;
+            salvar.style.display = 'none';
+            descartar.style.display = 'none';
+            editarInformações.style.display = 'flex';
         }
-        localStorage.setItem('nomeAcompanhante', JSON.stringify(acompanhanteInfo));
+
         desabilitarCamposAcompanhante();
     }
-
 }
 
-function descartarAlteracaoAcompanhante() {
-    var salvar = document.getElementById('salvarEdicaoEndereco');
-    var descartar = document.getElementById('descartarAlteracaoEndereco');
 
-    var acompanhanteInfoString = localStorage.getItem('nomeAcompanhante');
-    var acompanhanteInfo = JSON.parse(acompanhanteInfoString);
+function descartarAlteracaoAcompanhante() {
+    const salvar = document.getElementById('salvarInformacoesAcompanhante');
+    const descartar = document.getElementById('descartarInformacoesAcompanhante');
+
+    let acompanhanteInfo = JSON.parse(localStorage.getItem('dadosAcompanhante') || '{}');
 
     nomeAcompanhante.value = acompanhanteInfo.nomeAcompanhante || '';
     dataNascAcompanhante.value = acompanhanteInfo.dataNascimentoAcompanhante || '';
@@ -594,6 +614,7 @@ function descartarAlteracaoAcompanhante() {
         descartar.disabled = true;
     }
 }
+
 
 function desabilitarCamposEndereco() {
     cepInput.disabled = true;
@@ -650,6 +671,7 @@ function habilitarEdicaoEndereco() {
 function salvarAlteracaoEndereco() {
     const salvar = document.getElementById('salvarEdicaoEndereco');
     const descartar = document.getElementById('descartarAlteracaoEndereco');
+    const editar = document.getElementById('editarEndereco');
 
     const emailLogado = localStorage.getItem('usuarioLogado');
     const usuarioString = localStorage.getItem(emailLogado);
@@ -715,13 +737,15 @@ function salvarAlteracaoEndereco() {
             }
         }, 1000);
 
-        alert("Endereço salvo com sucesso.");
     }
 
     if (salvar && descartar) {
-        salvar.disabled = true;
-        descartar.disabled = true;
+        salvar.style.display = 'none';
+        descartar.style.display = 'none';
+        editar.style.display = 'flex';
     }
+
+    desabilitarCamposEndereco();
 }
 
 
@@ -785,16 +809,22 @@ function realizarAgendamento(event) {
         return;
     }
 
-    let consultas = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
-
-    const isDuplicate = consultas.some(consulta => {
-        return consulta.data === dataFormatada && consulta.hora === horaConsulta;
-    });
-
-    if (isDuplicate) {
-        alert("Já existe uma consulta agendada para o mesmo dia e hora. Por favor, escolha outro horário ou dia.");
-        return;
+    //  Verifica conflito com todos os agendamentos salvos no localStorage
+    for (let key in localStorage) {
+        if (key.startsWith('consultas_')) {
+            const agendamentos = JSON.parse(localStorage.getItem(key)) || [];
+            const conflito = agendamentos.some(consulta =>
+                consulta.data === dataFormatada && consulta.hora === horaConsulta
+            );
+            if (conflito) {
+                alert("Este horário já está ocupado por outro paciente. Por favor, escolha outro.");
+                return;
+            }
+        }
     }
+
+    // 🔐 Consulta válida, continua...
+    let consultasUsuario = JSON.parse(localStorage.getItem('consultas_' + usuarioLogado)) || [];
 
     const novaConsulta = {
         data: dataFormatada,
@@ -805,14 +835,15 @@ function realizarAgendamento(event) {
         status: 'Pendente'
     };
 
-    consultas.push(novaConsulta);
-    localStorage.setItem('consultas_' + usuarioLogado, JSON.stringify(consultas));
+    consultasUsuario.push(novaConsulta);
+    localStorage.setItem('consultas_' + usuarioLogado, JSON.stringify(consultasUsuario));
 
     carregarConsultasPaciente();
     formAgendarConsulta.reset();
     sessaoAgendarConsulta.style.display = 'none';
     historico.style.display = 'block';
 }
+
 
 function carregarConsultasPaciente() {
     const email = localStorage.getItem('usuarioLogado');

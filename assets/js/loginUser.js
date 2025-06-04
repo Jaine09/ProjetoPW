@@ -204,12 +204,14 @@ function validarCadastroCompletoComAcompanhante() {
     var cpfAcompanhante = document.getElementById('inpCpfAcompanhante').value;
     var telefoneAcompanhante = document.getElementById('inpTelefoneAcompanhante').value;
     var parentescoAcompanhanteSelect = document.getElementById('parentescoAcompanhante');
-    var mensagem = document.getElementById('mensagemMenorIdade');
     var parentescoAcompanhante = parentescoAcompanhanteSelect.value;
+    var mensagem = document.getElementById('mensagemMenorIdade');
 
     var dataAtual = new Date();
     var dataNasc = new Date(dataNascimentoAcompanhante);
     var idade = dataAtual.getFullYear() - dataNasc.getFullYear();
+
+    const emailUsuario = localStorage.getItem('emailTemp'); 
 
     const informacoesAcompanhante = {
         nomeAcompanhante: nomeAcompanhante,
@@ -217,11 +219,19 @@ function validarCadastroCompletoComAcompanhante() {
         idade: idade,
         cpfAcompanhante: cpfAcompanhante,
         telefoneAcompanhante: telefoneAcompanhante,
-        parentesco: parentescoAcompanhante
+        parentesco: parentescoAcompanhante,
+        emailUsuario: emailUsuario
     };
 
     let acompanhantes = localStorage.getItem('acompanhantes');
-    acompanhantes = acompanhantes ? JSON.parse(acompanhantes) : [];
+    try {
+        acompanhantes = JSON.parse(acompanhantes);
+        if (!Array.isArray(acompanhantes)) {
+            acompanhantes = [acompanhantes];
+        }
+    } catch (e) {
+        acompanhantes = [];
+    }
 
     const cpfExistente = acompanhantes.some(a => a.cpfAcompanhante === cpfAcompanhante);
 
@@ -230,7 +240,7 @@ function validarCadastroCompletoComAcompanhante() {
         return;
     }
 
-    if (nomeAcompanhante == "" || cpfAcompanhante == "" || telefoneAcompanhante == "") {
+    if (nomeAcompanhante === "" || cpfAcompanhante === "" || telefoneAcompanhante === "") {
         mensagem.textContent = 'Por favor, preencha todos os campos.';
         mensagem.style.color = 'red';
         return;
@@ -239,7 +249,7 @@ function validarCadastroCompletoComAcompanhante() {
         mensagem.style.color = 'red';
         return;
     } else {
-        // ✅ Agora salva o menor de idade
+        // Salva os dados do usuário menor
         const nome = localStorage.getItem('nomeTemp');
         const dataNascimento = localStorage.getItem('dataNascimentoTemp');
         const telefone = localStorage.getItem('telefoneTemp');
@@ -264,12 +274,11 @@ function validarCadastroCompletoComAcompanhante() {
         let usuarios = localStorage.getItem('usuarios');
         usuarios = usuarios ? JSON.parse(usuarios) : [];
         usuarios.push(informacoesUsuario);
-
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
         localStorage.setItem(email, JSON.stringify(informacoesUsuario));
         localStorage.setItem('usuarioLogado', email);
 
-        // Limpa temporários
+        // Limpa os dados temporários
         localStorage.removeItem('nomeTemp');
         localStorage.removeItem('dataNascimentoTemp');
         localStorage.removeItem('telefoneTemp');
@@ -284,6 +293,7 @@ function validarCadastroCompletoComAcompanhante() {
         localStorage.removeItem('estadoTemp');
         localStorage.removeItem('palavraChaveTemp');
 
+        // Salva o acompanhante vinculado
         acompanhantes.push(informacoesAcompanhante);
         localStorage.setItem('acompanhantes', JSON.stringify(acompanhantes));
 
