@@ -214,13 +214,13 @@ function validarCadastroCompletoComAcompanhante() {
     const emailUsuario = localStorage.getItem('emailTemp'); 
 
     const informacoesAcompanhante = {
-        nomeAcompanhante: nomeAcompanhante,
-        dataNascimentoAcompanhante: dataNascimentoAcompanhante,
-        idade: idade,
-        cpfAcompanhante: cpfAcompanhante,
-        telefoneAcompanhante: telefoneAcompanhante,
-        parentesco: parentescoAcompanhante,
-        emailUsuario: emailUsuario
+        nomeAcompanhante,
+        dataNascimentoAcompanhante,
+        idade,
+        cpfAcompanhante,
+        telefoneAcompanhante,
+        parentesco,
+        emailUsuario
     };
 
     let acompanhantes = localStorage.getItem('acompanhantes');
